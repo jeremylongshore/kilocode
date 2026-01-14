@@ -73,7 +73,8 @@ export const sessionImagesAtomFamily = atomFamily((_sessionId: string) => atom<s
 export const MAX_IMAGES_PER_MESSAGE = 4
 
 // User preference for run mode (persisted across new agent forms)
-export type RunMode = "local" | "worktree"
+// kilocode_change - added "cloud" option for cloud agent support
+export type RunMode = "local" | "worktree" | "cloud"
 // Default to local until worktree mode is ready to ship
 export const preferredRunModeAtom = atom<RunMode>("local")
 
