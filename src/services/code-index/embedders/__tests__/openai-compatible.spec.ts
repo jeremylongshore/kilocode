@@ -118,11 +118,17 @@ describe("OpenAICompatibleEmbedder", () => {
 			)
 		})
 
-		it("should throw error when apiKey is missing", () => {
-			expect(() => new OpenAICompatibleEmbedder(testBaseUrl, "", testModelId)).toThrow(
-				"embeddings:validation.apiKeyRequired",
-			)
+		// kilocode_change start
+		it("should use fallback SDK key when apiKey is missing", () => {
+			embedder = new OpenAICompatibleEmbedder(testBaseUrl, "", testModelId)
+
+			expect(MockedOpenAI).toHaveBeenCalledWith({
+				baseURL: testBaseUrl,
+				apiKey: "EMPTY",
+			})
+			expect(embedder).toBeDefined()
 		})
+		// kilocode_change end
 
 		it("should throw error when both baseUrl and apiKey are missing", () => {
 			expect(() => new OpenAICompatibleEmbedder("", "", testModelId)).toThrow(
@@ -813,6 +819,32 @@ describe("OpenAICompatibleEmbedder", () => {
 					expect(baseResult.embeddings[0]).toEqual([0.4, 0.5, 0.6])
 				})
 
+				// kilocode_change start
+				it("should omit auth headers for direct fetch when apiKey is empty", async () => {
+					const testTexts = ["Test text"]
+					const base64String = createBase64Embedding([0.1, 0.2, 0.3])
+					const embedder = new OpenAICompatibleEmbedder(azureUrl, "", testModelId)
+					const mockFetchResponse = createMockResponse({
+						data: [{ embedding: base64String }],
+						usage: { prompt_tokens: 10, total_tokens: 15 },
+					})
+					;(global.fetch as MockedFunction<typeof fetch>).mockResolvedValue(mockFetchResponse as any)
+
+					await embedder.createEmbeddings(testTexts)
+
+					const requestInit = (global.fetch as MockedFunction<typeof fetch>).mock.calls[0][1] as RequestInit
+					const headers = requestInit.headers as Record<string, string>
+
+					expect(headers).toEqual(
+						expect.objectContaining({
+							"Content-Type": "application/json",
+						}),
+					)
+					expect(headers).not.toHaveProperty("Authorization")
+					expect(headers).not.toHaveProperty("api-key")
+				})
+				// kilocode_change end
+
 				it.each([
 					[401, "Authentication failed. Please check your API key."],
 					[500, "Failed to create embeddings after 3 attempts"],
@@ -1013,6 +1045,32 @@ describe("OpenAICompatibleEmbedder", () => {
 				}),
 			)
 		})
+
+		// kilocode_change start
+		it("should validate successfully with full endpoint URL and empty API key", async () => {
+			const fullUrl = "https://api.example.com/v1/embeddings"
+			embedder = new OpenAICompatibleEmbedder(fullUrl, "", testModelId)
+
+			mockFetch.mockResolvedValueOnce({
+				ok: true,
+				status: 200,
+				json: async () => ({
+					data: [{ embedding: [0.1, 0.2, 0.3] }],
+					usage: { prompt_tokens: 2, total_tokens: 2 },
+				}),
+				text: async () => "",
+			} as any)
+
+			const result = await embedder.validateConfiguration()
+
+			expect(result.valid).toBe(true)
+			expect(result.error).toBeUndefined()
+			const requestInit = mockFetch.mock.calls[0][1] as RequestInit
+			const headers = requestInit.headers as Record<string, string>
+			expect(headers).not.toHaveProperty("Authorization")
+			expect(headers).not.toHaveProperty("api-key")
+		})
+		// kilocode_change end
 
 		it("should fail validation with authentication error", async () => {
 			embedder = new OpenAICompatibleEmbedder(testBaseUrl, testApiKey, testModelId)
