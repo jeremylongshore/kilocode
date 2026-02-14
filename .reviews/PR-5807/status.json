@@ -1,0 +1,30 @@
+{
+  "pr": 5807,
+  "title": "docs: remove Enterprise pricing, direct users to contact sales",
+  "author": "app/kiloconnect",
+  "category": "docs",
+  "tier": 1,
+  "total_lines": 71,
+  "files": 3,
+  "phase": "submitted",
+  "started_at": "2026-02-14T19:35:00Z",
+  "completed_at": "2026-02-14T19:55:00Z",
+  "submitted_at": "2026-02-14T19:55:00Z",
+  "confidence": 5,
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/6",
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "File deletions need cross-reference checks (nav, feature tables, mapping docs)",
+    "Bots only see the diff, not what should have changed - cross-ref validation is manual",
+    "Build passing doesn't mean links are valid - Markdoc validates syntax not links",
+    "Bot-generated PRs may have gaps - kiloconnect missed nav/feature cleanup",
+    "Sensitive internal content (pricing formulas, Stripe details) was in public docs"
+  ],
+  "bot_findings": {
+    "coderabbit": "rate_limited (did not complete review)",
+    "gemini": "comment (caught indentation nit, missed dangling references)",
+    "greptile": "no_response",
+    "codeql": "no_findings",
+    "qodo": "failed (could not generate suggestions)"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "pr": 5869,
+  "title": "docs: clarify slash commands (/newtask vs /smol) (#2160)",
+  "author": "EloiRamos",
+  "category": "docs",
+  "tier": 1,
+  "total_lines": 20,
+  "files": 2,
+  "phase": "submitted",
+  "started_at": "2026-02-14T19:00:00Z",
+  "completed_at": "2026-02-14T19:30:00Z",
+  "submitted_at": "2026-02-14T19:35:00Z",
+  "confidence": 4,
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/5",
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "Cross-cutting docs changes need structural awareness - don't split in-progress lists",
+    "Two-bot agreement on same finding = high confidence (CodeRabbit + Gemini both caught cli.md)",
+    "Source code verification catches docs drift - check slash-commands.ts for ground truth",
+    "All CI green doesn't mean all content is correct - Markdoc validates syntax not coherence"
+  ],
+  "bot_findings": {
+    "coderabbit": "comment (flagged orphaned kilo auth bullet, structural break in cli.md)",
+    "gemini": "comment (flagged cli.md structure break + using-modes.md list nesting concern)",
+    "greptile": "no_response",
+    "codeql": "no_findings",
+    "qodo": "failed (could not generate suggestions)"
+  }
+}

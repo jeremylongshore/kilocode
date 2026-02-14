@@ -1,0 +1,15 @@
+{
+  "pr": 5740,
+  "title": "fix: node.js detection issue in Intellij post fresh plugin installation",
+  "author": "muddlebee",
+  "category": "fix",
+  "tier": 4,
+  "total_lines": 496,
+  "files": 4,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

@@ -1,0 +1,15 @@
+{
+  "pr": 5771,
+  "title": "Add OTLP Telemetry Export",
+  "author": "jdbohrman",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 808,
+  "files": 14,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

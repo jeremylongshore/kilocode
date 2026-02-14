@@ -1,0 +1,15 @@
+{
+  "pr": 5677,
+  "title": "fix: wrap external extension API calls in try-catch to prevent crashes",
+  "author": "Ashwinhegde19",
+  "category": "fix",
+  "tier": 4,
+  "total_lines": 593,
+  "files": 3,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

@@ -1,0 +1,15 @@
+{
+  "pr": 5801,
+  "title": "feat(subagent): run background sub-agents for focused task and return results",
+  "author": "kels-ng",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 2089,
+  "files": 71,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

@@ -1,0 +1,32 @@
+{
+  "number": 5867,
+  "title": "Add banner and pre-release extension info",
+  "author": "lambertjosh",
+  "authorName": "Joshua Lambert",
+  "additions": 78,
+  "deletions": 2,
+  "changedFiles": 3,
+  "createdAt": "2026-02-13T17:34:00Z",
+  "mergeable": "UNKNOWN",
+  "reviewDecision": "APPROVED",
+  "files": [
+    {"path": "apps/kilocode-docs/components/TopNav.tsx", "additions": 39, "deletions": 0},
+    {"path": "apps/kilocode-docs/pages/getting-started/installing.md", "additions": 37, "deletions": 0},
+    {"path": "apps/kilocode-docs/public/globals.css", "additions": 2, "deletions": 2}
+  ],
+  "comments": [
+    {"author": "changeset-bot", "type": "bot", "message": "No changeset found (docs-only, acceptable)"},
+    {"author": "kiloconnect", "type": "bot", "message": "WARNING: Hard-coded --top-nav-height may not match real banner height"}
+  ],
+  "reviews": [
+    {"author": "emilieschario", "state": "APPROVED", "date": "2026-02-14T11:00:30Z"}
+  ],
+  "ci": {
+    "Build Markdoc Site": "pass",
+    "compile": "pass",
+    "check-translations": "pass",
+    "unit-test": "pass",
+    "test-extension (ubuntu)": "pass",
+    "test-extension (windows)": "pass"
+  }
+}

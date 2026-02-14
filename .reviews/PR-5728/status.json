@@ -1,0 +1,30 @@
+{
+  "pr": 5728,
+  "title": "feat(docs): add dynamic sitemap.xml generation",
+  "author": "app/kiloconnect",
+  "category": "docs",
+  "tier": 1,
+  "total_lines": 279,
+  "files": 3,
+  "phase": "submitted",
+  "started_at": "2026-02-14T20:25:00Z",
+  "completed_at": "2026-02-14T20:45:00Z",
+  "submitted_at": "2026-02-14T20:45:00Z",
+  "confidence": 4,
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/8",
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "Bot-generated code needs same scrutiny as human code",
+    "Existing patterns (llms.txt) reduce review burden",
+    "CodeRabbit rate limits are a bottleneck for batch reviewing",
+    "Test suites (162 lines) give confidence without manual testing"
+  ],
+  "bot_findings": {
+    "coderabbit": "rate_limited",
+    "gemini": "comment (4 findings: homepage lastmod, hardcoded URL, unused param, escapeXml)",
+    "kiloconnect": "comment (duplicate homepage, root index.md handling)",
+    "greptile": "no_response",
+    "codeql": "no_findings",
+    "qodo": "failed"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "pr": 5817,
+  "title": "fix: prevent MCP servers from restarting repeatedly on settings save",
+  "author": "markijbema",
+  "category": "fix",
+  "tier": 3,
+  "total_lines": 88,
+  "files": 3,
+  "phase": "ready",
+  "started_at": "2026-02-14T22:50:00Z",
+  "completed_at": "2026-02-14T23:10:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "fork_pr": null,
+  "fork_pr_note": "Merge conflict with upstream main - fork PR creation blocked",
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "Race conditions in debounced callbacks need re-checking of guards",
+    "Fire-and-forget async can trigger handlers after guards are cleared",
+    "Config comparison must use pre-injection values for accuracy",
+    "Tests must be updated to reflect new type requirements (rawConfig)"
+  ],
+  "bot_findings": {
+    "coderabbit": "pending",
+    "gemini": "pending",
+    "greptile": "pending",
+    "codeql": "pending",
+    "qodo": "pending"
+  }
+}

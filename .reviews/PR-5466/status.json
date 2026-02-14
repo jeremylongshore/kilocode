@@ -1,0 +1,16 @@
+{
+  "pr": 5466,
+  "title": "feat: display generated session names in task history UI",
+  "author": "app/kiloconnect",
+  "category": "feature",
+  "tier": 2,
+  "total_lines": 75,
+  "files": 5,
+  "phase": "ready",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:05:00Z",
+  "submitted_at": null,
+  "confidence": 5,
+  "fork_pr": null,
+  "lessons": ["Well-tested PRs with maintainer approval need minimal review"]
+}

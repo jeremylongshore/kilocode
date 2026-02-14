@@ -1,0 +1,15 @@
+{
+  "pr": 5560,
+  "title": "feat: add Poe provider",
+  "author": "marciepeters",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 1557,
+  "files": 32,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

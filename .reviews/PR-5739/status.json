@@ -1,0 +1,21 @@
+{
+  "pr": 5739,
+  "title": "Honor explicit 'disable' for reasoning effort",
+  "author": "rayss868",
+  "category": "feature",
+  "tier": 3,
+  "total_lines": 33,
+  "files": 2,
+  "phase": "ready",
+  "started_at": "2026-02-15T19:45:00Z",
+  "completed_at": "2026-02-15T20:05:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/11",
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7831 tests, 0 failures)"
+  },
+  "lessons": ["First review with full local test pipeline — test evidence is qualitatively different from CI screenshots", "pnpm test --continue is essential for repos with pre-existing test failures"]
+}

@@ -1,0 +1,15 @@
+{
+  "pr": 5845,
+  "title": "Feat: Profile condense override with model-aware token caps",
+  "author": "Neonsy",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 1628,
+  "files": 38,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

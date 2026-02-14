@@ -1,0 +1,16 @@
+{
+  "pr": 5864,
+  "title": "fix: organization selector overlapping with Recent text in chat pane",
+  "author": "Githubguy132010",
+  "category": "fix",
+  "tier": 2,
+  "total_lines": 35,
+  "files": 2,
+  "phase": "ready",
+  "started_at": "2026-02-14T23:45:00Z",
+  "completed_at": "2026-02-14T23:50:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "fork_pr": null,
+  "lessons": ["UI fixes with before/after screenshots are self-documenting"]
+}

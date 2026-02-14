@@ -1,0 +1,15 @@
+{
+  "pr": 5774,
+  "title": "Update API configuration profiles",
+  "author": "olearycrew",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 314,
+  "files": 2,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

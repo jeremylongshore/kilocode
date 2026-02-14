@@ -1,0 +1,15 @@
+{
+  "pr": 5860,
+  "title": "Fix Azure/OpenAI endpoints and reject Azure AI Inference URLs",
+  "author": "Neonsy",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 327,
+  "files": 5,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

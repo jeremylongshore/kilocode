@@ -1,0 +1,15 @@
+{
+  "pr": 5696,
+  "title": "feat(slash-commands): type/source indicators, skill invocation & argument hints",
+  "author": "Drilmo",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 354,
+  "files": 25,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

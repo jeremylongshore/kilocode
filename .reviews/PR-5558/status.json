@@ -1,0 +1,15 @@
+{
+  "pr": 5558,
+  "title": "feat: infrastructure refactor for core tools and auto-approval logic",
+  "author": "shashankshetty2312",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 11844,
+  "files": 20,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

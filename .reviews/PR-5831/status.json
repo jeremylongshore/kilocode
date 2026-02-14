@@ -1,0 +1,15 @@
+{
+  "pr": 5831,
+  "title": "Fix ZenMux model metadata and native tool message handling",
+  "author": "Neonsy",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 387,
+  "files": 9,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

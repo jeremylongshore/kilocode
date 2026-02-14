@@ -1,0 +1,15 @@
+{
+  "pr": 5587,
+  "title": "Add \"Make Active Profile on All Modes\" button to provider settings",
+  "author": "crazyrabbit0",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 282,
+  "files": 71,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

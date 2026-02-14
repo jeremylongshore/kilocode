@@ -1,0 +1,15 @@
+{
+  "pr": 5089,
+  "title": "Feat: Workflows now AI executable, updated slash_command tool allows agentic autonomous discovery & execution",
+  "author": "James-Cherished",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 2785,
+  "files": 54,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

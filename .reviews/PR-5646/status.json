@@ -1,0 +1,15 @@
+{
+  "pr": 5646,
+  "title": "feat(claude-code): Replace OAuth with CLI subprocess integration",
+  "author": "Drilmo",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 4382,
+  "files": 23,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

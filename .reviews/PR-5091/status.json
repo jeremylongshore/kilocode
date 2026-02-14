@@ -1,0 +1,15 @@
+{
+  "pr": 5091,
+  "title": "feat(mode): implement Ralph mode for infinite task loops",
+  "author": "dannycreations",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 768,
+  "files": 39,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

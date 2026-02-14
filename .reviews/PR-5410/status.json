@@ -1,0 +1,15 @@
+{
+  "pr": 5410,
+  "title": "Support refreshing MCP tool, resources, etc lists and avoid prompts",
+  "author": "lambertjosh",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 413,
+  "files": 3,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

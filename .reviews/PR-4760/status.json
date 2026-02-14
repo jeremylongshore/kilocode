@@ -1,0 +1,15 @@
+{
+  "pr": 4760,
+  "title": "Feat: Workflow tool allows Kilo to run slash commands autonomously",
+  "author": "James-Cherished",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 2665,
+  "files": 52,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

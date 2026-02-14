@@ -1,0 +1,16 @@
+{
+  "pr": 5826,
+  "title": "fix: prevent Create New Mode form fields from resetting while typing",
+  "author": "app/kiloconnect",
+  "category": "fix",
+  "tier": 2,
+  "total_lines": 39,
+  "files": 3,
+  "phase": "ready",
+  "started_at": "2026-02-14T23:50:00Z",
+  "completed_at": "2026-02-14T23:55:00Z",
+  "submitted_at": null,
+  "confidence": 5,
+  "fork_pr": null,
+  "lessons": ["VSCode web components cause controlled input issues - native elements fix it"]
+}

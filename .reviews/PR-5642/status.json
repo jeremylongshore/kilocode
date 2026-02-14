@@ -1,0 +1,15 @@
+{
+  "pr": 5642,
+  "title": "feat: allow auto-selecting rules based on prompt and context",
+  "author": "shssoichiro",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 1043,
+  "files": 65,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

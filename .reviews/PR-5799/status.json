@@ -1,0 +1,15 @@
+{
+  "pr": 5799,
+  "title": "Add Ask Sage as a new AI provider",
+  "author": "jdbohrman",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 736,
+  "files": 20,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

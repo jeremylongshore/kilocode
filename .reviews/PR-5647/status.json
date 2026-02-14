@@ -1,0 +1,15 @@
+{
+  "pr": 5647,
+  "title": "fix: reduce console noise for unconfigured services",
+  "author": "markijbema",
+  "category": "fix",
+  "tier": 4,
+  "total_lines": 209,
+  "files": 6,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

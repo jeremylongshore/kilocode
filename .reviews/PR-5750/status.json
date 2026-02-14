@@ -1,0 +1,15 @@
+{
+  "pr": 5750,
+  "title": "Fix: Kimi K2.5 tool calls in thinking mode (#5748)",
+  "author": "Githubguy132010",
+  "category": "fix",
+  "tier": 3,
+  "total_lines": 166,
+  "files": 3,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

@@ -1,0 +1,15 @@
+{
+  "pr": 4860,
+  "title": "feat: Add reasoning and capability controls for OpenAI Compatible models",
+  "author": "benzntech",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 1220,
+  "files": 40,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

@@ -1,0 +1,16 @@
+{
+  "pr": 5838,
+  "title": "fix: prevent false unsaved changes dialogs in settings",
+  "author": "wombatepiclandingstudio",
+  "category": "fix",
+  "tier": 2,
+  "total_lines": 49,
+  "files": 4,
+  "phase": "ready",
+  "started_at": "2026-02-14T23:55:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "fork_pr": null,
+  "lessons": ["CHANGES_REQUESTED = contributor needs to revise first"]
+}

@@ -1,0 +1,15 @@
+{
+  "pr": 5820,
+  "title": "Changeset version bump",
+  "author": "app/github-actions",
+  "category": "feature",
+  "tier": 3,
+  "total_lines": 141,
+  "files": 21,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

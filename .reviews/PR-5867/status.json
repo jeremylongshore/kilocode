@@ -1,0 +1,15 @@
+{
+  "pr": 5867,
+  "title": "Add banner and pre-release extension info",
+  "author": "lambertjosh",
+  "category": "docs",
+  "tier": 1,
+  "total_lines": 80,
+  "files": 3,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

@@ -1,0 +1,16 @@
+{
+  "pr": 5701,
+  "title": "fix(api): add type field to messages in Responses API",
+  "author": "Patel230",
+  "category": "fix",
+  "tier": 2,
+  "total_lines": 26,
+  "files": 4,
+  "phase": "ready",
+  "started_at": "2026-02-14T23:35:00Z",
+  "completed_at": "2026-02-14T23:40:00Z",
+  "submitted_at": null,
+  "confidence": 5,
+  "fork_pr": null,
+  "lessons": ["Consistent field additions across related files = low risk"]
+}

@@ -1,0 +1,15 @@
+{
+  "pr": 5849,
+  "title": "Make OpenAI-compatible API key optional for local codebase indexing",
+  "author": "Neonsy",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 313,
+  "files": 10,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

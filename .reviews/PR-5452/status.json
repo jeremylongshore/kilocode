@@ -1,0 +1,15 @@
+{
+  "pr": 5452,
+  "title": "fix: reasoning effort sync and support for OpenAI Compatible provider",
+  "author": "rayss868",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 32,
+  "files": 2,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

@@ -1,0 +1,15 @@
+{
+  "pr": 4631,
+  "title": "fix: Adjust handling of thinking blocks in message filtering",
+  "author": "pandemicsyn",
+  "category": "fix",
+  "tier": 3,
+  "total_lines": 87,
+  "files": 4,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

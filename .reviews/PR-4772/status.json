@@ -1,0 +1,15 @@
+{
+  "pr": 4772,
+  "title": "fix: enable dynamic model selection for OpenAI Compatible provider (#\u2026",
+  "author": "b3nw",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 908,
+  "files": 14,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

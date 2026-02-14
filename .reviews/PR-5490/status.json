@@ -1,0 +1,15 @@
+{
+  "pr": 5490,
+  "title": "# Pull Request: Fix Silent JSON Parse Errors in combineApiRequests",
+  "author": "zwbproducts",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 815,
+  "files": 9,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

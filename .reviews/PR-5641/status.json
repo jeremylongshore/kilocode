@@ -1,0 +1,15 @@
+{
+  "pr": 5641,
+  "title": "feat: parallel task execution with git worktrees in main panel",
+  "author": "Drilmo",
+  "category": "feature",
+  "tier": 3,
+  "total_lines": 101,
+  "files": 1,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

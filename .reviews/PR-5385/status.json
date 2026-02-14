@@ -1,0 +1,15 @@
+{
+  "pr": 5385,
+  "title": "Jetbrains - SDK Update (v2025.3) / Fix terminal integration",
+  "author": "catrielmuller",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 612,
+  "files": 10,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

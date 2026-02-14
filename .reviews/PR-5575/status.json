@@ -1,0 +1,16 @@
+{
+  "pr": 5575,
+  "title": "fix: treat maxReadFileLine=0 as unlimited (same as -1)",
+  "author": "Patel230",
+  "category": "fix",
+  "tier": 2,
+  "total_lines": 22,
+  "files": 2,
+  "phase": "ready",
+  "started_at": "2026-02-14T23:25:00Z",
+  "completed_at": "2026-02-14T23:30:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "fork_pr": null,
+  "lessons": ["Missing CI = needs rebase", "0 vs -1 as unlimited is a common edge case pattern"]
+}

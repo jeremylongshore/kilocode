@@ -1,0 +1,15 @@
+{
+  "pr": 4704,
+  "title": "feat(retry): add configurable delay and retry limits",
+  "author": "dannycreations",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 442,
+  "files": 36,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

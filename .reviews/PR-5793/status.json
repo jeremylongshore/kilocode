@@ -1,0 +1,15 @@
+{
+  "pr": 5793,
+  "title": "feat: Add AWS Bedrock Inference Profile ARN resolution support",
+  "author": "marcelloceschia",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 2041,
+  "files": 24,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

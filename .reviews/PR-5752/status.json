@@ -1,0 +1,15 @@
+{
+  "pr": 5752,
+  "title": "Fixes broken /slash-commands after continue or interrupted tool-use",
+  "author": "Madrawn",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 294,
+  "files": 3,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

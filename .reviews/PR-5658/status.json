@@ -1,0 +1,15 @@
+{
+  "pr": 5658,
+  "title": "Try to use exact provider-model profile for autocompletion if such exists",
+  "author": "wkordalski",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 10,
+  "files": 1,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

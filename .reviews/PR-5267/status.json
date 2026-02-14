@@ -1,0 +1,15 @@
+{
+  "pr": 5267,
+  "title": "fix: preserve extra_content for Gemini 3 thought_signature support",
+  "author": "maywzh",
+  "category": "fix",
+  "tier": 3,
+  "total_lines": 154,
+  "files": 7,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

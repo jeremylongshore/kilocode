@@ -1,0 +1,15 @@
+{
+  "pr": 5779,
+  "title": "feat(anthropic): support custom model typing and endpoint discovery for Anthropic-compatible providers",
+  "author": "ramhaidar",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 954,
+  "files": 15,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}

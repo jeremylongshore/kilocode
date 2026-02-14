@@ -1,0 +1,15 @@
+{
+  "pr": 4303,
+  "title": "Add OCA provider",
+  "author": "supreethjavalli",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 1507,
+  "files": 35,
+  "phase": "scaffolded",
+  "started_at": null,
+  "completed_at": null,
+  "submitted_at": null,
+  "confidence": null,
+  "lessons": []
+}
