@@ -15,7 +15,8 @@
   "test_results": {
     "check_types": "PASS (22/22)",
     "lint": "PASS (18/18)",
-    "test": "PASS (7831 tests, 0 failures)"
+    "test": "PASS (7,938 passed, 84 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-combined-batch-2.log"
   },
   "lessons": ["First review with full local test pipeline — test evidence is qualitatively different from CI screenshots", "pnpm test --continue is essential for repos with pre-existing test failures"]
 }

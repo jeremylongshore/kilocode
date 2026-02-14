@@ -20,6 +20,12 @@
     "Bot-generated PRs may have gaps - kiloconnect missed nav/feature cleanup",
     "Sensitive internal content (pricing formulas, Stripe details) was in public docs"
   ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7,935 passed, 84 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-combined-batch-4.log"
+  },
   "bot_findings": {
     "coderabbit": "rate_limited (did not complete review)",
     "gemini": "comment (caught indentation nit, missed dangling references)",

@@ -19,6 +19,12 @@
     "Source code verification catches docs drift - check slash-commands.ts for ground truth",
     "All CI green doesn't mean all content is correct - Markdoc validates syntax not coherence"
   ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7,935 passed, 84 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-combined-batch-4.log"
+  },
   "bot_findings": {
     "coderabbit": "comment (flagged orphaned kilo auth bullet, structural break in cli.md)",
     "gemini": "comment (flagged cli.md structure break + using-modes.md list nesting concern)",

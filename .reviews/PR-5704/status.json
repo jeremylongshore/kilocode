@@ -16,7 +16,8 @@
   "test_results": {
     "check_types": "PASS (22/22)",
     "lint": "PASS (18/18)",
-    "test": "PASS (7831 passed, 0 failures)"
+    "test": "PASS (7,859 passed, 77 flaky — filter.test.ts race condition, pre-existing)",
+    "evidence_log": "test-evidence-combined-batch-1.log"
   },
   "lessons": ["i18n keys must exist in locale files before referencing them in components", "Qodo bug detection caught a user-visible issue that manual review might miss"]
 }

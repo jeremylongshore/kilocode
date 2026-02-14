@@ -18,6 +18,12 @@
     "Comment/code mismatches are valid findings even when bots miss them",
     "RFC 8707 resource parameter was disabled for Cloudflare compat - now re-enabled"
   ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7,935 passed, 84 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-combined-batch-3.log"
+  },
   "bot_findings": {
     "coderabbit": "rate_limited",
     "gemini": "no_issues",

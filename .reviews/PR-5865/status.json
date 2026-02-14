@@ -19,6 +19,12 @@
     "Greptile 0/4 PRs reviewed - investigate codebase indexing status",
     "Some external contributors have Vercel deploy access (org members)"
   ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7,935 passed, 84 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-combined-batch-4.log"
+  },
   "bot_findings": {
     "coderabbit": "processing (still generating at submission time)",
     "gemini": "comment (missing nav entry + JetBrains simplification)",

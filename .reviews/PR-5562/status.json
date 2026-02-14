@@ -15,7 +15,8 @@
   "test_results": {
     "check_types": "PASS (22/22)",
     "lint": "PASS (18/18)",
-    "test": "PASS (7803 tests, 0 failures)"
+    "test": "PASS (7,803 passed, 85 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence.log"
   },
   "lessons": ["Backend API may already exist — check before assuming PR is incomplete", "RouterModels type requires ALL provider keys, can't use partial mock"]
 }

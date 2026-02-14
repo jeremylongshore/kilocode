@@ -19,6 +19,12 @@
     "CodeRabbit rate limits are a bottleneck for batch reviewing",
     "Test suites (162 lines) give confidence without manual testing"
   ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7,935 passed, 84 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-combined-batch-4.log"
+  },
   "bot_findings": {
     "coderabbit": "rate_limited",
     "gemini": "comment (4 findings: homepage lastmod, hardcoded URL, unused param, escapeXml)",

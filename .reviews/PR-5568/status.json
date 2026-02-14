@@ -18,6 +18,12 @@
     "Missing upstream CI is a red flag - branch may need rebase",
     "Model-specific overrides are a scaling concern for provider code"
   ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7,935 passed, 84 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-combined-batch-3.log"
+  },
   "bot_findings": {
     "coderabbit": "pending",
     "gemini": "pending",

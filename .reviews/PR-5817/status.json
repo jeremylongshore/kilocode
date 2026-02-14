@@ -20,6 +20,12 @@
     "Config comparison must use pre-injection values for accuracy",
     "Tests must be updated to reflect new type requirements (rawConfig)"
   ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7,938 passed, 84 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-combined-batch-2.log"
+  },
   "bot_findings": {
     "coderabbit": "pending",
     "gemini": "pending",
