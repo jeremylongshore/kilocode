@@ -5,7 +5,10 @@
 
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},
-		"ghcr.io/devcontainers/features/github-cli:1": {}
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers/features/sshd:1": {
+			"version": "latest"
+		}
 	},
 
 	"customizations": {
@@ -54,15 +57,12 @@
 	"remoteUser": "root",
 	"containerUser": "root",
 
-	// Mounts for persisting Kilo Code state across container rebuilds
-	// These mounts preserve threads, settings, and caches
 	"mounts": [
 		"source=${localWorkspaceFolder}/.git,target=/workspace/.git,type=bind,consistency=cached",
 		"source=kilocode-global-storage,target=/root/.vscode-remote/data/User/globalStorage/kilocode.kilo-code,type=volume",
 		"source=kilocode-settings,target=/root/.vscode-remote/data/User,type=volume"
 	],
 
-	// Configure custom properties for workspace storage
 	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
 	"workspaceFolder": "/workspace"
 }
