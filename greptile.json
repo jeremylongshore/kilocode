@@ -1,0 +1,89 @@
+{
+  "commentTypes": ["logic", "syntax", "style"],
+  "strictness": 1,
+  "fixWithAI": true,
+  "triggerOnUpdates": true,
+  "summarySection": {
+    "included": true,
+    "collapsible": false,
+    "defaultOpen": true
+  },
+  "issuesTableSection": {
+    "included": true,
+    "collapsible": false,
+    "defaultOpen": true
+  },
+  "confidenceScoreSection": {
+    "included": true,
+    "collapsible": false,
+    "defaultOpen": true
+  },
+  "sequenceDiagramSection": {
+    "included": true,
+    "collapsible": true,
+    "defaultOpen": false
+  },
+  "ignorePatterns": [
+    "*.lock",
+    "*.snap",
+    "pnpm-lock.yaml",
+    "src/i18n/locales/**"
+  ],
+  "customContext": [
+    {
+      "type": "rules",
+      "value": "This is a pnpm monorepo using Turbo. Packages: src/ (VSCode extension), webview-ui/ (React frontend), cli/ (CLI), packages/ (shared types, ipc, telemetry), jetbrains/ (Kotlin plugin), apps/ (docs, e2e, storybook)."
+    },
+    {
+      "type": "rules",
+      "value": "All code changes that modify Kilo Code behavior MUST include kilocode_change markers in comments explaining what was changed and why."
+    },
+    {
+      "type": "rules",
+      "value": "PRs that touch UI or settings MUST include i18n translation strings. A GUI-based change with settings typically involves 12-13 files plus ~18 more for i18n."
+    },
+    {
+      "type": "rules",
+      "value": "PRs SHOULD include a .changeset/ file for version bumping. Exception: docs-only changes in apps/kilocode-docs/ do not require changesets."
+    },
+    {
+      "type": "rules",
+      "value": "New provider additions follow a pattern: handler in src/api/providers/, model info, types in packages/types/, i18n strings, and tests. Check existing providers like anthropic or openai for the pattern."
+    },
+    {
+      "type": "rules",
+      "value": "TypeScript strict mode. No any types without justification. Use Zod schemas for runtime validation at system boundaries."
+    },
+    {
+      "type": "rules",
+      "value": "Security: No hardcoded credentials, API keys, or secrets. Validate all user inputs. No command injection in ExecuteCommand tool. No XSS in webview-ui."
+    },
+    {
+      "type": "rules",
+      "value": "Test expectations: Unit tests for business logic, integration tests for API handlers, e2e tests for critical user flows. Tests live alongside source files or in __tests__ directories."
+    },
+    {
+      "type": "files",
+      "path": "AGENTS.md",
+      "description": "Project structure, architecture overview, agent runtime details, and coding conventions"
+    },
+    {
+      "type": "files",
+      "path": "CONTRIBUTING.md",
+      "description": "Contribution guidelines, PR requirements, commit message format"
+    },
+    {
+      "type": "files",
+      "path": ".github/pull_request_template.md",
+      "description": "Expected PR format: Context, Implementation, Screenshots, How to Test"
+    },
+    {
+      "type": "other",
+      "value": "This repo has 50+ AI provider integrations. When reviewing provider changes, check for: correct error handling, proper streaming support, model capability declarations, and consistent patterns with existing providers."
+    },
+    {
+      "type": "other",
+      "value": "The docs site is a Next.js app using Markdoc at apps/kilocode-docs/. Docs PRs only need Build Markdoc Site and check-translations CI checks to pass."
+    }
+  ]
+}
