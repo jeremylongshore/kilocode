@@ -1449,7 +1449,12 @@ export class McpHub {
 			const intentionalKey = `${source}-${name}`
 			this.intentionalDisconnects.delete(intentionalKey)
 
-			this.kiloNotificationService.connect(name, connection.client)
+			// kilocode_change start - Pass refresh callback to handle list_changed notifications
+			this.kiloNotificationService.connect(name, connection.client, async (serverName) => {
+				await this.fetchAvailableServerCapabilities(serverName, source)
+				await this.notifyWebviewOfServerChanges()
+			})
+			// kilocode_change end
 
 			// Initial fetch of tools and resources
 			await this.fetchAvailableServerCapabilities(name, source) // kilocode_change: logic moved into method
