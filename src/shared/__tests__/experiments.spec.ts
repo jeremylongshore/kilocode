@@ -42,7 +42,7 @@ describe("experiments", () => {
 				multiFileApplyDiff: false,
 				preventFocusDisruption: false,
 				imageGeneration: false,
-				runSlashCommand: false,
+				autoExecuteWorkflow: false,
 				multipleNativeToolCalls: false,
 				customTools: false,
 			}
@@ -58,7 +58,7 @@ describe("experiments", () => {
 				multiFileApplyDiff: false,
 				preventFocusDisruption: false,
 				imageGeneration: false,
-				runSlashCommand: false,
+				autoExecuteWorkflow: false,
 				multipleNativeToolCalls: false,
 				customTools: false,
 			}
@@ -74,7 +74,7 @@ describe("experiments", () => {
 				multiFileApplyDiff: false,
 				preventFocusDisruption: false,
 				imageGeneration: false,
-				runSlashCommand: false,
+				autoExecuteWorkflow: false,
 				multipleNativeToolCalls: false,
 				customTools: false,
 			}

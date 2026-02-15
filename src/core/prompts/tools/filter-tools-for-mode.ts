@@ -314,7 +314,7 @@ export function filterNativeToolsForMode(
 	}
 
 	// Conditionally exclude run_slash_command if experiment is not enabled
-	if (!experiments?.runSlashCommand) {
+	if (!experiments?.autoExecuteWorkflow) {
 		allowedToolNames.delete("run_slash_command")
 	}
 
@@ -419,7 +419,7 @@ export function isToolAllowedInMode(
 			return experiments?.imageGeneration === true
 		}
 		if (toolName === "run_slash_command") {
-			return experiments?.runSlashCommand === true
+			return experiments?.autoExecuteWorkflow === true
 		}
 		if (toolName === "subagent") {
 			return experiments?.subagent === true

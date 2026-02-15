@@ -1028,7 +1028,7 @@
 				"relace": "Relace Apply v3"
 			}
 		},
-		"RUN_SLASH_COMMAND": {
+		"AUTO_EXECUTE_WORKFLOW": {
 			"name": "Abilita comandi slash avviati dal modello",
 			"description": "Quando abilitato, Kilo Code può eseguire i tuoi comandi slash per eseguire flussi di lavoro."
 		},

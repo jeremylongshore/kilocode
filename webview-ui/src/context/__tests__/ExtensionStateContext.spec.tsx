@@ -282,7 +282,13 @@ describe("mergeExtensionState", () => {
 				preventFocusDisruption: false,
 				morphFastApply: false, // kilocode_change
 				speechToText: false, // kilocode_change
+<<<<<<< ours
 				subagent: false,
+||||||| base
+=======
+				workflowDiscovery: false, // kilocode_change
+				autoExecuteWorkflow: false, // kilocode_change
+>>>>>>> theirs
 				newTaskRequireTodos: false,
 				imageGeneration: false,
 				runSlashCommand: false,
@@ -306,7 +312,13 @@ describe("mergeExtensionState", () => {
 			preventFocusDisruption: false,
 			morphFastApply: false, // kilocode_change
 			speechToText: false, // kilocode_change
+<<<<<<< ours
 			subagent: false,
+||||||| base
+=======
+			workflowDiscovery: false, // kilocode_change
+			autoExecuteWorkflow: false, // kilocode_change
+>>>>>>> theirs
 			newTaskRequireTodos: false,
 			imageGeneration: false,
 			runSlashCommand: false,
