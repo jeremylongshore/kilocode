@@ -35,6 +35,13 @@ export * from "./vscode-extension-host.js"
 export * from "./vscode.js"
 export * from "./kilocode/kilocode.js"
 export * from "./kilocode/device-auth.js" // kilocode_change
+<<<<<<< HEAD
+||||||| parent of 0670f909fb (feat: Add Cloud run mode to Agent Manager)
+export * from "./kilocode/nativeFunctionCallingProviders.js"
+=======
+export * from "./kilocode/nativeFunctionCallingProviders.js"
+export * from "./cloud-agent/index.js" // kilocode_change - Cloud Agent V2 API types
+>>>>>>> 0670f909fb (feat: Add Cloud run mode to Agent Manager)
 export * from "./usage-tracker.js" // kilocode_change
 
 export * from "./providers/index.js"
