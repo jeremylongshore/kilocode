@@ -6,10 +6,10 @@
   "tier": 3,
   "total_lines": 59,
   "files": 4,
-  "phase": "submitted",
+  "phase": "complete",
   "started_at": "2026-02-15T20:10:00Z",
   "completed_at": "2026-02-15T20:30:00Z",
-  "submitted_at": "2026-02-15T20:50:55Z",
+  "submitted_at": null,
   "confidence": 4,
   "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/12",
   "test_results": {

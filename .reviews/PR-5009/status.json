@@ -6,10 +6,10 @@
   "tier": 5,
   "total_lines": 829,
   "files": 10,
-  "phase": "submitted",
+  "phase": "complete",
   "started_at": "2026-02-15T13:45:00Z",
   "completed_at": "2026-02-15T14:10:00Z",
-  "submitted_at": "2026-02-15T20:50:55Z",
+  "submitted_at": null,
   "verdict": "APPROVE",
   "confidence": 88,
   "lessons": [

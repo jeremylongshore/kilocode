@@ -6,10 +6,10 @@
   "tier": 2,
   "total_lines": 35,
   "files": 2,
-  "phase": "submitted",
+  "phase": "complete",
   "started_at": "2026-02-14T23:45:00Z",
   "completed_at": "2026-02-14T23:50:00Z",
-  "submitted_at": "2026-02-15T20:50:55Z",
+  "submitted_at": null,
   "confidence": 4,
   "fork_pr": null,
   "lessons": [
