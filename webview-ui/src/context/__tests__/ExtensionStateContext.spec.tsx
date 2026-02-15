@@ -1,12 +1,13 @@
 import { render, screen, act } from "@/utils/test-utils"
 
 import {
-	type ProviderSettings,
-	type ExperimentId,
-	type ExtensionState,
+	ProviderSettings,
+	ExperimentId,
 	openRouterDefaultModelId, // kilocode_change
 	DEFAULT_CHECKPOINT_TIMEOUT_SECONDS,
 } from "@roo-code/types"
+
+import { ExtensionState } from "@roo/ExtensionMessage"
 
 import { ExtensionStateContextProvider, useExtensionState, mergeExtensionState } from "../ExtensionStateContext"
 
@@ -282,7 +283,8 @@ describe("mergeExtensionState", () => {
 				preventFocusDisruption: false,
 				morphFastApply: false, // kilocode_change
 				speechToText: false, // kilocode_change
-				subagent: false,
+				workflowDiscovery: false, // kilocode_change
+				autoExecuteWorkflow: false, // kilocode_change
 				newTaskRequireTodos: false,
 				imageGeneration: false,
 				runSlashCommand: false,
@@ -306,7 +308,8 @@ describe("mergeExtensionState", () => {
 			preventFocusDisruption: false,
 			morphFastApply: false, // kilocode_change
 			speechToText: false, // kilocode_change
-			subagent: false,
+			workflowDiscovery: false, // kilocode_change
+			autoExecuteWorkflow: false, // kilocode_change
 			newTaskRequireTodos: false,
 			imageGeneration: false,
 			runSlashCommand: false,

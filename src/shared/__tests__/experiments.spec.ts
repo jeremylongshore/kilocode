@@ -37,12 +37,11 @@ describe("experiments", () => {
 			const experiments: Record<ExperimentId, boolean> = {
 				morphFastApply: false, // kilocode_change
 				speechToText: false, // kilocode_change
-				subagent: false,
 				powerSteering: false,
 				multiFileApplyDiff: false,
 				preventFocusDisruption: false,
 				imageGeneration: false,
-				runSlashCommand: false,
+				autoExecuteWorkflow: false,
 				multipleNativeToolCalls: false,
 				customTools: false,
 			}
@@ -53,12 +52,11 @@ describe("experiments", () => {
 			const experiments: Record<ExperimentId, boolean> = {
 				morphFastApply: false, // kilocode_change
 				speechToText: false, // kilocode_change
-				subagent: false,
 				powerSteering: true,
 				multiFileApplyDiff: false,
 				preventFocusDisruption: false,
 				imageGeneration: false,
-				runSlashCommand: false,
+				autoExecuteWorkflow: false,
 				multipleNativeToolCalls: false,
 				customTools: false,
 			}
@@ -69,12 +67,11 @@ describe("experiments", () => {
 			const experiments: Record<ExperimentId, boolean> = {
 				morphFastApply: false, // kilocode_change
 				speechToText: false, // kilocode_change
-				subagent: false,
 				powerSteering: false,
 				multiFileApplyDiff: false,
 				preventFocusDisruption: false,
 				imageGeneration: false,
-				runSlashCommand: false,
+				autoExecuteWorkflow: false,
 				multipleNativeToolCalls: false,
 				customTools: false,
 			}

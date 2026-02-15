@@ -1,5 +1,4 @@
 {
-	"back": "Torna alla vista attività",
 	"common": {
 		"save": "Salva",
 		"done": "Fatto",
@@ -8,10 +7,6 @@
 		"select": "Seleziona",
 		"add": "Aggiungi intestazione",
 		"remove": "Rimuovi"
-	},
-	"search": {
-		"placeholder": "Cerca impostazioni...",
-		"noResults": "Nessuna impostazione trovata"
 	},
 	"header": {
 		"title": "Impostazioni",
@@ -42,9 +37,8 @@
 		"experimental": "Sperimentale",
 		"language": "Lingua",
 		"about": "Informazioni su Kilo Code",
-		"autoPurge": "Auto-pulizia",
-		"agentBehaviour": "Comportamento agente",
-		"autocomplete": "Ghost"
+		"ghost": "Ghost",
+		"autoPurge": "Auto-pulizia"
 	},
 	"about": {
 		"bugReport": {
@@ -64,11 +58,7 @@
 		},
 		"community": "Vuoi consigli o semplicemente uscire con altri utenti di Roo Code? Unisciti a <redditLink>reddit.com/r/kilocode</redditLink> o <discordLink>kilo.ai/discord</discordLink>",
 		"contactAndCommunity": "Contatti e Comunità",
-		"manageSettings": "Gestisci Impostazioni",
-		"debugMode": {
-			"label": "Abilita modalità debug",
-			"description": "Abilita la modalità debug per mostrare pulsanti aggiuntivi nell'intestazione dell'attività che consentano di visualizzare la cronologia delle conversazioni API e i messaggi dell'interfaccia utente come JSON formattato in file temporanei."
-		}
+		"manageSettings": "Gestisci Impostazioni"
 	},
 	"slashCommands": {
 		"description": "Gestisci i tuoi comandi slash per eseguire rapidamente flussi di lavoro e azioni personalizzate. <DocsLink>Scopri di più</DocsLink>"
@@ -104,11 +94,7 @@
 		"mistralProvider": "Mistral",
 		"mistralApiKeyLabel": "Chiave API:",
 		"mistralApiKeyPlaceholder": "Inserisci la tua chiave API Mistral",
-		"voyageProvider": "Voyage AI",
-		"voyageApiKeyLabel": "Chiave API Voyage AI",
-		"voyageApiKeyPlaceholder": "Inserisci la tua chiave API Voyage AI",
 		"openaiCompatibleProvider": "Compatibile con OpenAI",
-		"openaiCompatibleResponsesProvider": "Compatibile con OpenAI (Responses)",
 		"openAiKeyLabel": "Chiave API OpenAI",
 		"openAiKeyPlaceholder": "Inserisci la tua chiave API OpenAI",
 		"openAiCompatibleBaseUrlLabel": "URL di base",
@@ -181,8 +167,7 @@
 			"ollamaBaseUrlRequired": "È richiesto l'URL di base di Ollama",
 			"baseUrlRequired": "È richiesto l'URL di base",
 			"modelDimensionMinValue": "La dimensione del modello deve essere maggiore di 0",
-			"openRouterApiKeyRequired": "Chiave API OpenRouter è richiesta",
-			"voyageApiKeyRequired": "Chiave API Voyage AI è richiesta"
+			"openRouterApiKeyRequired": "Chiave API OpenRouter è richiesta"
 		},
 		"optional": "opzionale",
 		"advancedConfigLabel": "Configurazione avanzata",
@@ -331,40 +316,10 @@
 		"glamaApiKey": "Chiave API Glama",
 		"getGlamaApiKey": "Ottieni chiave API Glama",
 		"apiKeyStorageNotice": "Le chiavi API sono memorizzate in modo sicuro nell'Archivio Segreto di VSCode",
-		"openAiCodexRateLimits": {
-			"title": "Usage Limits for Codex{{planLabel}}",
-			"loading": "Loading usage limits...",
-			"loadError": "Failed to load usage limits",
-			"retry": "Retry",
-			"usedPercent": "{{percent}}% used",
-			"resetsIn": "Resets in {{time}}",
-			"plan": {
-				"default": "",
-				"withType": " ({{planType}})"
-			},
-			"time": {
-				"now": "Now",
-				"notAvailable": "N/A"
-			},
-			"duration": {
-				"daysHours": "{{days}}d {{hours}}h",
-				"hoursMinutes": "{{hours}}h {{minutes}}m",
-				"minutes": "{{minutes}}m"
-			},
-			"window": {
-				"usage": "Usage",
-				"fiveHour": "5h limit",
-				"oneHour": "1h limit",
-				"daily": "Daily limit",
-				"weekly": "Weekly limit",
-				"days": "{{days}}d limit",
-				"hours": "{{hours}}h limit",
-				"minutes": "{{minutes}}m limit"
-			}
-		},
 		"useCustomBaseUrl": "Usa URL base personalizzato",
 		"useReasoning": "Abilita ragionamento",
 		"useHostHeader": "Usa intestazione Host personalizzata",
+		"useLegacyFormat": "Usa formato API OpenAI legacy",
 		"customHeaders": "Intestazioni personalizzate",
 		"headerName": "Nome intestazione",
 		"headerValue": "Valore intestazione",
@@ -377,15 +332,11 @@
 			"success": "Elenco dei modelli aggiornato con successo!",
 			"error": "Impossibile aggiornare l'elenco dei modelli. Riprova."
 		},
-		"getZenmuxApiKey": "Ottieni chiave API Zenmux",
-		"zenmuxTransformsText": "Usa Zenmux Middle Out Transform",
 		"getRequestyApiKey": "Ottieni chiave API Requesty",
 		"getRequestyBaseUrl": "URL base",
 		"requestyUseCustomBaseUrl": "Utilizza URL di base personalizzato",
 		"anthropicApiKey": "Chiave API Anthropic",
 		"getAnthropicApiKey": "Ottieni chiave API Anthropic",
-		"apertisApiKey": "Chiave API Apertis",
-		"getApertisApiKey": "Ottieni chiave API Apertis",
 		"anthropicUseAuthToken": "Passa la chiave API Anthropic come header di autorizzazione invece di X-Api-Key",
 		"anthropic1MContextBetaLabel": "Abilita finestra di contesto da 1M (Beta)",
 		"anthropic1MContextBetaDescription": "Estende la finestra di contesto a 1 milione di token per Claude Sonnet 4",
@@ -397,8 +348,6 @@
 		"vertex1MContextBetaDescription": "Estende la finestra di contesto a 1 milione di token per Claude Sonnet 4",
 		"basetenApiKey": "Chiave API Baseten",
 		"getBasetenApiKey": "Ottieni chiave API Baseten",
-		"corethinkApiKey": "Chiave API Corethink",
-		"getCorethinkApiKey": "Ottieni chiave API Corethink",
 		"cerebrasApiKey": "Chiave API Cerebras",
 		"getCerebrasApiKey": "Ottieni chiave API Cerebras",
 		"chutesApiKey": "Chiave API Chutes",
@@ -651,7 +600,6 @@
 		},
 		"verbosity": {
 			"label": "Verbosity dell'output",
-			"max": "Max",
 			"high": "Alta",
 			"medium": "Media",
 			"low": "Bassa",
@@ -664,6 +612,21 @@
 			"placeholder": "Predefinito: claude",
 			"maxTokensLabel": "Token di output massimi",
 			"maxTokensDescription": "Numero massimo di token di output per le risposte di Claude Code. Il valore predefinito è 8000."
+		},
+		"geminiCli": {
+			"description": "Questo provider utilizza l'autenticazione OAuth dallo strumento Gemini CLI e non richiede chiavi API.",
+			"oauthPath": "Percorso Credenziali OAuth (opzionale)",
+			"oauthPathDescription": "Percorso al file delle credenziali OAuth. Lascia vuoto per utilizzare la posizione predefinita (~/.gemini/oauth_creds.json).",
+			"instructions": "Se non ti sei ancora autenticato, esegui",
+			"instructionsContinued": "nel tuo terminale prima.",
+			"setupLink": "Istruzioni di Configurazione Gemini CLI",
+			"requirementsTitle": "Requisiti Importanti",
+			"requirement1": "Prima, devi installare lo strumento Gemini CLI",
+			"requirement2": "Poi, esegui gemini nel tuo terminale e assicurati di accedere con Google",
+			"requirement3": "Funziona solo con account Google personali (non account Google Workspace)",
+			"requirement4": "Non utilizza chiavi API - l'autenticazione è gestita tramite OAuth",
+			"requirement5": "Richiede che lo strumento Gemini CLI sia installato e autenticato prima",
+			"freeAccess": "Accesso gratuito tramite autenticazione OAuth"
 		},
 		"qwenCode": {
 			"oauthPath": "Percorso credenziali OAuth (opzionale)",
@@ -1028,7 +991,7 @@
 				"relace": "Relace Apply v3"
 			}
 		},
-		"RUN_SLASH_COMMAND": {
+		"AUTO_EXECUTE_WORKFLOW": {
 			"name": "Abilita comandi slash avviati dal modello",
 			"description": "Quando abilitato, Kilo Code può eseguire i tuoi comandi slash per eseguire flussi di lavoro."
 		},
@@ -1050,10 +1013,6 @@
 			"refreshSuccess": "Strumenti aggiornati con successo",
 			"refreshError": "Aggiornamento strumenti non riuscito",
 			"toolParameters": "Parametri"
-		},
-		"SUBAGENT": {
-			"name": "Strumento subagente",
-			"description": "Quando abilitato, il modello può eseguire subagent in background per delegare ricerche o sottoattività. Il risultato del subagente viene restituito all'attività principale. Usa \"explore\" per sottoattività di sola lettura o \"general\" quando la sottoattività può modificare file o eseguire comandi."
 		}
 	},
 	"promptCaching": {
@@ -1190,7 +1149,7 @@
 			"description": "Visualizza le statistiche delle righe aggiunte/rimosse nell'intestazione dell'attività"
 		}
 	},
-	"autocomplete": {
+	"ghost": {
 		"showGutterAnimation": {
 			"label": "Mostra animazione gutter durante l'autocompletamento",
 			"description": "Visualizza indicatore animato nel gutter dell'editor quando l'autocompletamento è in esecuzione",

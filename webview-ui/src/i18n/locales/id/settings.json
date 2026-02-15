@@ -1,5 +1,4 @@
 {
-	"back": "Kembali ke tampilan tugas",
 	"common": {
 		"save": "Simpan",
 		"done": "Selesai",
@@ -8,10 +7,6 @@
 		"select": "Pilih",
 		"add": "Tambah Header",
 		"remove": "Hapus"
-	},
-	"search": {
-		"placeholder": "Cari pengaturan...",
-		"noResults": "Tidak ada pengaturan yang ditemukan"
 	},
 	"header": {
 		"title": "Pengaturan",
@@ -42,9 +37,7 @@
 		"experimental": "Eksperimental",
 		"language": "Bahasa",
 		"about": "Tentang Kilo Code",
-		"autoPurge": "Pembersihan Otomatis",
-		"agentBehaviour": "Perilaku Agent",
-		"autocomplete": "Autocomplete"
+		"autoPurge": "Pembersihan Otomatis"
 	},
 	"about": {
 		"bugReport": {
@@ -64,11 +57,7 @@
 		},
 		"community": "Ingin tips atau hanya nongkrong dengan pengguna Kilo Code lainnya? Bergabunglah dengan <redditLink>reddit.com/r/kilocode</redditLink> atau <discordLink>kilo.ai/discord</discordLink>",
 		"contactAndCommunity": "Kontak & Komunitas",
-		"manageSettings": "Kelola Pengaturan",
-		"debugMode": {
-			"label": "Aktifkan mode debug",
-			"description": "Aktifkan mode debug untuk menampilkan tombol tambahan di header tugas yang memungkinkan melihat riwayat percakapan API dan pesan UI sebagai JSON yang diformat dalam file sementara."
-		}
+		"manageSettings": "Kelola Pengaturan"
 	},
 	"slashCommands": {
 		"description": "Kelola perintah slash kamu untuk mengeksekusi alur kerja dan tindakan kustom dengan cepat. <DocsLink>Pelajari lebih lanjut</DocsLink>"
@@ -104,11 +93,7 @@
 		"mistralProvider": "Mistral",
 		"mistralApiKeyLabel": "Kunci API:",
 		"mistralApiKeyPlaceholder": "Masukkan kunci API Mistral Anda",
-		"voyageProvider": "Voyage AI",
-		"voyageApiKeyLabel": "Kunci API Voyage AI",
-		"voyageApiKeyPlaceholder": "Masukkan kunci API Voyage AI kamu",
 		"openaiCompatibleProvider": "OpenAI Compatible",
-		"openaiCompatibleResponsesProvider": "OpenAI Compatible (Responses)",
 		"openAiKeyLabel": "OpenAI API Key",
 		"openAiKeyPlaceholder": "Masukkan kunci API OpenAI kamu",
 		"openAiCompatibleBaseUrlLabel": "Base URL",
@@ -181,8 +166,7 @@
 			"ollamaBaseUrlRequired": "URL dasar Ollama diperlukan",
 			"baseUrlRequired": "URL dasar diperlukan",
 			"modelDimensionMinValue": "Dimensi model harus lebih besar dari 0",
-			"openRouterApiKeyRequired": "Kunci API OpenRouter diperlukan",
-			"voyageApiKeyRequired": "Kunci API Voyage AI diperlukan"
+			"openRouterApiKeyRequired": "Kunci API OpenRouter diperlukan"
 		},
 		"optional": "opsional",
 		"advancedConfigLabel": "Konfigurasi Lanjutan",
@@ -317,40 +301,10 @@
 		"glamaApiKey": "Glama API Key",
 		"getGlamaApiKey": "Dapatkan Glama API Key",
 		"apiKeyStorageNotice": "API key disimpan dengan aman di Secret Storage VSCode",
-		"openAiCodexRateLimits": {
-			"title": "Usage Limits for Codex{{planLabel}}",
-			"loading": "Loading usage limits...",
-			"loadError": "Failed to load usage limits",
-			"retry": "Retry",
-			"usedPercent": "{{percent}}% used",
-			"resetsIn": "Resets in {{time}}",
-			"plan": {
-				"default": "",
-				"withType": " ({{planType}})"
-			},
-			"time": {
-				"now": "Now",
-				"notAvailable": "N/A"
-			},
-			"duration": {
-				"daysHours": "{{days}}d {{hours}}h",
-				"hoursMinutes": "{{hours}}h {{minutes}}m",
-				"minutes": "{{minutes}}m"
-			},
-			"window": {
-				"usage": "Usage",
-				"fiveHour": "5h limit",
-				"oneHour": "1h limit",
-				"daily": "Daily limit",
-				"weekly": "Weekly limit",
-				"days": "{{days}}d limit",
-				"hours": "{{hours}}h limit",
-				"minutes": "{{minutes}}m limit"
-			}
-		},
 		"useCustomBaseUrl": "Gunakan base URL kustom",
 		"useReasoning": "Aktifkan reasoning",
 		"useHostHeader": "Gunakan Host header kustom",
+		"useLegacyFormat": "Gunakan format API OpenAI legacy",
 		"customHeaders": "Header Kustom",
 		"headerName": "Nama header",
 		"headerValue": "Nilai header",
@@ -363,13 +317,9 @@
 			"success": "Daftar model berhasil direfresh!",
 			"error": "Gagal merefresh daftar model. Silakan coba lagi."
 		},
-		"getZenmuxApiKey": "Dapatkan Zenmux API Key",
-		"zenmuxTransformsText": "Gunakan Zenmux Middle Out Transform",
 		"getRequestyApiKey": "Dapatkan Requesty API Key",
 		"getRequestyBaseUrl": "Base URL",
 		"requestyUseCustomBaseUrl": "Gunakan URL dasar khusus",
-		"apertisApiKey": "Apertis API Key",
-		"getApertisApiKey": "Dapatkan Apertis API Key",
 		"anthropicApiKey": "Anthropic API Key",
 		"getAnthropicApiKey": "Dapatkan Anthropic API Key",
 		"anthropicUseAuthToken": "Kirim Anthropic API Key sebagai Authorization header alih-alih X-Api-Key",
@@ -383,8 +333,6 @@
 		"vertex1MContextBetaDescription": "Memperluas jendela konteks menjadi 1 juta token untuk Claude Sonnet 4",
 		"basetenApiKey": "Baseten API Key",
 		"getBasetenApiKey": "Dapatkan Baseten API Key",
-		"corethinkApiKey": "Corethink API Key",
-		"getCorethinkApiKey": "Dapatkan Corethink API Key",
 		"cerebrasApiKey": "Cerebras API Key",
 		"getCerebrasApiKey": "Dapatkan Cerebras API Key",
 		"chutesApiKey": "Chutes API Key",
@@ -637,7 +585,6 @@
 		},
 		"verbosity": {
 			"label": "Verbositas Output",
-			"max": "Max",
 			"high": "Tinggi",
 			"medium": "Sedang",
 			"low": "Rendah",
@@ -650,6 +597,21 @@
 			"placeholder": "Default: claude",
 			"maxTokensLabel": "Token Output Maks",
 			"maxTokensDescription": "Jumlah maksimum token output untuk respons Claude Code. Default adalah 8000."
+		},
+		"geminiCli": {
+			"description": "Penyedia ini menggunakan autentikasi OAuth dari alat Gemini CLI dan tidak memerlukan kunci API.",
+			"oauthPath": "Jalur Kredensial OAuth (opsional)",
+			"oauthPathDescription": "Jalur ke file kredensial OAuth. Biarkan kosong untuk menggunakan lokasi default (~/.gemini/oauth_creds.json).",
+			"instructions": "Jika Anda belum melakukan autentikasi, jalankan",
+			"instructionsContinued": "di terminal Anda terlebih dahulu.",
+			"setupLink": "Petunjuk Pengaturan Gemini CLI",
+			"requirementsTitle": "Persyaratan Penting",
+			"requirement1": "Pertama, Anda perlu menginstal alat Gemini CLI",
+			"requirement2": "Kemudian, jalankan gemini di terminal Anda dan pastikan Anda masuk dengan Google",
+			"requirement3": "Hanya berfungsi dengan akun Google pribadi (bukan akun Google Workspace)",
+			"requirement4": "Tidak menggunakan kunci API - autentikasi ditangani melalui OAuth",
+			"requirement5": "Memerlukan alat Gemini CLI diinstal dan diautentikasi terlebih dahulu",
+			"freeAccess": "Akses gratis melalui autentikasi OAuth"
 		},
 		"qwenCode": {
 			"oauthPath": "Jalur Kredensial OAuth (opsional)",
@@ -1044,7 +1006,7 @@
 			"name": "Autocomplete",
 			"description": "Aktifkan fitur Autocomplete untuk saran kode cepat dan perbaikan langsung di editor Anda. Termasuk Tugas Cepat (Cmd+I) untuk perubahan yang ditargetkan dan Autocomplete untuk perbaikan kontekstual."
 		},
-		"RUN_SLASH_COMMAND": {
+		"AUTO_EXECUTE_WORKFLOW": {
 			"name": "Aktifkan perintah slash yang dimulai model",
 			"description": "Ketika diaktifkan, Kilo Code dapat menjalankan perintah slash Anda untuk mengeksekusi alur kerja."
 		},
@@ -1066,10 +1028,6 @@
 			"refreshSuccess": "Tool berhasil direfresh",
 			"refreshError": "Gagal merefresh tool",
 			"toolParameters": "Parameter"
-		},
-		"SUBAGENT": {
-			"name": "Alat subagen",
-			"description": "Saat diaktifkan, model dapat menjalankan subagen di latar belakang untuk mendelegasikan riset atau sub-tugas. Hasil subagen dikembalikan ke tugas utama. Gunakan \"explore\" untuk sub-tugas hanya baca atau \"general\" ketika sub-tugas dapat mengedit file atau menjalankan perintah."
 		}
 	},
 	"promptCaching": {
@@ -1206,7 +1164,7 @@
 			"description": "Tampilkan statistik baris ditambahkan/dihapus di header tugas"
 		}
 	},
-	"autocomplete": {
+	"ghost": {
 		"showGutterAnimation": {
 			"label": "Tampilkan animasi gutter saat autocomplete",
 			"description": "Tampilkan indikator animasi di gutter editor saat autocompletion sedang berjalan",

@@ -6,13 +6,13 @@ import type { Keys, Equals, AssertEqual } from "./type-fu.js"
  * ExperimentId
  */
 
-const kilocodeExperimentIds = ["morphFastApply", "speechToText", "subagent"] as const
+const kilocodeExperimentIds = ["morphFastApply", "speechToText"] as const // kilocode_change
 export const experimentIds = [
 	"powerSteering",
 	"multiFileApplyDiff",
 	"preventFocusDisruption",
 	"imageGeneration",
-	"runSlashCommand",
+	"autoExecuteWorkflow",
 	"multipleNativeToolCalls",
 	"customTools",
 ] as const
@@ -28,12 +28,11 @@ export type ExperimentId = z.infer<typeof experimentIdsSchema>
 export const experimentsSchema = z.object({
 	morphFastApply: z.boolean().optional(), // kilocode_change
 	speechToText: z.boolean().optional(), // kilocode_change
-	subagent: z.boolean().optional(),
 	powerSteering: z.boolean().optional(),
 	multiFileApplyDiff: z.boolean().optional(),
 	preventFocusDisruption: z.boolean().optional(),
 	imageGeneration: z.boolean().optional(),
-	runSlashCommand: z.boolean().optional(),
+	autoExecuteWorkflow: z.boolean().optional(),
 	multipleNativeToolCalls: z.boolean().optional(),
 	customTools: z.boolean().optional(),
 })

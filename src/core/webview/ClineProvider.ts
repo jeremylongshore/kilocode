@@ -34,9 +34,6 @@ import {
 	type CreateTaskOptions,
 	type TokenUsage,
 	type ToolUsage,
-	type ExtensionMessage,
-	type ExtensionState,
-	type MarketplaceInstalledMetadata,
 	RooCodeEventName,
 	TelemetryEventName, // kilocode_change
 	requestyDefaultModelId,
@@ -49,7 +46,6 @@ import {
 	DEFAULT_CHECKPOINT_TIMEOUT_SECONDS,
 	getModelId,
 } from "@roo-code/types"
-import { aggregateTaskCostsRecursive, type AggregatedCosts } from "./aggregateTaskCosts"
 import { TelemetryService } from "@roo-code/telemetry"
 import { CloudService, BridgeOrchestrator, getRooCodeApiUrl } from "@roo-code/cloud"
 
@@ -57,16 +53,12 @@ import { Package } from "../../shared/package"
 import { findLast } from "../../shared/array"
 import { supportPrompt } from "../../shared/support-prompt"
 import { GlobalFileNames } from "../../shared/globalFileNames"
+import type { ExtensionMessage, ExtensionState, MarketplaceInstalledMetadata } from "../../shared/ExtensionMessage"
 import { Mode, defaultModeSlug, getModeBySlug } from "../../shared/modes"
 import { experimentDefault } from "../../shared/experiments"
 import { formatLanguage } from "../../shared/language"
 import { WebviewMessage } from "../../shared/WebviewMessage"
 import { EMBEDDING_MODEL_PROFILES } from "../../shared/embeddingModels"
-import {
-	SUBAGENT_CANCELLED_STRUCTURED_RESULT,
-	type RunSubagentInBackgroundParams,
-	type SubagentStructuredResult,
-} from "../../shared/subagent"
 import { ProfileValidator } from "../../shared/ProfileValidator"
 
 import { Terminal } from "../../integrations/terminal/Terminal"
@@ -100,6 +92,7 @@ import { VirtualQuotaFallbackHandler } from "../../api/providers/virtual-quota-f
 
 import { ContextProxy } from "../config/ContextProxy"
 import { getEnabledRules } from "./kilorules"
+import { refreshWorkflowToggles } from "../context/instructions/workflows"
 import { ProviderSettingsManager } from "../config/ProviderSettingsManager"
 import { CustomModesManager } from "../config/CustomModesManager"
 import { Task } from "../task/Task"
@@ -186,7 +179,7 @@ export class ClineProvider
 
 	public isViewLaunched = false
 	public settingsImportedAt?: number
-	public readonly latestAnnouncementId = "jan-2026-v3.41.0-openai-codex-provider-gpt52-fixes" // v3.41.0 OpenAI Codex Provider, GPT-5.2-codex, Bug Fixes
+	public readonly latestAnnouncementId = "dec-2025-v3.38.0-skills-native-tool-calling" // v3.38.0 Skills & Native Tool Calling Required
 	public readonly providerSettingsManager: ProviderSettingsManager
 	public readonly customModesManager: CustomModesManager
 
@@ -559,14 +552,8 @@ export class ClineProvider
 			const cleanupFunctions = this.taskEventListeners.get(task)
 
 			if (cleanupFunctions) {
-				try {
-					cleanupFunctions.forEach((cleanup) => cleanup())
-					this.taskEventListeners.delete(task)
-				} catch (error) {
-					console.error(`Error running cleanup functions for task ${task.taskId}:`, error)
-					// Still delete to prevent memory leaks
-					this.taskEventListeners.delete(task)
-				}
+				cleanupFunctions.forEach((cleanup) => cleanup())
+				this.taskEventListeners.delete(task)
 			}
 
 			// Make sure no reference kept, once promises end it will be
@@ -667,130 +654,59 @@ export class ClineProvider
 		this.log("Disposing ClineProvider...")
 
 		// Clear all tasks from the stack.
-		try {
-			while (this.clineStack.length > 0) {
-				await this.removeClineFromStack()
-			}
-			this.log("Cleared all tasks")
-		} catch (error) {
-			console.error("Error clearing task stack:", error)
+		while (this.clineStack.length > 0) {
+			await this.removeClineFromStack()
 		}
+
+		this.log("Cleared all tasks")
 
 		// Clear all pending edit operations to prevent memory leaks
-		try {
-			this.clearAllPendingEditOperations()
-			this.log("Cleared pending operations")
-		} catch (error) {
-			console.error("Error clearing pending operations:", error)
+		this.clearAllPendingEditOperations()
+		this.log("Cleared pending operations")
+
+		if (this.view && "dispose" in this.view) {
+			this.view.dispose()
+			this.log("Disposed webview")
 		}
 
-		// Dispose webview
-		try {
-			if (this.view && "dispose" in this.view) {
-				this.view.dispose()
-				this.log("Disposed webview")
-			}
-		} catch (error) {
-			console.error("Error disposing webview:", error)
-		}
-
-		// Clear webview resources
-		try {
-			this.clearWebviewResources()
-		} catch (error) {
-			console.error("Error clearing webview resources:", error)
-		}
+		this.clearWebviewResources()
 
 		// Clean up cloud service event listener
-		try {
-			if (CloudService.hasInstance()) {
-				CloudService.instance.off("settings-updated", this.handleCloudSettingsUpdate)
+		if (CloudService.hasInstance()) {
+			CloudService.instance.off("settings-updated", this.handleCloudSettingsUpdate)
+		}
+
+		while (this.disposables.length) {
+			const x = this.disposables.pop()
+
+			if (x) {
+				x.dispose()
 			}
-		} catch (error) {
-			console.error("Error removing cloud service listener:", error)
 		}
 
-		// Dispose all disposables
-		try {
-			while (this.disposables.length) {
-				const x = this.disposables.pop()
+		this._workspaceTracker?.dispose()
+		this._workspaceTracker = undefined
+		await this.mcpHub?.unregisterClient()
+		this.mcpHub = undefined
+		await this.skillsManager?.dispose()
+		this.skillsManager = undefined
+		this.marketplaceManager?.cleanup()
+		this.customModesManager?.dispose()
 
-				if (x) {
-					try {
-						x.dispose()
-					} catch (disposeError) {
-						console.error("Error disposing individual disposable:", disposeError)
-					}
-				}
-			}
-		} catch (error) {
-			console.error("Error disposing disposables:", error)
+		// kilocode_change start - Stop auto-purge scheduler and device auth service
+		if (this.autoPurgeScheduler) {
+			this.autoPurgeScheduler.stop()
+			this.autoPurgeScheduler = undefined
 		}
-
-		// Dispose workspace tracker
-		try {
-			this._workspaceTracker?.dispose()
-			this._workspaceTracker = undefined
-		} catch (error) {
-			console.error("Error disposing workspace tracker:", error)
-		}
-
-		// Unregister MCP client
-		try {
-			await this.mcpHub?.unregisterClient()
-			this.mcpHub = undefined
-		} catch (error) {
-			console.error("Error unregistering MCP client:", error)
-		}
-
-		// Dispose skills manager
-		try {
-			await this.skillsManager?.dispose()
-			this.skillsManager = undefined
-		} catch (error) {
-			console.error("Error disposing skills manager:", error)
-		}
-
-		// Cleanup marketplace manager
-		try {
-			this.marketplaceManager?.cleanup()
-		} catch (error) {
-			console.error("Error cleaning up marketplace manager:", error)
-		}
-
-		// Dispose custom modes manager
-		try {
-			this.customModesManager?.dispose()
-		} catch (error) {
-			console.error("Error disposing custom modes manager:", error)
-		}
-
-		// Stop auto-purge scheduler
-		try {
-			if (this.autoPurgeScheduler) {
-				this.autoPurgeScheduler.stop()
-				this.autoPurgeScheduler = undefined
-			}
-		} catch (error) {
-			console.error("Error stopping auto-purge scheduler:", error)
-		}
+		// kilocode_change end
 
 		this.log("Disposed all disposables")
 		ClineProvider.activeInstances.delete(this)
 
-		// Clean up event listeners
-		try {
-			this.removeAllListeners()
-		} catch (error) {
-			console.error("Error removing event listeners:", error)
-		}
+		// Clean up any event listeners attached to this provider
+		this.removeAllListeners()
 
-		// Unregister from MCP server manager
-		try {
-			McpServerManager.unregisterProvider(this)
-		} catch (error) {
-			console.error("Error unregistering from MCP server manager:", error)
-		}
+		McpServerManager.unregisterProvider(this)
 	}
 
 	public static getVisibleInstance(): ClineProvider | undefined {
@@ -802,15 +718,10 @@ export class ClineProvider
 
 		// If no visible provider, try to show the sidebar view
 		if (!visibleProvider) {
-			try {
-				await vscode.commands.executeCommand(`${Package.name}.SidebarProvider.focus`)
-				// Wait briefly for the view to become visible
-				await delay(100)
-				visibleProvider = ClineProvider.getVisibleInstance()
-			} catch (error) {
-				console.error("Error focusing sidebar:", error)
-				// Continue without focusing - return undefined if no visible provider
-			}
+			await vscode.commands.executeCommand(`${Package.name}.SidebarProvider.focus`)
+			// Wait briefly for the view to become visible
+			await delay(100)
+			visibleProvider = ClineProvider.getVisibleInstance()
 		}
 
 		// If still no visible provider, return
@@ -1068,75 +979,29 @@ export class ClineProvider
 			await this.updateGlobalState("mode", historyItem.mode)
 
 			// Load the saved API config for the restored mode if it exists.
-			// Skip mode-based profile activation if historyItem.apiConfigName exists,
-			// since the task's specific provider profile will override it anyway.
-			if (!historyItem.apiConfigName) {
-				const savedConfigId = await this.providerSettingsManager.getModeConfigId(historyItem.mode)
-				const listApiConfig = await this.providerSettingsManager.listConfig()
+			const savedConfigId = await this.providerSettingsManager.getModeConfigId(historyItem.mode)
+			const listApiConfig = await this.providerSettingsManager.listConfig()
 
-				// Update listApiConfigMeta first to ensure UI has latest data.
-				await this.updateGlobalState("listApiConfigMeta", listApiConfig)
+			// Update listApiConfigMeta first to ensure UI has latest data.
+			await this.updateGlobalState("listApiConfigMeta", listApiConfig)
 
-				// If this mode has a saved config, use it.
-				if (savedConfigId) {
-					const profile = listApiConfig.find(({ id }) => id === savedConfigId)
+			// If this mode has a saved config, use it.
+			if (savedConfigId) {
+				const profile = listApiConfig.find(({ id }) => id === savedConfigId)
 
-					if (profile?.name) {
-						try {
-							// Check if the profile has actual API configuration (not just an id).
-							// In CLI mode, the ProviderSettingsManager may return empty default profiles
-							// that only contain 'id' and 'name' fields. Activating such a profile would
-							// overwrite the CLI's working API configuration with empty settings.
-							const fullProfile = await this.providerSettingsManager.getProfile({ name: profile.name })
-							const hasActualSettings = !!fullProfile.apiProvider
-
-							if (hasActualSettings) {
-								await this.activateProviderProfile({ name: profile.name })
-							} else {
-								// The task will continue with the current/default configuration.
-							}
-						} catch (error) {
-							// Log the error but continue with task restoration.
-							this.log(
-								`Failed to restore API configuration for mode '${historyItem.mode}': ${
-									error instanceof Error ? error.message : String(error)
-								}. Continuing with default configuration.`,
-							)
-							// The task will continue with the current/default configuration.
-						}
+				if (profile?.name) {
+					try {
+						await this.activateProviderProfile({ name: profile.name })
+					} catch (error) {
+						// Log the error but continue with task restoration.
+						this.log(
+							`Failed to restore API configuration for mode '${historyItem.mode}': ${
+								error instanceof Error ? error.message : String(error)
+							}. Continuing with default configuration.`,
+						)
+						// The task will continue with the current/default configuration.
 					}
 				}
-			}
-		}
-
-		// If the history item has a saved API config name (provider profile), restore it.
-		// This overrides any mode-based config restoration above, because the task's
-		// specific provider profile takes precedence over mode defaults.
-		if (historyItem.apiConfigName) {
-			const listApiConfig = await this.providerSettingsManager.listConfig()
-			// Keep global state/UI in sync with latest profiles for parity with mode restoration above.
-			await this.updateGlobalState("listApiConfigMeta", listApiConfig)
-			const profile = listApiConfig.find(({ name }) => name === historyItem.apiConfigName)
-
-			if (profile?.name) {
-				try {
-					await this.activateProviderProfile(
-						{ name: profile.name },
-						{ persistModeConfig: false, persistTaskHistory: false },
-					)
-				} catch (error) {
-					// Log the error but continue with task restoration.
-					this.log(
-						`Failed to restore API configuration '${historyItem.apiConfigName}' for task: ${
-							error instanceof Error ? error.message : String(error)
-						}. Continuing with current configuration.`,
-					)
-				}
-			} else {
-				// Profile no longer exists, log warning but continue
-				this.log(
-					`Provider profile '${historyItem.apiConfigName}' from history no longer exists. Using current configuration.`,
-				)
 			}
 		}
 
@@ -1372,7 +1237,6 @@ export class ClineProvider
 					<link href="${codiconsUri}" rel="stylesheet" />
 					<script nonce="${nonce}">
 						window.IMAGES_BASE_URI = "${imagesUri}"
-						window.ICONS_BASE_URI = "${iconsUri}"
 						window.AUDIO_BASE_URI = "${audioUri}"
 						window.MATERIAL_ICONS_BASE_URI = "${materialIconsUri}"
 						window.KILOCODE_BACKEND_BASE_URL = "${process.env.KILOCODE_BACKEND_BASE_URL ?? ""}"
@@ -1455,7 +1319,6 @@ export class ClineProvider
 			<link href="${codiconsUri}" rel="stylesheet" />
 			<script nonce="${nonce}">
 				window.IMAGES_BASE_URI = "${imagesUri}"
-				window.ICONS_BASE_URI = "${iconsUri}"
 				window.AUDIO_BASE_URI = "${audioUri}"
 				window.MATERIAL_ICONS_BASE_URI = "${materialIconsUri}"
 				window.KILOCODE_BACKEND_BASE_URL = "${process.env.KILOCODE_BACKEND_BASE_URL ?? ""}"
@@ -1551,29 +1414,14 @@ export class ClineProvider
 			const profile = listApiConfig.find(({ id }) => id === savedConfigId)
 
 			if (profile?.name) {
-				// Check if the profile has actual API configuration (not just an id).
-				// In CLI mode, the ProviderSettingsManager may return empty default profiles
-				// that only contain 'id' and 'name' fields. Activating such a profile would
-				// overwrite the CLI's working API configuration with empty settings.
-				// Skip activation if the profile has no apiProvider set - this indicates
-				// an unconfigured/empty profile.
-				const fullProfile = await this.providerSettingsManager.getProfile({ name: profile.name })
-				const hasActualSettings = !!fullProfile.apiProvider
-
-				if (hasActualSettings) {
-					await this.activateProviderProfile({ name: profile.name })
-				} else {
-					// The task will continue with the current/default configuration.
-				}
-			} else {
-				// The task will continue with the current/default configuration.
+				await this.activateProviderProfile({ name: profile.name })
 			}
 		} else {
 			// If no saved config for this mode, save current config as default.
-			const currentApiConfigNameAfter = this.getGlobalState("currentApiConfigName")
+			const currentApiConfigName = this.getGlobalState("currentApiConfigName")
 
-			if (currentApiConfigNameAfter) {
-				const config = listApiConfig.find((c) => c.name === currentApiConfigNameAfter)
+			if (currentApiConfigName) {
+				const config = listApiConfig.find((c) => c.name === currentApiConfigName)
 
 				if (config?.id) {
 					await this.providerSettingsManager.setModeConfig(newMode, config.id)
@@ -1582,12 +1430,6 @@ export class ClineProvider
 		}
 
 		await this.postStateToWebview()
-
-		// kilocode_change start: Review mode scope selection
-		if (newMode === "review") {
-			await this.triggerReviewScopeSelection()
-		}
-		// kilocode_change end
 	}
 
 	// Provider Profile Management
@@ -1694,9 +1536,6 @@ export class ClineProvider
 				await TelemetryService.instance.updateIdentity(providerSettings.kilocodeToken ?? "") // kilocode_change
 
 				this.updateTaskApiHandlerIfNeeded(providerSettings, { forceRebuild: true })
-
-				// Keep the current task's sticky provider profile in sync with the newly-activated profile.
-				await this.persistStickyProviderProfileToCurrentTask(name)
 			} else {
 				await this.updateGlobalState("listApiConfigMeta", await this.providerSettingsManager.listConfig())
 			}
@@ -1736,41 +1575,8 @@ export class ClineProvider
 		await this.postStateToWebview()
 	}
 
-	private async persistStickyProviderProfileToCurrentTask(apiConfigName: string): Promise<void> {
-		const task = this.getCurrentTask()
-		if (!task) {
-			return
-		}
-
-		try {
-			// Update in-memory state immediately so sticky behavior works even before the task has
-			// been persisted into taskHistory (it will be captured on the next save).
-			task.setTaskApiConfigName(apiConfigName)
-
-			const history = this.getGlobalState("taskHistory") ?? []
-			const taskHistoryItem = history.find((item) => item.id === task.taskId)
-
-			if (taskHistoryItem) {
-				await this.updateTaskHistory({ ...taskHistoryItem, apiConfigName })
-			}
-		} catch (error) {
-			// If persistence fails, log the error but don't fail the profile switch.
-			this.log(
-				`Failed to persist provider profile switch for task ${task.taskId}: ${
-					error instanceof Error ? error.message : String(error)
-				}`,
-			)
-		}
-	}
-
-	async activateProviderProfile(
-		args: { name: string } | { id: string },
-		options?: { persistModeConfig?: boolean; persistTaskHistory?: boolean },
-	) {
+	async activateProviderProfile(args: { name: string } | { id: string }) {
 		const { name, id, ...providerSettings } = await this.providerSettingsManager.activateProfile(args)
-
-		const persistModeConfig = options?.persistModeConfig ?? true
-		const persistTaskHistory = options?.persistTaskHistory ?? true
 
 		// See `upsertProviderProfile` for a description of what this is doing.
 		await Promise.all([
@@ -1781,18 +1587,11 @@ export class ClineProvider
 
 		const { mode } = await this.getState()
 
-		if (id && persistModeConfig) {
+		if (id) {
 			await this.providerSettingsManager.setModeConfig(mode, id)
 		}
-
 		// Change the provider for the current task.
 		this.updateTaskApiHandlerIfNeeded(providerSettings, { forceRebuild: true })
-
-		// Update the current task's sticky provider profile, unless this activation is
-		// being used purely as a non-persisting restoration (e.g., reopening a task from history).
-		if (persistTaskHistory) {
-			await this.persistStickyProviderProfileToCurrentTask(name)
-		}
 
 		await this.postStateToWebview()
 		await TelemetryService.instance.updateIdentity(providerSettings.kilocodeToken ?? "") // kilocode_change
@@ -1993,22 +1792,7 @@ export class ClineProvider
 			const taskDirPath = await getTaskDirectoryPath(globalStoragePath, id)
 			const apiConversationHistoryFilePath = path.join(taskDirPath, GlobalFileNames.apiConversationHistory)
 			const uiMessagesFilePath = path.join(taskDirPath, GlobalFileNames.uiMessages)
-			
-			// kilocode_change start
-			// Retry mechanism to handle temporary file not found issues
-			let fileExists = false
-			const maxRetries = 3
-			const retryDelay = 1000 // 1 second
-
-			for (let i = 0; i < maxRetries; i++) {
-				fileExists = await fileExistsAtPath(apiConversationHistoryFilePath)
-				if (fileExists) {
-					break
-				}
-				this.log(`[getTaskWithId] File not found, retrying in ${retryDelay}ms (attempt ${i + 1}/${maxRetries})`)
-				await new Promise(resolve => setTimeout(resolve, retryDelay))
-			}
-			// kilocode_change end
+			const fileExists = await fileExistsAtPath(apiConversationHistoryFilePath)
 
 			if (fileExists) {
 				const apiConversationHistory = JSON.parse(await fs.readFile(apiConversationHistoryFilePath, "utf8"))
@@ -2043,20 +1827,6 @@ export class ClineProvider
 		// await this.deleteTaskFromState(id)
 		// kilocode_change end
 		throw new Error("Task not found")
-	}
-
-	async getTaskWithAggregatedCosts(taskId: string): Promise<{
-		historyItem: HistoryItem
-		aggregatedCosts: AggregatedCosts
-	}> {
-		const { historyItem } = await this.getTaskWithId(taskId)
-
-		const aggregatedCosts = await aggregateTaskCostsRecursive(taskId, async (id: string) => {
-			const result = await this.getTaskWithId(id)
-			return result.historyItem
-		})
-
-		return { historyItem, aggregatedCosts }
 	}
 
 	async showTaskWithId(id: string) {
@@ -2095,6 +1865,15 @@ export class ClineProvider
 		try {
 			// get the task directory full path
 			const { taskDirPath } = await this.getTaskWithId(id)
+
+			// kilocode_change start
+			// Check if task is favorited
+			const history = this.getGlobalState("taskHistory") ?? []
+			const task = history.find((item) => item.id === id)
+			if (task?.isFavorited) {
+				throw new Error("Cannot delete a favorited task. Please unfavorite it first.")
+			}
+			// kilocode_change end
 
 			// remove task from stack if it's the current task
 			if (id === this.getCurrentTask()?.taskId) {
@@ -2173,6 +1952,8 @@ export class ClineProvider
 	async postRulesDataToWebview() {
 		const workspacePath = this.cwd
 		if (workspacePath) {
+			// Refresh workflow toggles to ensure newly created workflow files are recognized
+			await refreshWorkflowToggles(this.context, workspacePath)
 			this.postMessageToWebview({
 				type: "rulesData",
 				...(await getEnabledRules(workspacePath, this.contextProxy, this.context)),
@@ -2491,15 +2272,15 @@ export class ClineProvider
 			uriScheme: vscode.env.uriScheme,
 			uiKind: vscode.UIKind[vscode.env.uiKind], // kilocode_change
 			kiloCodeWrapperProperties, // kilocode_change wrapper information
-			kilocodeDefaultModel: (
-				await getKilocodeDefaultModel(apiConfiguration.kilocodeToken, apiConfiguration.kilocodeOrganizationId)
-			).defaultModel,
+			kilocodeDefaultModel: await getKilocodeDefaultModel(
+				apiConfiguration.kilocodeToken,
+				apiConfiguration.kilocodeOrganizationId,
+			),
 			currentTaskItem: this.getCurrentTask()?.taskId
 				? (taskHistory || []).find((item: HistoryItem) => item.id === this.getCurrentTask()?.taskId)
 				: undefined,
 			clineMessages: this.getCurrentTask()?.clineMessages || [],
 			currentTaskTodos: this.getCurrentTask()?.todoList || [],
-			currentTaskCumulativeCost: this.getCurrentTask()?.getCumulativeTotalCost(), // kilocode_change
 			messageQueue: this.getCurrentTask()?.messageQueueService?.messages,
 			taskHistoryFullLength: taskHistory.length, // kilocode_change
 			taskHistoryVersion: this.kiloCodeTaskHistoryVersion, // kilocode_change
@@ -2615,7 +2396,6 @@ export class ClineProvider
 			profileThresholds: profileThresholds ?? {},
 			cloudApiUrl: getRooCodeApiUrl(),
 			hasOpenedModeSelector: this.getGlobalState("hasOpenedModeSelector") ?? false,
-			hasCompletedOnboarding: this.getGlobalState("hasCompletedOnboarding"), // kilocode_change: Track onboarding completion - undefined means new user
 			systemNotificationsEnabled: systemNotificationsEnabled ?? false, // kilocode_change
 			dismissedNotificationIds: dismissedNotificationIds ?? [], // kilocode_change
 			morphApiKey, // kilocode_change
@@ -2684,7 +2464,6 @@ export class ClineProvider
 			| "clineMessages"
 			| "renderContext"
 			| "hasOpenedModeSelector"
-			| "hasCompletedOnboarding" // kilocode_change
 			| "version"
 			| "shouldShowAnnouncement"
 			| "hasSystemPromptOverride"
@@ -2710,90 +2489,76 @@ export class ClineProvider
 
 		let organizationAllowList = ORGANIZATION_ALLOW_ALL
 
-		// kilocode_change start: CloudService never initialized, silencing errors
-		// try {
-		// 	organizationAllowList = await CloudService.instance.getAllowList()
-		// } catch (error) {
-		// 	console.error(
-		// 		`[getState] failed to get organization allow list: ${error instanceof Error ? error.message : String(error)}`,
-		// 	)
-		// }
-		// kilocode_change end
+		try {
+			organizationAllowList = await CloudService.instance.getAllowList()
+		} catch (error) {
+			console.error(
+				`[getState] failed to get organization allow list: ${error instanceof Error ? error.message : String(error)}`,
+			)
+		}
 
 		let cloudUserInfo: CloudUserInfo | null = null
 
-		// kilocode_change start: CloudService never initialized, silencing errors
-		// try {
-		// 	cloudUserInfo = CloudService.instance.getUserInfo()
-		// } catch (error) {
-		// 	console.error(
-		// 		`[getState] failed to get cloud user info: ${error instanceof Error ? error.message : String(error)}`,
-		// 	)
-		// }
-		// kilocode_change end
+		try {
+			cloudUserInfo = CloudService.instance.getUserInfo()
+		} catch (error) {
+			console.error(
+				`[getState] failed to get cloud user info: ${error instanceof Error ? error.message : String(error)}`,
+			)
+		}
 
 		let cloudIsAuthenticated: boolean = false
 
-		// kilocode_change start: CloudService never initialized, silencing errors
-		// try {
-		// 	cloudIsAuthenticated = CloudService.instance.isAuthenticated()
-		// } catch (error) {
-		// 	console.error(
-		// 		`[getState] failed to get cloud authentication state: ${error instanceof Error ? error.message : String(error)}`,
-		// 	)
-		// }
-		// kilocode_change end
+		try {
+			cloudIsAuthenticated = CloudService.instance.isAuthenticated()
+		} catch (error) {
+			console.error(
+				`[getState] failed to get cloud authentication state: ${error instanceof Error ? error.message : String(error)}`,
+			)
+		}
 
 		let sharingEnabled: boolean = false
 
-		// kilocode_change start: CloudService never initialized, silencing errors
-		// try {
-		// 	sharingEnabled = await CloudService.instance.canShareTask()
-		// } catch (error) {
-		// 	console.error(
-		// 		`[getState] failed to get sharing enabled state: ${error instanceof Error ? error.message : String(error)}`,
-		// 	)
-		// }
-		// kilocode_change end
+		try {
+			sharingEnabled = await CloudService.instance.canShareTask()
+		} catch (error) {
+			console.error(
+				`[getState] failed to get sharing enabled state: ${error instanceof Error ? error.message : String(error)}`,
+			)
+		}
 
 		let publicSharingEnabled: boolean = false
 
-		// kilocode_change start: CloudService never initialized, silencing errors
-		// try {
-		// 	publicSharingEnabled = await CloudService.instance.canSharePublicly()
-		// } catch (error) {
-		// 	console.error(
-		// 		`[getState] failed to get public sharing enabled state: ${error instanceof Error ? error.message : String(error)}`,
-		// 	)
-		// }
-		// kilocode_change end
+		try {
+			publicSharingEnabled = await CloudService.instance.canSharePublicly()
+		} catch (error) {
+			console.error(
+				`[getState] failed to get public sharing enabled state: ${error instanceof Error ? error.message : String(error)}`,
+			)
+		}
 
 		let organizationSettingsVersion: number = -1
 
-		// kilocode_change start: CloudService never initialized, silencing errors
-		// try {
-		// 	if (CloudService.hasInstance()) {
-		// 		const settings = CloudService.instance.getOrganizationSettings()
-		// 		organizationSettingsVersion = settings?.version ?? -1
-		// 	}
-		// } catch (error) {
-		// 	console.error(
-		// 		`[getState] failed to get organization settings version: ${error instanceof Error ? error.message : String(error)}`,
-		// 	)
-		// }
-		// kilocode_change end
+		try {
+			if (CloudService.hasInstance()) {
+				const settings = CloudService.instance.getOrganizationSettings()
+				organizationSettingsVersion = settings?.version ?? -1
+			}
+		} catch (error) {
+			console.error(
+				`[getState] failed to get organization settings version: ${error instanceof Error ? error.message : String(error)}`,
+			)
+		}
 
 		let taskSyncEnabled: boolean = false
 
-		// kilocode_change start: CloudService never initialized, silencing errors
-		// try {
-		// 	taskSyncEnabled = CloudService.instance.isTaskSyncEnabled()
-		// } catch (error) {
-		// 	console.error(
-		// 		`[getState] failed to get task sync enabled state: ${error instanceof Error ? error.message : String(error)}`,
-		// 	)
-		// }
-		// kilocode_change end
+		try {
+			taskSyncEnabled = CloudService.instance.isTaskSyncEnabled()
+		} catch (error) {
+			console.error(
+				`[getState] failed to get task sync enabled state: ${error instanceof Error ? error.message : String(error)}`,
+			)
+		}
 
 		// Get actual browser session state
 		const isBrowserSessionActive = this.getCurrentTask()?.browserSession?.isSessionActive() ?? false
@@ -2801,9 +2566,10 @@ export class ClineProvider
 		// Return the same structure as before.
 		return {
 			apiConfiguration: providerSettings,
-			kilocodeDefaultModel: (
-				await getKilocodeDefaultModel(providerSettings.kilocodeToken, providerSettings.kilocodeOrganizationId)
-			).defaultModel, // kilocode_change
+			kilocodeDefaultModel: await getKilocodeDefaultModel(
+				providerSettings.kilocodeToken,
+				providerSettings.kilocodeOrganizationId,
+			), // kilocode_change
 			lastShownAnnouncementId: stateValues.lastShownAnnouncementId,
 			customInstructions: stateValues.customInstructions,
 			apiModelId: stateValues.apiModelId,
@@ -2958,37 +2724,33 @@ export class ClineProvider
 			includeCurrentCost: stateValues.includeCurrentCost ?? true,
 			maxGitStatusFiles: stateValues.maxGitStatusFiles ?? 0,
 			taskSyncEnabled,
-			// kilocode_change start: CloudService never initialized, silencing errors
 			remoteControlEnabled: (() => {
-				// try {
-				// 	const cloudSettings = CloudService.instance.getUserSettings()
-				// 	return cloudSettings?.settings?.extensionBridgeEnabled ?? false
-				// } catch (error) {
-				// 	console.error(
-				// 		`[getState] failed to get remote control setting from cloud: ${error instanceof Error ? error.message : String(error)}`,
-				// 	)
-				return false
-				// }
+				try {
+					const cloudSettings = CloudService.instance.getUserSettings()
+					return cloudSettings?.settings?.extensionBridgeEnabled ?? false
+				} catch (error) {
+					console.error(
+						`[getState] failed to get remote control setting from cloud: ${error instanceof Error ? error.message : String(error)}`,
+					)
+					return false
+				}
 			})(),
-			// kilocode_change end
 			imageGenerationProvider: stateValues.imageGenerationProvider,
 			openRouterImageApiKey: stateValues.openRouterImageApiKey,
 			kiloCodeImageApiKey: stateValues.kiloCodeImageApiKey,
 			openRouterImageGenerationSelectedModel: stateValues.openRouterImageGenerationSelectedModel,
-			// kilocode_change start: CloudService never initialized, silencing errors
 			featureRoomoteControlEnabled: (() => {
-				// try {
-				// 	const userSettings = CloudService.instance.getUserSettings()
-				// 	const hasOrganization = cloudUserInfo?.organizationId != null
-				// 	return hasOrganization || (userSettings?.features?.roomoteControlEnabled ?? false)
-				// } catch (error) {
-				// 	console.error(
-				// 		`[getState] failed to get featureRoomoteControlEnabled: ${error instanceof Error ? error.message : String(error)}`,
-				// 	)
-				return false
-				// }
+				try {
+					const userSettings = CloudService.instance.getUserSettings()
+					const hasOrganization = cloudUserInfo?.organizationId != null
+					return hasOrganization || (userSettings?.features?.roomoteControlEnabled ?? false)
+				} catch (error) {
+					console.error(
+						`[getState] failed to get featureRoomoteControlEnabled: ${error instanceof Error ? error.message : String(error)}`,
+					)
+					return false
+				}
 			})(),
-			// kilocode_change end
 			appendSystemPrompt: stateValues.appendSystemPrompt, // kilocode_change: CLI append system prompt
 		}
 	}
@@ -3397,22 +3159,6 @@ export class ClineProvider
 			return
 		}
 
-		// If the current task has a running subagent, cancel only the subagent and return the cancellation result to the parent.
-		const subagentChild = task.activeSubagentChild
-		if (subagentChild) {
-			task.activeSubagentChild = undefined
-			subagentChild.subagentProgressCallback = undefined
-			if (subagentChild.backgroundCompletionResolve) {
-				subagentChild.backgroundCompletionResolve(SUBAGENT_CANCELLED_STRUCTURED_RESULT)
-				subagentChild.backgroundCompletionResolve = undefined
-			}
-			subagentChild.abandoned = true
-			subagentChild.cancelCurrentRequest()
-			subagentChild.abortTask()
-			this.log(`[cancelTask] cancelled subagent ${subagentChild.taskId}.${subagentChild.instanceId}`)
-			return
-		}
-
 		console.log(`[cancelTask] cancelling task ${task.taskId}.${task.instanceId}`)
 
 		const { historyItem, uiMessagesFilePath } = await this.getTaskWithId(task.taskId)
@@ -3514,71 +3260,6 @@ export class ClineProvider
 	public async setMode(mode: string): Promise<void> {
 		await this.setValues({ mode })
 	}
-
-	// kilocode_change start: Review mode
-	/**
-	 * Triggers the review scope selection UI
-	 * Called when user enters review mode
-	 */
-	public async triggerReviewScopeSelection(): Promise<void> {
-		try {
-			const cwd = getWorkspacePath()
-			if (!cwd) {
-				this.log("Cannot start review: no workspace folder open")
-				return
-			}
-
-			// Phase 1: Show dialog immediately with loading state
-			await this.postMessageToWebview({
-				type: "askReviewScope",
-				reviewScopeInfo: undefined,
-			})
-
-			// Phase 2: Compute scope info and hydrate
-			const { ReviewService } = await import("../../services/review")
-			const reviewService = new ReviewService({ cwd })
-			const scopeInfo = await reviewService.getScopeInfo()
-
-			await this.postMessageToWebview({
-				type: "askReviewScope",
-				reviewScopeInfo: scopeInfo,
-			})
-		} catch (error) {
-			this.log(
-				`Error triggering review scope selection: ${error instanceof Error ? error.message : String(error)}`,
-			)
-		}
-	}
-
-	/**
-	 * Handles the user's review scope selection
-	 * Gets lightweight summary and starts the review task
-	 * The agent will dynamically explore changes using tools
-	 */
-	public async handleReviewScopeSelected(scope: "uncommitted" | "branch"): Promise<void> {
-		try {
-			const cwd = getWorkspacePath()
-			if (!cwd) {
-				this.log("Cannot start review: no workspace folder open")
-				vscode.window.showErrorMessage("Cannot start review: no workspace folder open")
-				return
-			}
-
-			const { ReviewService, buildReviewPrompt } = await import("../../services/review")
-			const reviewService = new ReviewService({ cwd })
-
-			// Get lightweight summary - agent will explore details with tools
-			const summary = await reviewService.getReviewSummary(scope)
-
-			// Build the review prompt and start the task
-			// Let the agent handle cases with no changes - it can explain and offer alternatives
-			const reviewPrompt = buildReviewPrompt(summary)
-			await this.createTask(reviewPrompt)
-		} catch (error) {
-			this.log(`Error handling review scope selection: ${error instanceof Error ? error.message : String(error)}`)
-		}
-	}
-	// kilocode_change end: Review mode
 
 	// Provider Profiles
 
@@ -4015,18 +3696,15 @@ Here is the project's README to help you get started:\n\n${mcpDetails.readmeCont
 	}
 
 	// Modify batch delete to respect favorites
-	async deleteMultipleTasks(taskIds: string[], excludeFavorites?: boolean) {
+	async deleteMultipleTasks(taskIds: string[]) {
 		const history = this.getGlobalState("taskHistory") ?? []
+		const favoritedTaskIds = taskIds.filter((id) => history.find((item) => item.id === id)?.isFavorited)
 
-		// kilocode_change start
-		// Filter out favorited tasks if excludeFavorites is true
-		let idsToDelete = taskIds
-		if (excludeFavorites) {
-			idsToDelete = taskIds.filter((id) => !history.find((item) => item.id === id)?.isFavorited)
+		if (favoritedTaskIds.length > 0) {
+			throw new Error("Cannot delete favorited tasks. Please unfavorite them first.")
 		}
-		// kilocode_change end
 
-		for (const id of idsToDelete) {
+		for (const id of taskIds) {
 			await this.deleteTaskWithId(id)
 		}
 	}
@@ -4156,98 +3834,6 @@ Here is the project's README to help you get started:\n\n${mcpDetails.readmeCont
 		}
 
 		return child
-	}
-
-	/**
-	 * Runs a subagent in the background. Parent stays current; child runs until attempt_completion.
-	 * Resolves with the completion result string, or rejects on error.
-	 */
-	public async runSubagentInBackground(
-		params: RunSubagentInBackgroundParams,
-	): Promise<string | SubagentStructuredResult> {
-		const { parentTaskId, prompt, subagentType, onProgress } = params
-		const parent = this.getCurrentTask()
-		if (!parent) {
-			throw new Error("[runSubagentInBackground] No current task")
-		}
-		if (parent.taskId !== parentTaskId) {
-			throw new Error(
-				`[runSubagentInBackground] Parent mismatch: expected ${parentTaskId}, current ${parent.taskId}`,
-			)
-		}
-
-		const {
-			apiConfiguration,
-			organizationAllowList,
-			diffEnabled: enableDiff,
-			enableCheckpoints,
-			checkpointTimeout,
-			fuzzyMatchThreshold,
-			experiments,
-			cloudUserInfo,
-			remoteControlEnabled,
-		} = await this.getState()
-
-		if (!ProfileValidator.isProfileAllowed(apiConfiguration, organizationAllowList)) {
-			throw new OrganizationAllowListViolationError(t("common:errors.violated_organization_allowlist"))
-		}
-
-		const child = new Task({
-			provider: this,
-			context: this.context,
-			apiConfiguration,
-			enableDiff,
-			enableCheckpoints,
-			checkpointTimeout,
-			fuzzyMatchThreshold,
-			consecutiveMistakeLimit: apiConfiguration.consecutiveMistakeLimit,
-			task: prompt,
-			images: undefined,
-			experiments,
-			rootTask: this.clineStack.length > 0 ? this.clineStack[0] : undefined,
-			parentTask: parent,
-			taskNumber: this.clineStack.length + 1,
-			onCreated: this.taskCreationCallback,
-			enableBridge: BridgeOrchestrator.isEnabled(cloudUserInfo, remoteControlEnabled),
-			startTask: false,
-			subagentType,
-			initialStatus: "active",
-		})
-		if (onProgress) {
-			child.subagentProgressCallback = onProgress
-		}
-
-		parent.activeSubagentChild = child
-
-		return new Promise<string | SubagentStructuredResult>((resolve, reject) => {
-			let settled = false
-			child.backgroundCompletionResolve = (result: string | SubagentStructuredResult) => {
-				if (!settled) {
-					settled = true
-					parent.activeSubagentChild = undefined
-					resolve(result)
-				}
-			}
-			child
-				.runBackgroundSubagentLoop(prompt)
-				.then(() => {
-					if (!settled) {
-						settled = true
-						parent.activeSubagentChild = undefined
-						reject(new Error("Subagent ended without attempt_completion"))
-					}
-				})
-				.catch((err) => {
-					if (!settled) {
-						settled = true
-						parent.activeSubagentChild = undefined
-						reject(err)
-					}
-				})
-				.finally(() => {
-					parent.activeSubagentChild = undefined
-				})
-		})
 	}
 
 	/**

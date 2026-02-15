@@ -1,5 +1,4 @@
 {
-	"back": "Zurück zur Aufgabenansicht",
 	"common": {
 		"save": "Speichern",
 		"done": "Fertig",
@@ -8,10 +7,6 @@
 		"select": "Auswählen",
 		"add": "Header hinzufügen",
 		"remove": "Entfernen"
-	},
-	"search": {
-		"placeholder": "Einstellungen durchsuchen...",
-		"noResults": "Keine Einstellungen gefunden"
 	},
 	"header": {
 		"title": "Einstellungen",
@@ -42,9 +37,7 @@
 		"experimental": "Experimentell",
 		"language": "Sprache",
 		"about": "Über Kilo Code",
-		"autoPurge": "Auto-Bereinigung",
-		"agentBehaviour": "Agentenverhalten",
-		"autocomplete": "Autovervollständigung"
+		"autoPurge": "Auto-Bereinigung"
 	},
 	"about": {
 		"bugReport": {
@@ -64,11 +57,7 @@
 		},
 		"community": "Möchtest du Tipps oder dich einfach mit anderen Kilo Code-Nutzern austauschen? Tritt <redditLink>reddit.com/r/kilocode</redditLink> oder <discordLink>kilo.ai/discord</discordLink> bei",
 		"contactAndCommunity": "Kontakt & Community",
-		"manageSettings": "Einstellungen verwalten",
-		"debugMode": {
-			"label": "Debug-Modus aktivieren",
-			"description": "Aktiviere den Debug-Modus, um zusätzliche Buttons im Task-Header zum Anzeigen der API-Konversationshistorie und UI-Nachrichten als formatiertes JSON in temporären Dateien zu erhalten."
-		}
+		"manageSettings": "Einstellungen verwalten"
 	},
 	"slashCommands": {
 		"description": "Verwalte deine Slash-Befehle, um benutzerdefinierte Workflows und Aktionen schnell auszuführen. <DocsLink>Mehr erfahren</DocsLink>"
@@ -109,11 +98,7 @@
 		"mistralProvider": "Mistral",
 		"mistralApiKeyLabel": "API-Schlüssel:",
 		"mistralApiKeyPlaceholder": "Gib deinen Mistral-API-Schlüssel ein",
-		"voyageProvider": "Voyage AI",
-		"voyageApiKeyLabel": "Voyage AI API-Schlüssel",
-		"voyageApiKeyPlaceholder": "Gib deinen Voyage AI API-Schlüssel ein",
 		"openaiCompatibleProvider": "OpenAI-kompatibel",
-		"openaiCompatibleResponsesProvider": "OpenAI-kompatibel (Responses)",
 		"openAiKeyLabel": "OpenAI API-Schlüssel",
 		"openAiKeyPlaceholder": "Gib deinen OpenAI API-Schlüssel ein",
 		"openAiCompatibleBaseUrlLabel": "Basis-URL",
@@ -181,8 +166,7 @@
 			"ollamaBaseUrlRequired": "Ollama-Basis-URL ist erforderlich",
 			"baseUrlRequired": "Basis-URL ist erforderlich",
 			"modelDimensionMinValue": "Modellabmessung muss größer als 0 sein",
-			"openRouterApiKeyRequired": "OpenRouter API-Schlüssel ist erforderlich",
-			"voyageApiKeyRequired": "Voyage AI API-Schlüssel ist erforderlich"
+			"openRouterApiKeyRequired": "OpenRouter API-Schlüssel ist erforderlich"
 		},
 		"optional": "optional",
 		"advancedConfigLabel": "Erweiterte Konfiguration",
@@ -328,40 +312,10 @@
 		"apiKeyStorageNotice": "API-Schlüssel werden sicher im VSCode Secret Storage gespeichert",
 		"glamaApiKey": "Glama API-Schlüssel",
 		"getGlamaApiKey": "Glama API-Schlüssel erhalten",
-		"openAiCodexRateLimits": {
-			"title": "Usage Limits for Codex{{planLabel}}",
-			"loading": "Loading usage limits...",
-			"loadError": "Failed to load usage limits",
-			"retry": "Retry",
-			"usedPercent": "{{percent}}% used",
-			"resetsIn": "Resets in {{time}}",
-			"plan": {
-				"default": "",
-				"withType": " ({{planType}})"
-			},
-			"time": {
-				"now": "Now",
-				"notAvailable": "N/A"
-			},
-			"duration": {
-				"daysHours": "{{days}}d {{hours}}h",
-				"hoursMinutes": "{{hours}}h {{minutes}}m",
-				"minutes": "{{minutes}}m"
-			},
-			"window": {
-				"usage": "Usage",
-				"fiveHour": "5h limit",
-				"oneHour": "1h limit",
-				"daily": "Daily limit",
-				"weekly": "Weekly limit",
-				"days": "{{days}}d limit",
-				"hours": "{{hours}}h limit",
-				"minutes": "{{minutes}}m limit"
-			}
-		},
 		"useCustomBaseUrl": "Benutzerdefinierte Basis-URL verwenden",
 		"useReasoning": "Reasoning aktivieren",
 		"useHostHeader": "Benutzerdefinierten Host-Header verwenden",
+		"useLegacyFormat": "Altes OpenAI API-Format verwenden",
 		"customHeaders": "Benutzerdefinierte Headers",
 		"headerName": "Header-Name",
 		"headerValue": "Header-Wert",
@@ -374,15 +328,11 @@
 			"success": "Modellliste erfolgreich aktualisiert!",
 			"error": "Fehler beim Aktualisieren der Modellliste. Bitte versuche es erneut."
 		},
-		"getZenmuxApiKey": "Zenmux API-Schlüssel erhalten",
-		"zenmuxTransformsText": "Zenmux Middle Out Transform verwenden",
 		"getRequestyApiKey": "Requesty API-Schlüssel erhalten",
 		"getRequestyBaseUrl": "Basis-URL",
 		"requestyUseCustomBaseUrl": "Benutzerdefinierte Basis-URL verwenden",
 		"anthropicApiKey": "Anthropic API-Schlüssel",
 		"getAnthropicApiKey": "Anthropic API-Schlüssel erhalten",
-		"apertisApiKey": "Apertis API-Schlüssel",
-		"getApertisApiKey": "Apertis API-Schlüssel erhalten",
 		"anthropicUseAuthToken": "Anthropic API-Schlüssel als Authorization-Header anstelle von X-Api-Key übergeben",
 		"anthropicUseAzureDeployment": "Azure-Bereitstellungsname verwenden",
 		"anthropicAzureDeploymentPlaceholder": "Bereitstellungsname eingeben...",
@@ -394,8 +344,6 @@
 		"vertex1MContextBetaDescription": "Erweitert das Kontextfenster für Claude Sonnet 4 auf 1 Million Token",
 		"basetenApiKey": "Baseten API-Schlüssel",
 		"getBasetenApiKey": "Baseten API-Schlüssel erhalten",
-		"corethinkApiKey": "Corethink API-Schlüssel",
-		"getCorethinkApiKey": "Corethink API-Schlüssel erhalten",
 		"cerebrasApiKey": "Cerebras API-Schlüssel",
 		"getCerebrasApiKey": "Cerebras API-Schlüssel erhalten",
 		"chutesApiKey": "Chutes API-Schlüssel",
@@ -646,7 +594,6 @@
 		},
 		"verbosity": {
 			"label": "Ausgabe-Ausführlichkeit",
-			"max": "Max",
 			"high": "Hoch",
 			"medium": "Mittel",
 			"low": "Niedrig",
@@ -659,6 +606,21 @@
 			"placeholder": "Standard: claude",
 			"maxTokensLabel": "Maximale Ausgabe-Tokens",
 			"maxTokensDescription": "Maximale Anzahl an Ausgabe-Tokens für Claude Code-Antworten. Standard ist 8000."
+		},
+		"geminiCli": {
+			"description": "Dieser Anbieter verwendet OAuth-Authentifizierung vom Gemini CLI-Tool und benötigt keine API-Schlüssel.",
+			"oauthPath": "OAuth-Anmeldedaten-Pfad (optional)",
+			"oauthPathDescription": "Pfad zur OAuth-Anmeldedaten-Datei. Leer lassen, um den Standardort zu verwenden (~/.gemini/oauth_creds.json).",
+			"instructions": "Falls du dich noch nicht authentifiziert hast, führe bitte",
+			"instructionsContinued": "in deinem Terminal zuerst aus.",
+			"setupLink": "Gemini CLI Setup-Anweisungen",
+			"requirementsTitle": "Wichtige Anforderungen",
+			"requirement1": "Zuerst musst du das Gemini CLI-Tool installieren",
+			"requirement2": "Dann führe gemini in deinem Terminal aus und stelle sicher, dass du dich mit Google anmeldest",
+			"requirement3": "Funktioniert nur mit persönlichen Google-Konten (nicht mit Google Workspace-Konten)",
+			"requirement4": "Verwendet keine API-Schlüssel - Authentifizierung wird über OAuth abgewickelt",
+			"requirement5": "Erfordert, dass das Gemini CLI-Tool zuerst installiert und authentifiziert wird",
+			"freeAccess": "Kostenloser Zugang über OAuth-Authentifizierung"
 		},
 		"qwenCode": {
 			"oauthPath": "OAuth-Anmeldedaten-Pfad (optional)",
@@ -1018,7 +980,7 @@
 			"warningMissingKey": "⚠️ Ein API-Schlüssel ist für die Bildgenerierung erforderlich, bitte konfiguriere ihn oben.",
 			"successConfigured": "✓ Bildgenerierung ist konfiguriert und einsatzbereit"
 		},
-		"RUN_SLASH_COMMAND": {
+		"AUTO_EXECUTE_WORKFLOW": {
 			"name": "Modellinitierte Slash-Befehle aktivieren",
 			"description": "Wenn aktiviert, kann Kilo Code deine Slash-Befehle ausführen, um Workflows zu starten."
 		},
@@ -1040,10 +1002,6 @@
 			"refreshSuccess": "Tools erfolgreich aktualisiert",
 			"refreshError": "Aktualisierung der Tools fehlgeschlagen",
 			"toolParameters": "Parameter"
-		},
-		"SUBAGENT": {
-			"name": "Subagent-Tool",
-			"description": "Wenn aktiviert, kann das Modell Hintergrund-Subagenten für Recherche oder Teilaufgaben ausführen. Das Ergebnis des Subagenten wird an die Hauptaufgabe zurückgegeben. Verwende \"explore\" für schreibgeschützte Teilaufgaben oder \"general\", wenn die Teilaufgabe Dateien bearbeiten oder Befehle ausführen kann."
 		}
 	},
 	"promptCaching": {
@@ -1180,7 +1138,7 @@
 			"description": "Statistiken zu hinzugefügten/entfernten Zeilen im Aufgaben-Header anzeigen"
 		}
 	},
-	"autocomplete": {
+	"ghost": {
 		"showGutterAnimation": {
 			"label": "Randanimation bei Autovervollständigung anzeigen",
 			"description": "Zeigt eine animierte Anzeige im Editor-Rand an, wenn die Autovervollständigung läuft",

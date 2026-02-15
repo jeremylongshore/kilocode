@@ -314,12 +314,8 @@ export function filterNativeToolsForMode(
 	}
 
 	// Conditionally exclude run_slash_command if experiment is not enabled
-	if (!experiments?.runSlashCommand) {
+	if (!experiments?.autoExecuteWorkflow) {
 		allowedToolNames.delete("run_slash_command")
-	}
-
-	if (!experiments?.subagent) {
-		allowedToolNames.delete("subagent")
 	}
 
 	// Conditionally exclude browser_action if disabled in settings
@@ -419,10 +415,7 @@ export function isToolAllowedInMode(
 			return experiments?.imageGeneration === true
 		}
 		if (toolName === "run_slash_command") {
-			return experiments?.runSlashCommand === true
-		}
-		if (toolName === "subagent") {
-			return experiments?.subagent === true
+			return experiments?.autoExecuteWorkflow === true
 		}
 		return true
 	}

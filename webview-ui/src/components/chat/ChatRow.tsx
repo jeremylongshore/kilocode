@@ -2,24 +2,13 @@ import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from "
 import { useSize } from "react-use"
 import { useTranslation, Trans } from "react-i18next"
 import deepEqual from "fast-deep-equal"
-import { VSCodeBadge } from "@vscode/webview-ui-toolkit/react"
 
-import type {
-	ClineMessage,
-	FollowUpData,
-	SuggestionItem,
-	ClineApiReqInfo,
-	ClineAskUseMcpServer,
-	ClineSayTool,
-} from "@roo-code/types"
-
-/** i18n keys backend sends as currentTask; we pass to t() for display. */
-const SUBAGENT_STATUS_KEYS = ["chat:subagents.starting", "chat:subagents.thinking"] as const
-
+import type { ClineMessage, FollowUpData, SuggestionItem } from "@roo-code/types"
 import { Mode } from "@roo/modes"
 
+import { ClineApiReqInfo, ClineAskUseMcpServer, ClineSayTool } from "@roo/ExtensionMessage"
 import { COMMAND_OUTPUT_STRING } from "@roo/combineCommandSequences"
-import { safeJsonParse } from "@roo/core"
+import { safeJsonParse } from "@roo/safeJsonParse"
 
 import { useExtensionState } from "@src/context/ExtensionStateContext"
 import { findMatchingResourceOrTemplate } from "@src/utils/mcp"
@@ -27,6 +16,8 @@ import { vscode } from "@src/utils/vscode"
 import { formatPathTooltip } from "@src/utils/formatPathTooltip"
 
 import { ToolUseBlock, ToolUseBlockHeader } from "../common/ToolUseBlock"
+// kilocode_change: Use extended SlashCommandItem for workflow execution
+import { SlashCommandItem } from "./SlashCommandItem"
 import UpdateTodoListToolBlock from "./UpdateTodoListToolBlock"
 import { TodoChangeDisplay } from "./TodoChangeDisplay"
 import CodeAccordian from "../common/CodeAccordian"
@@ -76,7 +67,6 @@ import {
 import { cn } from "@/lib/utils"
 import { SeeNewChangesButtons } from "./kilocode/SeeNewChangesButtons"
 import { PathTooltip } from "../ui/PathTooltip"
-import { OpenMarkdownPreviewButton } from "./OpenMarkdownPreviewButton"
 
 // kilocode_change start
 import { LowCreditWarning } from "../kilocode/chat/LowCreditWarning"
@@ -85,53 +75,11 @@ import { KiloChatRowGutterBar } from "../kilocode/chat/KiloChatRowGutterBar"
 import { StandardTooltip } from "../ui"
 import { FastApplyChatDisplay } from "./kilocode/FastApplyChatDisplay"
 import { InvalidModelWarning } from "../kilocode/chat/InvalidModelWarning"
-import { UnauthorizedWarning } from "../kilocode/chat/UnauthorizedWarning"
 import { formatFileSize } from "@/lib/formatting-utils"
 import ChatTimestamps from "./ChatTimestamps"
 import { removeLeadingNonAlphanumeric } from "@/utils/removeLeadingNonAlphanumeric"
 import { KILOCODE_TOKEN_REQUIRED_ERROR } from "@roo/kilocode/errorUtils"
 // kilocode_change end
-
-interface ParsedSubagentTask {
-	toolLabel: string
-	purpose: string | null
-	isGeneric: boolean
-}
-
-/**
- * Parses backend progress strings like "[read_file for 15 files]" or "Thinking..." into
- * tool label and purpose for highlighted display. getToolLabel(key) returns the localized tool name.
- */
-function parseSubagentCurrentTask(raw: string, getToolLabel: (toolKey: string) => string): ParsedSubagentTask {
-	const s = raw.trim()
-	if (!s) return { toolLabel: "", purpose: "...", isGeneric: true }
-
-	const fallbackFormat = (str: string) => str.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
-
-	// Generic status (no brackets) – show as-is
-	if (!s.startsWith("[")) {
-		return { toolLabel: "", purpose: s.endsWith("...") ? s : s + "...", isGeneric: true }
-	}
-
-	// Strip brackets and parse "[tool_name for purpose]"
-	const inner = s.slice(1, s.endsWith("]") ? s.length - 1 : s.length).trim()
-	const forIndex = inner.indexOf(" for ")
-	if (forIndex === -1) {
-		const toolKey = inner.replace(/\s+/g, "_").toLowerCase()
-		const toolLabel = getToolLabel(toolKey) || fallbackFormat(inner)
-		return { toolLabel, purpose: null, isGeneric: false }
-	}
-
-	const toolPart = inner.slice(0, forIndex).trim()
-	const purposePart = inner.slice(forIndex + 5).trim()
-	const toolKey = toolPart.replace(/\s+/g, "_").toLowerCase()
-	const toolLabel = getToolLabel(toolKey) || fallbackFormat(toolPart)
-	let purpose = purposePart
-	if ((purpose.startsWith("'") && purpose.endsWith("'")) || (purpose.startsWith('"') && purpose.endsWith('"'))) {
-		purpose = purpose.slice(1, -1)
-	}
-	return { toolLabel, purpose: purpose || null, isGeneric: false }
-}
 
 // Helper function to get previous todos before a specific message
 function getPreviousTodos(messages: ClineMessage[], currentMessageTs: number): any[] {
@@ -479,7 +427,7 @@ export const ChatRowContent = ({
 		display: "flex",
 		alignItems: "center",
 		gap: "10px",
-		marginBottom: "4px", // kilocode_change
+		marginBottom: "10px",
 		wordBreak: "break-word",
 	}
 
@@ -1046,74 +994,23 @@ export const ChatRowContent = ({
 					</>
 				)
 			case "runSlashCommand": {
-				const slashCommandInfo = tool
+				// kilocode_change: Add diagnostic logging for workflow display issue
+				console.log(`[ChatRow] Processing runSlashCommand tool:`, {
+					tool,
+					messageType: message.type,
+					isExpanded,
+					messageText: message.text,
+				})
+				// kilocode_change end
+				// kilocode_change: Use extended SlashCommandItem for workflow execution
 				return (
-					<>
-						<div style={headerStyle}>
-							{toolIcon("play")}
-							<span style={{ fontWeight: "bold" }}>
-								{message.type === "ask"
-									? t("chat:slashCommand.wantsToRun")
-									: t("chat:slashCommand.didRun")}
-							</span>
-						</div>
-						<div
-							style={{
-								marginTop: "4px",
-								backgroundColor: "var(--vscode-editor-background)",
-								border: "1px solid var(--vscode-editorGroup-border)",
-								borderRadius: "4px",
-								overflow: "hidden",
-								cursor: "pointer",
-							}}
-							onClick={handleToggleExpand}>
-							<ToolUseBlockHeader
-								className="group"
-								style={{
-									display: "flex",
-									alignItems: "center",
-									justifyContent: "space-between",
-									padding: "10px 12px",
-								}}>
-								<div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-									<span style={{ fontWeight: "500", fontSize: "var(--vscode-font-size)" }}>
-										/{slashCommandInfo.command}
-									</span>
-									{slashCommandInfo.source && (
-										<VSCodeBadge style={{ fontSize: "calc(var(--vscode-font-size) - 2px)" }}>
-											{slashCommandInfo.source}
-										</VSCodeBadge>
-									)}
-								</div>
-								<span
-									className={`codicon codicon-chevron-${isExpanded ? "up" : "down"} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}></span>
-							</ToolUseBlockHeader>
-							{isExpanded && (slashCommandInfo.args || slashCommandInfo.description) && (
-								<div
-									style={{
-										padding: "12px 16px",
-										borderTop: "1px solid var(--vscode-editorGroup-border)",
-										display: "flex",
-										flexDirection: "column",
-										gap: "8px",
-									}}>
-									{slashCommandInfo.args && (
-										<div>
-											<span style={{ fontWeight: "500" }}>Arguments: </span>
-											<span style={{ color: "var(--vscode-descriptionForeground)" }}>
-												{slashCommandInfo.args}
-											</span>
-										</div>
-									)}
-									{slashCommandInfo.description && (
-										<div style={{ color: "var(--vscode-descriptionForeground)" }}>
-											{slashCommandInfo.description}
-										</div>
-									)}
-								</div>
-							)}
-						</div>
-					</>
+					<SlashCommandItem
+						isWorkflowExecution
+						tool={tool as any}
+						messageType={message.type}
+						isExpanded={isExpanded}
+						onToggleExpand={handleToggleExpand}
+					/>
 				)
 			}
 			case "generateImage":
@@ -1302,8 +1199,7 @@ export const ChatRowContent = ({
 									// }
 								} else {
 									body = t("chat:apiRequest.errorMessage.unknown")
-									docsURL =
-										"mailto:support@roocode.com?subject=Unknown API Error&body=[Please include full error details]"
+									docsURL = "mailto:support@roocode.com?subject=Unknown API Error"
 								}
 							} else if (message.text.indexOf("Connection error") === 0) {
 								body = t("chat:apiRequest.errorMessage.connection")
@@ -1374,12 +1270,10 @@ export const ChatRowContent = ({
 					return null // we should never see this message type
 				case "text":
 					return (
-						<div className="group">
+						<div>
 							<div style={headerStyle}>
 								<MessageCircle className="w-4 shrink-0" aria-label="Speech bubble icon" />
 								<span style={{ fontWeight: "bold" }}>{t("chat:text.rooSaid")}</span>
-								<div style={{ flexGrow: 1 }} />
-								<OpenMarkdownPreviewButton markdown={message.text} />
 							</div>
 							<div className="pl-6">
 								<Markdown markdown={message.text} partial={message.partial} />
@@ -1406,7 +1300,7 @@ export const ChatRowContent = ({
 									isEditing ? "overflow-visible" : "overflow-hidden", // kilocode_change
 									isEditing
 										? "bg-vscode-editor-background text-vscode-editor-foreground"
-										: "cursor-text p-1 bg-vscode-sideBar-background text-vscode-foreground", // kilocode_change
+										: "cursor-text p-1 bg-vscode-editor-foreground/70 text-vscode-editor-background",
 								)}>
 								{isEditing ? (
 									<div className="flex flex-col gap-2">
@@ -1534,20 +1428,17 @@ export const ChatRowContent = ({
 					}
 
 					// Fallback for generic errors
-					return (
-						<ErrorRow type="error" message={message.text || t("chat:error")} errorDetails={message.text} />
-					)
+					return <ErrorRow type="error" message={message.text || t("chat:error")} />
 				case "completion_result":
 					const commitRange = message.metadata?.kiloCode?.commitRange
 					return (
-						<div className="group">
+						<>
 							<div style={headerStyle}>
 								{icon}
 								{/* kilocode_change start */}
 								<div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
 									{title}
 									{showTimestamps && <ChatTimestamps ts={message.ts} />}
-									<OpenMarkdownPreviewButton markdown={message.text} />
 								</div>
 								{/* kilocode_change end */}
 							</div>
@@ -1563,7 +1454,7 @@ export const ChatRowContent = ({
 								)
 								// kilocode_change end
 							}
-						</div>
+						</>
 					)
 				case "shell_integration_warning":
 					return <CommandExecutionError />
@@ -1637,160 +1528,23 @@ export const ChatRowContent = ({
 
 					switch (sayTool.tool) {
 						case "runSlashCommand": {
-							const slashCommandInfo = sayTool
+							// kilocode_change: Add diagnostic logging for workflow display issue
+							console.log(`[ChatRow] Processing say runSlashCommand tool:`, {
+								sayTool,
+								messageType: message.type,
+								isExpanded,
+								messageText: message.text,
+							})
+							// kilocode_change end
+							// kilocode_change: Use extended SlashCommandItem for workflow execution
 							return (
-								<>
-									<div style={headerStyle}>
-										<span
-											className="codicon codicon-terminal-cmd"
-											style={{
-												color: "var(--vscode-foreground)",
-												marginBottom: "-1.5px",
-											}}></span>
-										<span style={{ fontWeight: "bold" }}>{t("chat:slashCommand.didRun")}</span>
-									</div>
-									<div className="pl-6">
-										<ToolUseBlock>
-											<ToolUseBlockHeader
-												style={{
-													display: "flex",
-													flexDirection: "column",
-													alignItems: "flex-start",
-													gap: "4px",
-													padding: "10px 12px",
-												}}>
-												<div
-													style={{
-														display: "flex",
-														alignItems: "center",
-														gap: "8px",
-														width: "100%",
-													}}>
-													<span
-														style={{
-															fontWeight: "500",
-															fontSize: "var(--vscode-font-size)",
-														}}>
-														/{slashCommandInfo.command}
-													</span>
-													{slashCommandInfo.args && (
-														<span
-															style={{
-																color: "var(--vscode-descriptionForeground)",
-																fontSize: "var(--vscode-font-size)",
-															}}>
-															{slashCommandInfo.args}
-														</span>
-													)}
-												</div>
-												{slashCommandInfo.description && (
-													<div
-														style={{
-															color: "var(--vscode-descriptionForeground)",
-															fontSize: "calc(var(--vscode-font-size) - 1px)",
-														}}>
-														{slashCommandInfo.description}
-													</div>
-												)}
-												{slashCommandInfo.source && (
-													<div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-														<VSCodeBadge
-															style={{ fontSize: "calc(var(--vscode-font-size) - 2px)" }}>
-															{slashCommandInfo.source}
-														</VSCodeBadge>
-													</div>
-												)}
-											</ToolUseBlockHeader>
-										</ToolUseBlock>
-									</div>
-								</>
-							)
-						}
-						case "subagentRunning": {
-							const desc = sayTool.description ?? ""
-							const currentTask = sayTool.currentTask
-							const getToolLabel = (key: string) =>
-								t("chat:subagents.toolDisplayNames." + key, {
-									defaultValue: key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
-								})
-							const parsed = currentTask ? parseSubagentCurrentTask(currentTask, getToolLabel) : null
-							const purposeKey = parsed?.purpose?.replace(/\.\.\.$/, "")
-							const displayPurpose =
-								purposeKey &&
-								SUBAGENT_STATUS_KEYS.includes(purposeKey as (typeof SUBAGENT_STATUS_KEYS)[number])
-									? t(purposeKey)
-									: parsed?.purpose
-							return (
-								<div>
-									<div style={headerStyle}>
-										{message.progressStatus?.icon && (
-											<span
-												className={`codicon codicon-${message.progressStatus.icon}`}
-												style={{ marginRight: "6px", color: "var(--vscode-foreground)" }}
-											/>
-										)}
-										<span>{t("chat:subagents.runningLabel", { description: desc })}</span>
-									</div>
-									{parsed && (
-										<div className="pl-6 mt-1.5 text-sm text-vscode-descriptionForeground">
-											{parsed.toolLabel ? (
-												displayPurpose ? (
-													<>
-														{parsed.toolLabel}: {displayPurpose}
-														{!parsed.purpose?.endsWith("...") && "..."}
-													</>
-												) : (
-													<>{parsed.toolLabel}...</>
-												)
-											) : (
-												<>
-													{displayPurpose?.endsWith("...")
-														? displayPurpose
-														: `${displayPurpose ?? ""}...`}
-												</>
-											)}
-										</div>
-									)}
-								</div>
-							)
-						}
-						case "subagentCompleted": {
-							const hasError = !!sayTool.error
-							return (
-								<>
-									<div style={headerStyle}>
-										<span
-											className={`codicon codicon-${hasError ? "error" : "check-all"}`}
-											style={{
-												marginRight: "6px",
-												color: hasError
-													? "var(--vscode-errorForeground)"
-													: "var(--vscode-foreground)",
-											}}
-										/>
-										<span>{t("chat:subagents.completedLabel")}</span>
-										{sayTool.description && (
-											<span
-												style={{
-													color: "var(--vscode-descriptionForeground)",
-													marginLeft: "8px",
-												}}>
-												{sayTool.description}
-											</span>
-										)}
-									</div>
-									{(sayTool.result ||
-										sayTool.error ||
-										(sayTool.resultCode && sayTool.messageKey)) && (
-										<div className="pl-6 mt-2 text-vscode-descriptionForeground whitespace-pre-wrap">
-											{sayTool.resultCode === "CANCELLED" && sayTool.messageKey
-												? t(sayTool.messageKey)
-												: hasError
-													? sayTool.error
-													: sayTool.result}
-										</div>
-									)}
-								</>
+								<SlashCommandItem
+									isWorkflowExecution
+									tool={sayTool as any}
+									messageType={message.type}
+									isExpanded={isExpanded}
+									onToggleExpand={handleToggleExpand}
+								/>
 							)
 						}
 						default:
@@ -1865,7 +1619,7 @@ export const ChatRowContent = ({
 		case "ask":
 			switch (message.ask) {
 				case "mistake_limit_reached":
-					return <ErrorRow type="mistake_limit" message={message.text || ""} errorDetails={message.text} />
+					return <ErrorRow type="mistake_limit" message={message.text || ""} />
 				case "command":
 					return (
 						<CommandExecution
@@ -1937,12 +1691,10 @@ export const ChatRowContent = ({
 				case "completion_result":
 					if (message.text) {
 						return (
-							<div className="group">
+							<div>
 								<div style={headerStyle}>
 									{icon}
 									{title}
-									<div style={{ flexGrow: 1 }} />
-									<OpenMarkdownPreviewButton markdown={message.text} />
 								</div>
 								<div style={{ color: "var(--vscode-charts-green)", paddingTop: 10 }}>
 									<Markdown markdown={message.text} partial={message.partial} />
@@ -2002,10 +1754,12 @@ export const ChatRowContent = ({
 					)
 
 				case "payment_required_prompt": {
-					return <LowCreditWarning message={message} />
-				}
-				case "unauthorized_prompt": {
-					return <UnauthorizedWarning message={message} />
+					return (
+						<LowCreditWarning
+							message={message}
+							isOrganization={!!apiConfiguration.kilocodeOrganizationId}
+						/>
+					)
 				}
 				case "invalid_model": {
 					return <InvalidModelWarning message={message} isLast={isLast} />

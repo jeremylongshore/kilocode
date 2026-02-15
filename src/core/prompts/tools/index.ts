@@ -163,13 +163,8 @@ export function getToolDescriptionsForMode(
 	}
 
 	// Conditionally exclude run_slash_command if experiment is not enabled
-	if (!experiments?.runSlashCommand) {
+	if (!experiments?.autoExecuteWorkflow) {
 		tools.delete("run_slash_command")
-	}
-
-	// Conditionally exclude subagent if experiment is not enabled
-	if (!experiments?.subagent) {
-		tools.delete("subagent")
 	}
 
 	// Map tool descriptions for allowed tools
