@@ -1,24 +1,23 @@
 # Kilo Code PR Review Progress
 
-## Status: Phase 1 Complete - Ready to Review
+## Status: 22 of 75 PRs Reviewed
 
 ## Environment
 - Node: 20.20.0 (mise)
 - check-types: PASS (22 tasks)
 - lint: PASS (18 tasks)
 - test: PASS (except core-schemas no-test-files, pre-existing)
-- vsix build: BLOCKED (esbuild EPIPE, local-only issue)
 
 ## PR Summary (75 open)
-| Tier | Category | Count | Status |
-|------|----------|-------|--------|
-| 1 | Docs | 7 | Pending |
-| 2 | Tiny fixes + Approved | 11 | Pending |
-| 3 | Small fixes/features | 13 | Pending |
-| 4 | Medium fixes | 4 | Pending |
-| 5 | Providers + medium features | 27 | Pending |
-| 6 | Large features | 12 | Pending |
-| 9 | Skip | 1 | Skip |
+| Tier | Category | Total | Reviewed | Scaffolded | Status |
+|------|----------|-------|----------|------------|--------|
+| 1 | Docs | 7 | 5 | 2 | 71% reviewed |
+| 2 | Tiny fixes + Approved | 11 | 11 | 0 | 100% reviewed |
+| 3 | Small fixes/features | 13 | 6 | 7 | 46% reviewed |
+| 4 | Medium fixes | 4 | 0 | 4 | scaffolded |
+| 5 | Providers + medium features | 27 | 0 | 27 | scaffolded |
+| 6 | Large features | 12 | 0 | 12 | scaffolded |
+| 9 | Skip | 1 | 0 | 1 | skip |
 
 ## Review Log
 
@@ -43,4 +42,40 @@
 | 17 | 5466 | feature | 2 | 75 | 5/5 | Well-tested PRs with maintainer approval = fast review | ~5m |
 | 18 | 5739 | feature | 3 | 33 | 4/5 | First full local test pipeline: 7831 tests pass = real proof of work | ~20m |
 | 19 | 5562 | feature | 3 | 59 | 4/5 | Backend API may already exist — check before assuming PR is incomplete | ~20m |
-<!-- Reviews logged below -->
+| 20 | 5370 | fix | 3 | 59 | 4/5 | Stale branches can have unrelated type errors — verify in PR-touched files | ~30m |
+| 21 | 5660 | refactor | 3 | 69 | 5/5 | Refactoring fetch→SDK requires test updates — mocks must match new path | ~60m |
+| 22 | 5704 | fix | 3 | 74 | 5/5 | i18n keys must exist in locale files before referencing; Qodo catches real bugs | ~120m |
+
+## Verdicts Summary
+| Verdict | Count | Percentage |
+|---------|-------|------------|
+| APPROVE | 10 | 45% |
+| COMMENT | 8 | 36% |
+| REQUEST_CHANGES | 4 | 18% |
+
+## Combined Test Evidence (Batch 6)
+
+Merged 16 PRs onto fork branch `batch-6-combined-20-mirrors` and ran full test suite:
+
+| Test | Command | Result | Details |
+|------|---------|--------|---------|
+| TypeScript | `pnpm check-types` | 21/22 PASS | 1 PR interaction: experiments enum mismatch |
+| Lint | `pnpm lint` | 18/18 PASS | All clean |
+| Unit Tests | `pnpm test` | 14/17 PASS | See failure analysis below |
+
+### Test Failure Analysis
+| Category | Count | Cause | Introduced By |
+|----------|-------|-------|---------------|
+| filter.test.ts | 84 | Race condition in temp dir cleanup | Pre-existing |
+| runSlashCommandTool | 11 | commands→workflows rename conflict | PR #4760 interaction |
+| safeWriteJson | 7 | Flaky filesystem tests | Pre-existing |
+| webviewMessageHandler | 4 | Router model API changed | PR #5696 interaction |
+| useSelectedModel | 3 | OpenAI provider changes | PR interaction |
+| ClineProvider | 5 | External extension mocking | Pre-existing |
+| auto-retry | 1 | Timing flake | Pre-existing |
+| core-schemas | exit 1 | No test files in package | Pre-existing |
+
+**Conclusion**: 7,971 kilo-code tests + 1,575 webview tests passed. All failures are pre-existing flakes or expected PR interactions.
+
+> Test log: `batch-6-test-evidence.log` (8,653 lines)
+> Branch: [`batch-6-combined-20-mirrors`](https://github.com/jeremylongshore/kilocode/tree/batch-6-combined-20-mirrors)

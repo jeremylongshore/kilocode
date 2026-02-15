@@ -16,5 +16,7 @@
     "Always read existing comments - contributor agreed to new design direction",
     "PR is blocked by pending design revision, not code quality"
   ],
-  "bot_findings": {}
+  "bot_findings": {},
+  "verdict": "REQUEST_CHANGES",
+  "lines": 8
 }

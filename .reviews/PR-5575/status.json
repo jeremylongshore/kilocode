@@ -12,5 +12,10 @@
   "submitted_at": null,
   "confidence": 4,
   "fork_pr": null,
-  "lessons": ["Missing CI = needs rebase", "0 vs -1 as unlimited is a common edge case pattern"]
+  "lessons": [
+    "Missing CI = needs rebase",
+    "0 vs -1 as unlimited is a common edge case pattern"
+  ],
+  "verdict": "COMMENT",
+  "lines": 22
 }

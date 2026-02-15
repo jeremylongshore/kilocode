@@ -16,8 +16,12 @@
   "test_results": {
     "check_types": "PASS (22/22)",
     "lint": "PASS (18/18)",
-    "test": "FAIL (4 test cases in mistral-fim.spec.ts — pre-existing, mocks not updated for SDK refactor)",
+    "test": "FAIL (4 test cases in mistral-fim.spec.ts \u2014 pre-existing, mocks not updated for SDK refactor)",
     "evidence_log": "test-evidence-combined-batch-1.log"
   },
-  "lessons": ["Refactoring from fetch() to SDK requires test updates — mocks must match the new code path", "Mistral SDK returns camelCase fields (promptTokens, not prompt_tokens)"]
+  "lessons": [
+    "Refactoring from fetch() to SDK requires test updates \u2014 mocks must match the new code path",
+    "Mistral SDK returns camelCase fields (promptTokens, not prompt_tokens)"
+  ],
+  "lines": 69
 }

@@ -31,5 +31,7 @@
     "greptile": "no_response",
     "codeql": "no_findings",
     "qodo": "failed (could not generate suggestions)"
-  }
+  },
+  "verdict": "COMMENT",
+  "lines": 58
 }

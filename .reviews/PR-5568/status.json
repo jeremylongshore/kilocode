@@ -30,5 +30,7 @@
     "greptile": "no_response",
     "codeql": "pending",
     "qodo": "pending"
-  }
+  },
+  "verdict": "COMMENT",
+  "lines": 6
 }

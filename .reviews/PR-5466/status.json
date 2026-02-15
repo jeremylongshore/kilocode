@@ -12,5 +12,9 @@
   "submitted_at": null,
   "confidence": 5,
   "fork_pr": null,
-  "lessons": ["Well-tested PRs with maintainer approval need minimal review"]
+  "lessons": [
+    "Well-tested PRs with maintainer approval need minimal review"
+  ],
+  "verdict": "APPROVE",
+  "lines": 75
 }

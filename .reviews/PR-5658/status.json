@@ -6,10 +6,11 @@
   "tier": 5,
   "total_lines": 10,
   "files": 1,
-  "phase": "scaffolded",
+  "phase": "ready",
   "started_at": null,
   "completed_at": null,
   "submitted_at": null,
   "confidence": null,
-  "lessons": []
+  "lessons": [],
+  "lines": 10
 }

@@ -12,5 +12,9 @@
   "submitted_at": null,
   "confidence": 4,
   "fork_pr": null,
-  "lessons": ["Maintainer feedback in comments can invalidate the entire approach"]
+  "lessons": [
+    "Maintainer feedback in comments can invalidate the entire approach"
+  ],
+  "verdict": "REQUEST_CHANGES",
+  "lines": 22
 }

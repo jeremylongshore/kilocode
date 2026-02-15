@@ -12,5 +12,9 @@
   "submitted_at": null,
   "confidence": 5,
   "fork_pr": null,
-  "lessons": ["VSCode web components cause controlled input issues - native elements fix it"]
+  "lessons": [
+    "VSCode web components cause controlled input issues - native elements fix it"
+  ],
+  "verdict": "APPROVE",
+  "lines": 39
 }

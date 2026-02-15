@@ -34,5 +34,7 @@
     "greptile": "no_response",
     "codeql": "no_findings",
     "qodo": "failed (no OpenAI key)"
-  }
+  },
+  "verdict": "APPROVE",
+  "lines": 2
 }

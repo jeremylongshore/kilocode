@@ -32,5 +32,7 @@
     "greptile": "pending",
     "codeql": "pending",
     "qodo": "pending"
-  }
+  },
+  "verdict": "APPROVE",
+  "lines": 88
 }
