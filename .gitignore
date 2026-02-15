@@ -9,6 +9,7 @@ mock/
 .DS_Store
 *.orig
 
+.expo/
 # Builds
 bin/
 bin-unpacked/
@@ -53,10 +54,6 @@ logs
 # Nix / Direnv
 .direnv
 
-# Mise
-mise.toml
-mise.local.toml
-
 # Exclude Conport Directory (MCP server)
 context_portal/
 
@@ -71,9 +68,11 @@ qdrant_storage/
 # to make it easier to work on features in parallel
 *.code-workspace
 
-# Act Secret Files
-.secrets
-# Architect plans
-./plans/
 
-roo-cli-*.tar.gz*
+# Ignore auto-generated mobile directories
+apps/kilo-remote/android/
+apps/kilo-remote/ios/
+apps/kilo-remote/node_modules/
+
+# Kilo Remote environment file
+apps/kilo-remote/.env

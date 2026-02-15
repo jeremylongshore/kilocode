@@ -1,0 +1,42 @@
+{
+	"expo": {
+		"name": "Kilo canvas",
+		"slug": "kilo-canvas",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/icon.png",
+		"userInterfaceStyle": "light",
+		"splash": {
+			"image": "./assets/icon.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#ffffff"
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"infoPlist": {
+				"NSAppTransportSecurity": {
+					"NSAllowsArbitraryLoads": true
+				}
+			},
+			"supportsTablet": true,
+			"bundleIdentifier": "com.aet.kilo-canvas"
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/icon.png",
+				"backgroundColor": "#ffffff"
+			},
+			"usesCleartextTraffic": true,
+			"package": "com.aet.kilocanvas"
+		},
+		"web": {
+			"favicon": "./assets/icon.png"
+		},
+		"plugins": ["expo-font", "./plugins/disablePushNotifications"],
+		"extra": {
+			"eas": {
+				"projectId": "1975470f-e37c-4ab1-8f49-390474a66964"
+			}
+		}
+	}
+}

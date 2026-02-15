@@ -5,7 +5,15 @@ import { kiloLanguages } from "./kilocode/kiloLanguages.js"
  * CodeAction
  */
 
-export const codeActionIds = ["explainCode", "fixCode", "improveCode", "addToContext", "newTask"] as const
+export const kiloCodeActionIds = ["addToContextAndFocus"] as const // kilocode_change
+export const codeActionIds = [
+	...kiloCodeActionIds, // kilocode_change
+	"explainCode",
+	"fixCode",
+	"improveCode",
+	"addToContext",
+	"newTask",
+] as const
 
 export type CodeActionId = (typeof codeActionIds)[number]
 
@@ -32,6 +40,7 @@ export const commandIds = [
 
 	"plusButtonClicked",
 	"promptsButtonClicked",
+	"mcpButtonClicked",
 
 	"historyButtonClicked",
 	"marketplaceButtonClicked",
@@ -40,8 +49,6 @@ export const commandIds = [
 	"settingsButtonClicked",
 
 	"openInNewTab",
-	"open", // kilocode_change
-	"agentManagerOpen", // kilocode_change
 
 	"showHumanRelayDialog",
 	"registerHumanRelayCallback",
@@ -64,6 +71,9 @@ export const commandIds = [
 	"handleExternalUri", // kilocode_change - for JetBrains plugin URL forwarding
 	"focusPanel",
 	"toggleAutoApprove",
+	"startMobileBridge",
+	"stopMobileBridge",
+	"getMobileBridgeStatus",
 ] as const
 
 export type CommandId = (typeof commandIds)[number]
@@ -88,7 +98,6 @@ export const languages = [
 	"pl",
 	"pt-BR",
 	"ru",
-	"sk",
 	"tr",
 	"vi",
 	"zh-CN",

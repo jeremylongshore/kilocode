@@ -1,17 +1,7 @@
-import {
-	appendFileSync,
-	openSync,
-	readSync,
-	closeSync,
-	statSync,
-	writeFileSync,
-	renameSync,
-	unlinkSync,
-	mkdirSync,
-	existsSync,
-} from "fs"
+import { appendFileSync } from "fs"
+import * as fs from "fs-extra"
 import * as path from "path"
-import { KiloCodePaths, safeStringify } from "@kilocode/agent-runtime"
+import { KiloCodePaths } from "../utils/paths.js"
 
 export type LogLevel = "info" | "debug" | "error" | "warn"
 
@@ -21,7 +11,7 @@ export interface LogEntry {
 	level: LogLevel
 	message: string
 	source?: string
-	context?: Record<string, unknown>
+	context?: Record<string, any>
 }
 
 export interface LogFilter {
@@ -35,11 +25,6 @@ export interface LogFilter {
  */
 export class LogsService {
 	private static instance: LogsService | null = null
-
-	// Log rotation constants
-	private static readonly MAX_LOG_FILE_SIZE = 10 * 1024 * 1024 // 10 MB - rotate when file exceeds this size
-	private static readonly TRUNCATE_TO_SIZE = 5 * 1024 * 1024 // 5 MB - keep this much of the most recent logs
-
 	private logs: LogEntry[] = []
 	private maxEntries: number = 1000
 	private listeners: Array<(entry: LogEntry) => void> = []
@@ -83,20 +68,55 @@ export class LogsService {
 	}
 
 	/**
-	 * Serialize context object, handling Error objects and circular references
+	 * Serialize an error object to a plain object with all relevant properties
 	 */
-	private serializeContext(context?: Record<string, unknown>): Record<string, unknown> | undefined {
+	private serializeError(error: any): any {
+		if (error instanceof Error) {
+			return {
+				message: error.message,
+				name: error.name,
+				stack: error.stack,
+				// Include any additional enumerable properties
+				...Object.getOwnPropertyNames(error)
+					.filter((key) => key !== "message" && key !== "name" && key !== "stack")
+					.reduce(
+						(acc, key) => {
+							acc[key] = (error as any)[key]
+							return acc
+						},
+						{} as Record<string, any>,
+					),
+			}
+		}
+		return error
+	}
+
+	/**
+	 * Serialize context object, handling Error objects specially
+	 */
+	private serializeContext(context?: Record<string, any>): Record<string, any> | undefined {
 		if (!context) {
 			return undefined
 		}
 
-		return safeStringify(context) as Record<string, unknown>
+		const serialized: Record<string, any> = {}
+		for (const [key, value] of Object.entries(context)) {
+			if (value instanceof Error) {
+				serialized[key] = this.serializeError(value)
+			} else if (typeof value === "object" && value !== null) {
+				// Recursively handle nested objects that might contain errors
+				serialized[key] = this.serializeContext(value as Record<string, any>) || value
+			} else {
+				serialized[key] = value
+			}
+		}
+		return serialized
 	}
 
 	/**
 	 * Add a log entry with the specified level
 	 */
-	private addLog(level: LogLevel, message: string, source?: string, context?: Record<string, unknown>): void {
+	private addLog(level: LogLevel, message: string, source?: string, context?: Record<string, any>): void {
 		// Serialize context to handle Error objects properly
 		const serializedContext = this.serializeContext(context)
 
@@ -135,7 +155,7 @@ export class LogsService {
 	 */
 	private outputToConsole(entry: LogEntry): void {
 		// GUARD: Prevent recursive logging by checking if we're already in a logging call
-		if ((this as { _isLogging?: boolean })._isLogging) {
+		if ((this as any)._isLogging) {
 			return
 		}
 
@@ -146,7 +166,7 @@ export class LogsService {
 		}
 
 		// Set flag to prevent recursion
-		;(this as { _isLogging?: boolean })._isLogging = true
+		;(this as any)._isLogging = true
 
 		try {
 			const ts = new Date(entry.ts).toISOString()
@@ -177,7 +197,7 @@ export class LogsService {
 			}
 		} finally {
 			// Always clear the flag
-			;(this as { _isLogging?: boolean })._isLogging = false
+			;(this as any)._isLogging = false
 		}
 	}
 
@@ -187,13 +207,7 @@ export class LogsService {
 	private async initializeFileLogging(): Promise<void> {
 		try {
 			const logDir = path.dirname(this.logFilePath)
-			// Create log directory if it doesn't exist (recursive)
-			if (!existsSync(logDir)) {
-				mkdirSync(logDir, { recursive: true })
-			}
-
-			// Rotate log file if needed (check size and truncate if too large)
-			this.rotateLogFileIfNeeded()
+			await fs.ensureDir(logDir)
 		} catch (error) {
 			// Disable file logging if initialization fails
 			this.fileLoggingEnabled = false
@@ -205,100 +219,13 @@ export class LogsService {
 	}
 
 	/**
-	 * Rotate log file if it exceeds maximum size.
-	 * Keeps the most recent entries by truncating from the beginning.
-	 * This is called at startup to prevent unbounded log file growth.
-	 *
-	 * Uses byte-wise reading to avoid loading the entire file into memory,
-	 * and atomic write (temp file + rename) to prevent corruption on crash.
-	 * Uses only native fs module to avoid bundling issues with fs-extra.
-	 */
-	private rotateLogFileIfNeeded(): void {
-		let fd: number | null = null
-		let tempFilePath: string | null = null
-		try {
-			const stats = statSync(this.logFilePath)
-
-			if (stats.size <= LogsService.MAX_LOG_FILE_SIZE) {
-				return // File is within size limit, no rotation needed
-			}
-
-			// Calculate the start position to read from (keep only the last TRUNCATE_TO_SIZE bytes)
-			const startPosition = Math.max(0, stats.size - LogsService.TRUNCATE_TO_SIZE)
-			const bytesToRead = stats.size - startPosition
-
-			// Read only the bytes we need (byte-wise, no full file load)
-			fd = openSync(this.logFilePath, "r")
-			const buffer = Buffer.alloc(bytesToRead)
-			readSync(fd, buffer, 0, bytesToRead, startPosition)
-			closeSync(fd)
-			fd = null
-
-			// Convert to string and find the first complete line
-			let content = buffer.toString("utf8")
-			const firstNewline = content.indexOf("\n")
-			if (firstNewline > 0) {
-				content = content.slice(firstNewline + 1)
-			}
-
-			// Write to a temp file in the SAME directory (ensures same filesystem for atomic rename)
-			const logDir = path.dirname(this.logFilePath)
-			tempFilePath = path.join(logDir, `.cli.txt.rotate-${Date.now()}.tmp`)
-			writeFileSync(tempFilePath, content, "utf8")
-
-			// Atomic rename (works on same filesystem)
-			renameSync(tempFilePath, this.logFilePath)
-			tempFilePath = null // Successfully renamed, no cleanup needed
-		} catch (error: unknown) {
-			// Ensure fd is closed if an error occurred after opening
-			if (fd !== null) {
-				try {
-					closeSync(fd)
-				} catch {
-					// Ignore close errors
-				}
-			}
-
-			// Clean up temp file if it was created but rename failed
-			if (tempFilePath !== null) {
-				try {
-					unlinkSync(tempFilePath)
-				} catch {
-					// Ignore cleanup errors
-				}
-			}
-
-			// Handle ENOENT (file doesn't exist) silently - expected on first run
-			if (error instanceof Error && "code" in error && (error as NodeJS.ErrnoException).code === "ENOENT") {
-				return
-			}
-
-			// Warn about other errors (disk, permission, etc.) instead of silently ignoring
-			if (this.originalConsole) {
-				this.originalConsole.warn("[LogsService] Failed to rotate log file:", error)
-			}
-		}
-	}
-
-	/**
 	 * Format log entry for file output (same format as outputToConsole)
 	 */
 	private formatLogEntryForFile(entry: LogEntry): string {
 		const ts = new Date(entry.ts).toISOString()
 		const source = entry.source ? `[${entry.source}]` : ""
 		const prefix = `${ts} ${source}`
-
-		// Use safe stringify to handle circular references
-		let contextStr = ""
-		if (entry.context) {
-			try {
-				const safeContext = safeStringify(entry.context)
-				contextStr = ` ${JSON.stringify(safeContext)}`
-			} catch (_error) {
-				// Fallback if even safe stringify fails
-				contextStr = " [Context serialization failed]"
-			}
-		}
+		const contextStr = entry.context ? ` ${JSON.stringify(entry.context)}` : ""
 
 		switch (entry.level) {
 			case "error":
@@ -324,9 +251,7 @@ export class LogsService {
 		try {
 			// Ensure directory exists before writing (synchronous to avoid race conditions)
 			const logDir = path.dirname(this.logFilePath)
-			if (!existsSync(logDir)) {
-				mkdirSync(logDir, { recursive: true })
-			}
+			fs.ensureDirSync(logDir)
 
 			const logLine = this.formatLogEntryForFile(entry) + "\n"
 			appendFileSync(this.logFilePath, logLine, "utf8")
@@ -343,28 +268,28 @@ export class LogsService {
 	/**
 	 * Log an info message
 	 */
-	public info(message: string, source?: string, context?: Record<string, unknown>): void {
+	public info(message: string, source?: string, context?: Record<string, any>): void {
 		this.addLog("info", message, source, context)
 	}
 
 	/**
 	 * Log a debug message
 	 */
-	public debug(message: string, source?: string, context?: Record<string, unknown>): void {
+	public debug(message: string, source?: string, context?: Record<string, any>): void {
 		this.addLog("debug", message, source, context)
 	}
 
 	/**
 	 * Log an error message
 	 */
-	public error(message: string, source?: string, context?: Record<string, unknown>): void {
+	public error(message: string, source?: string, context?: Record<string, any>): void {
 		this.addLog("error", message, source, context)
 	}
 
 	/**
 	 * Log a warning message
 	 */
-	public warn(message: string, source?: string, context?: Record<string, unknown>): void {
+	public warn(message: string, source?: string, context?: Record<string, any>): void {
 		this.addLog("warn", message, source, context)
 	}
 
