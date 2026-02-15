@@ -1,0 +1,38 @@
+{
+  "pr": 5490,
+  "title": "Fix Silent JSON Parse Errors in combineApiRequests",
+  "author": "zwbproducts",
+  "category": "fix",
+  "tier": 2,
+  "total_lines": 815,
+  "files": 9,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:50:00Z",
+  "completed_at": "2026-02-15T00:10:00Z",
+  "submitted_at": null,
+  "verdict": "REQUEST_CHANGES",
+  "confidence": 5,
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "Always verify the diff matches the PR description -- excellent writeup can mask a fundamentally broken implementation",
+    "Re-export wrappers (src/shared/) hide the real code in packages/core/ -- contributors unfamiliar with the monorepo structure may edit the wrong file",
+    "Bundling unrelated changes (JSON parse logging + safeWriteJson retry + ClineProvider retry) makes each individual change impossible to evaluate",
+    "Silent retries mask root causes -- adding retry loops on top of existing retry/error-handling mechanisms creates nested complexity"
+  ],
+  "test_results": {
+    "ci": "NO_CHECKS (targets author's fork, not upstream)",
+    "new_tests_will_pass": false,
+    "reason": "Tests assert console.warn calls that were never added to the implementation"
+  },
+  "bot_findings": {
+    "changeset_bot": "detected (2 changesets for 1 PR)"
+  },
+  "blocking_issues": [
+    "Core fix never applied -- consolidateApiRequests.ts in packages/core/ was not modified",
+    "Export removed from src/shared/combineApiRequests.ts -- breaks the module",
+    "New tests assert non-existent behavior (console.warn) -- will fail",
+    "3 unrelated changes bundled: safeWriteJson rewrite, ClineProvider retry, root-level docs",
+    "3 root-level markdown files (BUGFIX.md, PR_FORK.md, PR_UPSTREAM.md) do not belong in the repo"
+  ]
+}

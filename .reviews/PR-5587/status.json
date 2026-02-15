@@ -1,0 +1,29 @@
+{
+  "pr": 5587,
+  "title": "Add 'Make Active Profile on All Modes' button to provider settings",
+  "author": "crazyrabbit0",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 282,
+  "files": 71,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T20:00:00Z",
+  "completed_at": "2026-02-14T20:30:00Z",
+  "submitted_at": null,
+  "verdict": "APPROVE",
+  "confidence": 4,
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "File count is misleading for i18n-heavy PRs -- 65 of 71 files are translation updates, real review surface is 6 files",
+    "Existing API reuse is the mark of good feature work -- no new patterns invented, pure composition of existing primitives",
+    "UI sync after backend changes is easy to miss in extension/webview architectures where state lives in two places"
+  ],
+  "test_results": {
+    "upstream_ci": "PASS (11/11 active checks)",
+    "local_tests": "not run (desk review, tier 5)"
+  },
+  "bot_findings": {
+    "changeset_bot": "detected (patch)"
+  }
+}

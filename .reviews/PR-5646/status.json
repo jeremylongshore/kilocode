@@ -1,0 +1,79 @@
+{
+  "pr": 5646,
+  "title": "feat(claude-code): Replace OAuth with CLI subprocess integration",
+  "author": "Drilmo",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 4382,
+  "files": 23,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T12:00:00Z",
+  "completed_at": "2026-02-14T12:30:00Z",
+  "submitted_at": null,
+  "verdict": "REQUEST_CHANGES",
+  "confidence": "high",
+  "test_results": {
+    "status": "not_tested",
+    "reason": "All existing tests deleted (1,586 lines), no new tests added for CLI subprocess integration. Cannot test without implementation of test suite."
+  },
+  "lessons": [
+    {
+      "category": "security",
+      "title": "Subprocess security requires same rigor as network code",
+      "description": "Spawning subprocesses introduces command injection, temp file handling, and resource management risks. Need input validation, cleanup handlers, and secure temp file handling.",
+      "impact": "critical"
+    },
+    {
+      "category": "testing",
+      "title": "Test deletion creates technical debt",
+      "description": "Deleting 1,586 lines of tests without replacement leaves new implementation untested. Test coverage is non-negotiable for Tier 6 architectural changes.",
+      "impact": "high"
+    },
+    {
+      "category": "architecture",
+      "title": "CLI-first integration pattern",
+      "description": "Delegating to official CLI (following Cline's proven approach) simplifies code by -3,144 lines but requires careful subprocess security and error handling.",
+      "impact": "medium"
+    },
+    {
+      "category": "configuration",
+      "title": "Feature regression needs documentation",
+      "description": "Simplification forced disabling of images, prompt cache, and native tools. Document why and provide roadmap for re-enabling.",
+      "impact": "medium"
+    },
+    {
+      "category": "platform",
+      "title": "Cross-platform edge cases need platform-specific tests",
+      "description": "Windows has 8191 char CLI limit, Unix different. Platform-specific code needs tests on all platforms.",
+      "impact": "medium"
+    }
+  ],
+  "blocking_issues": [
+    {
+      "severity": "critical",
+      "category": "security",
+      "description": "Temp file race condition - predictable paths, no guaranteed cleanup, potential sensitive data leak",
+      "location": "src/integrations/claude-code/run.ts:3277-3279"
+    },
+    {
+      "severity": "critical",
+      "category": "security",
+      "description": "Subprocess input validation missing - allows command injection via claudeCodePath setting",
+      "location": "src/integrations/claude-code/run.ts:3429"
+    },
+    {
+      "severity": "high",
+      "category": "testing",
+      "description": "Zero test coverage for new CLI subprocess implementation (1,586 lines deleted, 0 added)",
+      "location": "Entire PR"
+    }
+  ],
+  "review_metadata": {
+    "net_lines_changed": -3144,
+    "complexity": "high",
+    "architectural_impact": "major",
+    "breaking_changes": true,
+    "security_concerns": true,
+    "performance_impact": "unknown"
+  }
+}

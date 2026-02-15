@@ -1,0 +1,26 @@
+{
+  "pr": 5452,
+  "title": "fix: reasoning effort sync and support for OpenAI Compatible provider",
+  "author": "rayss868",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 32,
+  "files": 2,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T22:00:00Z",
+  "completed_at": "2026-02-14T22:30:00Z",
+  "submitted_at": null,
+  "verdict": "COMMENT",
+  "confidence": 3,
+  "lessons": [
+    "Check for existing abstractions (getOpenAiReasoning, shouldUseReasoningEffort) before adding inline reasoning logic",
+    "Dual-write patterns are a code smell -- normalize to one location instead",
+    "kiloconnect found a real bug: 'disable' not suppressing binary thinking",
+    "Small PRs touching base classes affect all inheriting providers (10+ subclasses here)"
+  ],
+  "test_results": null,
+  "bot_findings": {
+    "kiloconnect": "2 issues (1 critical: disable not suppressing thinking, 1 warning: ThinkingBudget wrapper)",
+    "changeset-bot": "no changeset"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "pr": 5718,
+  "title": "feat: pattern-based routing optimization for intelligent model selection",
+  "author": "fullmeo",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 4081,
+  "files": 10,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T08:30:00Z",
+  "completed_at": "2026-02-14T09:15:00Z",
+  "submitted_at": null,
+  "verdict": "REQUEST_CHANGES",
+  "confidence": "very_high",
+  "test_results": {
+    "build": "not_tested",
+    "tests": "not_tested",
+    "reason": "Code cannot compile due to import errors - imports reference non-existent paths and types"
+  },
+  "lessons": [
+    "Integration smoke test: Check import paths and directory structure exist before deep review (saved 90% review time)",
+    "Buzzword detection: 'Consciousness-driven' and 'therapeutic insights' were red flags for over-engineering",
+    "Cost claims need data: '30-50% cost reduction' was backwards - actually doubles API calls",
+    "Test coverage ≠ integration: 95% coverage of isolated code but 0% integration with Kilo",
+    "INTEGRATION.md smoking gun: 'Copy files from another repo' revealed this wasn't built for Kilo",
+    "Unsolicited 4k-line features need prior discussion: No issue, no alignment, no incremental approach",
+    "Architecture mismatch is fundamental: VS Code extension vs gateway service - can't be reconciled with edits",
+    "When to close: No integration + wrong architecture + no discussion = recommend closing, not iterating"
+  ],
+  "review_notes": "This is code from a different project (Magnus 14/15 framework) submitted to Kilo without integration. Creates /src/gateway/ directory that doesn't exist, imports types that don't exist, assumes architecture that doesn't exist. Claims to reduce API costs 30-50% but actually adds API calls to Claude for 'code quality scoring'. References 'consciousness-driven framework' and 'therapeutic insights' which are standard linting checks rebranded with buzzwords. Well-written code in isolation, but completely incompatible with Kilo's VS Code extension architecture. Recommendation: Close with suggestion to open issue first if feature is desired."
+}

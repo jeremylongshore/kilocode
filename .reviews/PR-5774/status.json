@@ -1,0 +1,44 @@
+{
+  "pr": 5774,
+  "title": "Update API configuration profiles",
+  "author": "olearycrew",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 314,
+  "files": 2,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:30:00Z",
+  "submitted_at": null,
+  "verdict": "COMMENT",
+  "confidence": 4,
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "CI passing does not mean docs are complete -- Markdoc build validates syntax, not asset references",
+    "Empty PR bodies are a yellow flag for premature or draft PRs",
+    "Internal link anchors break silently when docs pages are reorganized",
+    "Progress tracking with checkmarks in mapping plans gives good at-a-glance status"
+  ],
+  "test_results": {
+    "ci_checks": "PASS (12/12, 1 skipped)",
+    "local_build": "N/A (docs-only, no code changes)",
+    "evidence_log": null
+  },
+  "bot_findings": {
+    "changeset_bot": "info (no changeset, expected for docs)"
+  },
+  "findings": {
+    "red": 1,
+    "yellow": 3,
+    "gray": 2,
+    "details": [
+      "RED: 11 missing image/video assets (page will have all broken images)",
+      "YELLOW: Broken #temperature anchor on model-selection page",
+      "YELLOW: Potentially misleading rate-limits link text",
+      "YELLOW: Typo 'Additionl' in mappingplan.md heading",
+      "GRAY: Inconsistent indentation in numbered list sub-items",
+      "GRAY: Mapping plan Summary section removed (loses migration context)"
+    ]
+  }
+}

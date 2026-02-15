@@ -1,0 +1,30 @@
+{
+  "pr": 5385,
+  "title": "Jetbrains - SDK Update (v2025.3) / Fix terminal integration",
+  "author": "catrielmuller",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 612,
+  "files": 10,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T19:00:00Z",
+  "completed_at": "2026-02-14T19:30:00Z",
+  "submitted_at": null,
+  "verdict": "COMMENT",
+  "confidence": 3,
+  "lessons": [
+    "JetBrains SDK migrations can break fundamental assumptions like synchronous process creation",
+    "Reflection-based field replacement is necessary evil for IDE plugins but needs version-pinned tests",
+    "Supporting both OSC 633 and OSC 133 protocols ensures cross-version compatibility",
+    "Environment variable markers are a clean coordination mechanism for extension-owned terminals",
+    "Use actual logging framework levels, not text conventions like [DEBUG] prefix on info-level logs"
+  ],
+  "test_results": {
+    "upstream_ci": "PASS (11/11 checks including test-jetbrains)",
+    "local_test": "not_run (JetBrains IDE with SDK 2025.3 required for manual testing)"
+  },
+  "bot_findings": {
+    "kiloconnect": "merge (reflection fragility noted, no blockers)",
+    "changeset_bot": "info (two changesets detected)"
+  }
+}

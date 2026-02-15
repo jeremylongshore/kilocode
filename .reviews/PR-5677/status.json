@@ -1,0 +1,31 @@
+{
+  "pr": 5677,
+  "title": "fix: wrap external extension API calls in try-catch to prevent crashes",
+  "author": "Ashwinhegde19",
+  "category": "fix",
+  "tier": 4,
+  "total_lines": 593,
+  "files": 3,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T00:05:00Z",
+  "completed_at": "2026-02-15T00:20:00Z",
+  "submitted_at": null,
+  "confidence": 3,
+  "verdict": "REQUEST_CHANGES",
+  "fork_pr": 22,
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "forEach stops on first throw — use for...of with per-iteration try-catch for resilient cleanup",
+    "Extract repeated try-catch patterns into helper functions",
+    "Test known limitations explicitly — document what the code doesn't handle"
+  ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (pre-existing failures only)",
+    "evidence_log": "codespace run, fork PR #22"
+  },
+  "bot_findings": {
+    "changeset-bot": "warn (no changeset)"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "pr": 5328,
+  "title": "UI accessibility enhancements",
+  "author": "audioses",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 271,
+  "files": 15,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:50:00Z",
+  "completed_at": "2026-02-15T00:15:00Z",
+  "submitted_at": null,
+  "verdict": "COMMENT",
+  "confidence": 3,
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "Accessibility PRs need narrow scope -- 15 files with 5+ patterns is too broad for one review",
+    "Don't duplicate native HTML APIs -- ariaLabel prop is redundant when aria-label works via ...props spread",
+    "Web components have shadow DOM boundaries -- slotted visually-hidden text may not associate as labels",
+    "Overlapping approaches (explicit props + auto-injection) multiply review surface -- pick one",
+    "Stale PRs accumulate merge debt -- 3+ weeks old with conflicts"
+  ],
+  "test_results": {
+    "check_types": "NOT_RUN (merge conflicts)",
+    "lint": "NOT_RUN (merge conflicts)",
+    "test": "NOT_RUN (merge conflicts)",
+    "evidence_log": null
+  },
+  "bot_findings": {
+    "changeset_bot": "warning (no changeset found)",
+    "upstream_ci": "not_run (merge conflicts)"
+  },
+  "blockers": [
+    "Merge conflicts (CONFLICTING status) -- ghost vs autocomplete tab label",
+    "Missing i18n key: chat:slashCommands.createCommand",
+    "No changeset included"
+  ]
+}

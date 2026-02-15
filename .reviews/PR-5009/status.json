@@ -1,0 +1,46 @@
+{
+  "pr": 5009,
+  "title": "feat: Add Cloud run mode to Agent Manager",
+  "author": "marius-kilocode",
+  "category": "feat",
+  "tier": 3,
+  "total_lines": 829,
+  "files": 10,
+  "phase": "reviewed",
+  "verdict": "REQUEST_CHANGES",
+  "started_at": "2026-02-14T20:00:00Z",
+  "completed_at": "2026-02-14T20:45:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "Trace the execution flow, not just the code patterns -- pattern-based reviews miss control flow bugs",
+    "Check for stale branches early -- mergeable:CONFLICTING and undefined method calls are classic signs of drift",
+    "Verify message round-trips end-to-end -- every postMessage from provider needs a handler in the webview",
+    "Auth consistency in multi-endpoint services -- asymmetric auth across methods needs documentation or fixing"
+  ],
+  "test_results": {
+    "local_test": "NOT_RUN (merge conflicts prevent local merge)",
+    "ci_compile": "PASS",
+    "ci_build_cli": "PASS",
+    "ci_test_cli": "PASS",
+    "ci_test_webview_ubuntu": "PASS",
+    "ci_test_webview_windows": "PASS",
+    "ci_test_jetbrains": "PASS",
+    "ci_check_translations": "FAIL",
+    "ci_test_extension_ubuntu": "FAIL",
+    "ci_test_extension_windows": "FAIL",
+    "ci_unit_test": "SKIPPED",
+    "ci_docusaurus": "PASS"
+  },
+  "bot_findings": {
+    "kiloconnect": "merge (missed runtime bugs)",
+    "changeset_bot": "info (changeset detected)"
+  },
+  "blocking_issues": [
+    "runAuthInTerminal() is undefined -- runtime crash when unauthenticated user clicks login button",
+    "Webview never handles cloudSessionStarted message -- form stuck in loading state after successful start",
+    "Merge conflicts (DIRTY state) prevent clean merge to main"
+  ]
+}

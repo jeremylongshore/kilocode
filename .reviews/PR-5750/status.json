@@ -1,0 +1,36 @@
+{
+  "pr": 5750,
+  "title": "Fix: Kimi K2.5 tool calls in thinking mode (#5748)",
+  "author": "Githubguy132010",
+  "category": "fix",
+  "tier": 3,
+  "total_lines": 166,
+  "files": 3,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:30:00Z",
+  "completed_at": "2026-02-14T23:40:00Z",
+  "submitted_at": null,
+  "confidence": 4.0,
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/19",
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "Model-specific parsers are inevitable \u2014 different providers embed structured data in different formats",
+    "Use marker boundaries, not content patterns \u2014 markers are reliable; JSON can have arbitrary nesting",
+    "Community confirmation across providers validates both problem and fix approach",
+    "Tests for regex-based parsers are non-negotiable \u2014 first edge case becomes a regression"
+  ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (12,920 passed, 194 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-PR-5750.log"
+  },
+  "bot_findings": {
+    "coderabbit": "processing",
+    "gemini": "comment (clean implementation, solid improvement)",
+    "greptile": "no_response",
+    "codeql": "no_findings",
+    "qodo": "comment (0 bugs, 0 rule violations, 0 requirement gaps)"
+  },
+  "verdict": "COMMENT"
+}

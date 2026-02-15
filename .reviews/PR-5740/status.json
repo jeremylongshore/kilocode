@@ -1,0 +1,31 @@
+{
+  "pr": 5740,
+  "title": "fix: node.js detection issue in Intellij post fresh plugin installation",
+  "author": "muddlebee",
+  "category": "fix",
+  "tier": 4,
+  "total_lines": 496,
+  "files": 4,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T00:05:00Z",
+  "completed_at": "2026-02-15T00:20:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "verdict": "APPROVE",
+  "fork_pr": 24,
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "Dependency injection enables testability for system-level code",
+    "Version managers (nvm/fnm/volta/asdf) complicate PATH — support them explicitly",
+    "DRY refactors pay compound dividends — shared utilities prevent dual maintenance"
+  ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (pre-existing failures only)",
+    "evidence_log": "codespace run, fork PR #24"
+  },
+  "bot_findings": {
+    "changeset-bot": "warn (no changeset)"
+  }
+}

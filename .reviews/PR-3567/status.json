@@ -1,0 +1,47 @@
+{
+  "pr": 3567,
+  "title": "Kilo canvas",
+  "author": "intuitiv",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 26496,
+  "files": 112,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T12:00:00Z",
+  "completed_at": "2026-02-14T13:45:00Z",
+  "submitted_at": null,
+  "verdict": "REQUEST_CHANGES",
+  "confidence": "high",
+  "test_results": {
+    "attempted": false,
+    "reason": "PR scope too large and security issues too severe to warrant testing. Would require 2-3 hours to set up React Native environment, build mobile app, and verify HTTP bridge. Security vulnerability (0.0.0.0 binding with no auth) makes local testing inadvisable."
+  },
+  "blocking_issues": [
+    "CRITICAL: HTTP server binds to 0.0.0.0 with no authentication - remote code execution vulnerability",
+    "CRITICAL: PR scope unmanageable at 25,386 lines across 112 files - should be 8-10 separate PRs",
+    "CRITICAL: Breaking change (.kilocodemodes JSON to YAML) with no migration code",
+    "CRITICAL: Binary artifacts committed (app-release.apk, font files)",
+    "HIGH: Zero test coverage for 486-line MobileBridge.ts",
+    "HIGH: Mobile app uses JavaScript instead of TypeScript"
+  ],
+  "lessons": [
+    "PRs over 10K lines are effectively unreviewable - enforce size limits",
+    "Network binding to 0.0.0.0 should trigger mandatory security review",
+    "Breaking config format changes must include migration code",
+    "Binary artifacts (APKs, fonts) should never be committed to git",
+    "Large PRs hide breaking changes - .kilocodemodes change buried in 25K lines",
+    "Mobile app testing requires video demos and test evidence logs",
+    "Documentation duplication (2 MOBILE_BRIDGE_API.md files) indicates drift",
+    "When title doesn't match content ('canvas' vs 'mobile app'), scope creep occurred",
+    "Compiled artifacts show author may not understand build/release process",
+    "Strong engineering skills (React Native architecture) can still produce unmerge-able PRs if delivery approach is wrong"
+  ],
+  "review_metadata": {
+    "review_number": 23,
+    "queue_position": "23/75",
+    "time_spent_hours": 1.75,
+    "diff_size_lines": 32417,
+    "security_critical": true,
+    "requires_architectural_discussion": true
+  }
+}

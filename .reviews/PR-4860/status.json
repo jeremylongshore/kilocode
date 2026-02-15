@@ -1,0 +1,49 @@
+{
+  "pr": 4860,
+  "title": "feat: Add reasoning and capability controls for OpenAI Compatible models",
+  "author": "benzntech",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 1220,
+  "files": 40,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T15:00:00Z",
+  "completed_at": "2026-02-14T15:45:00Z",
+  "submitted_at": null,
+  "verdict": "REQUEST_CHANGES",
+  "confidence": "high",
+  "test_results": {
+    "ci_all_pass": true,
+    "mergeable": false,
+    "merge_conflicts": true,
+    "checks_passed": [
+      "Build Docusaurus Site",
+      "build-cli",
+      "check-translations",
+      "compile",
+      "test-cli",
+      "test-extension (ubuntu-latest)",
+      "test-extension (windows-latest)",
+      "test-jetbrains",
+      "test-webview (ubuntu-latest)",
+      "test-webview (windows-latest)"
+    ]
+  },
+  "findings": {
+    "red": 3,
+    "yellow": 4,
+    "gray": 3
+  },
+  "key_issues": [
+    "Heuristic substring matching on 'r1'/'o1'/'o3'/'vl' causes false positives",
+    "No debounce on auto-fill useEffect - fires on every model ID keystroke",
+    "thinking injection copy-pasted 4x across openai.ts without helper extraction",
+    "Auto-fill on model change can silently disable tool support",
+    "PR bundles 6+ unrelated changes (CI deps, formatting, MiniMax removal, locale dedup)"
+  ],
+  "lessons": [
+    "Two-character substring matching on model IDs is inherently fragile",
+    "useEffect auto-fill without debounce overwrites config on intermediate keystrokes",
+    "Scope discipline - splitting unrelated changes enables cleaner review"
+  ]
+}

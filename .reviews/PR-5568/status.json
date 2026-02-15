@@ -1,0 +1,35 @@
+{
+  "pr": 5568,
+  "title": "fix: override context window for MiniMax/Kimi free models",
+  "author": "romeoscript",
+  "category": "fix",
+  "tier": 2,
+  "total_lines": 6,
+  "files": 1,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T20:50:00Z",
+  "completed_at": "2026-02-14T21:00:00Z",
+  "submitted_at": null,
+  "confidence": 4.0,
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/9",
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "Code fix PRs need changeset + tests checklist items",
+    "Missing upstream CI is a red flag - branch may need rebase",
+    "Model-specific overrides are a scaling concern for provider code"
+  ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7,935 passed, 84 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-combined-batch-3.log"
+  },
+  "bot_findings": {
+    "coderabbit": "pending",
+    "gemini": "pending",
+    "greptile": "no_response",
+    "codeql": "pending",
+    "qodo": "pending"
+  },
+  "verdict": "COMMENT"
+}

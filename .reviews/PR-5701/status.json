@@ -1,0 +1,26 @@
+{
+  "pr": 5701,
+  "title": "fix(api): add type field to messages in Responses API",
+  "author": "Patel230",
+  "category": "fix",
+  "tier": 2,
+  "total_lines": 26,
+  "files": 4,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:10:00Z",
+  "completed_at": "2026-02-14T23:15:00Z",
+  "submitted_at": null,
+  "verdict": "APPROVE",
+  "confidence": 5,
+  "fork_pr": null,
+  "test_results": {
+    "check_types": "NOT_RUN",
+    "lint": "NOT_RUN",
+    "test": "NOT_RUN",
+    "evidence_log": null
+  },
+  "lessons": [
+    "Consistent field additions across related files = low risk",
+    "Always include spec-defined fields even when the dominant provider doesn't require them"
+  ]
+}

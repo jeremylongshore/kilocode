@@ -1,0 +1,39 @@
+{
+  "pr": 5667,
+  "title": "docs: clarify memory bank status indicators",
+  "author": "Olusammytee",
+  "category": "docs",
+  "tier": 1,
+  "total_lines": 2,
+  "files": 1,
+  "phase": "submitted",
+  "started_at": "2026-02-14T12:00:00Z",
+  "completed_at": "2026-02-14T12:10:00Z",
+  "submitted_at": "2026-02-14T18:15:00Z",
+  "confidence": 5.0,
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/4",
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "Docs-only PRs don't need changesets",
+    "Triage CI failures: docs PRs only need Build Markdoc Site + check-translations",
+    "Acknowledge when contributors adapt to file removals on main",
+    "'Is this true?' is a high-value review question",
+    "Fork PRs must use cherry-pick, not API file replacement, for accurate bot diffs",
+    "Codespace basicLinux32gb is only 8GB RAM (32gb=storage) - use premiumLinux for check-types",
+    "Husky pre-push checks current branch name - must checkout PR branch before pushing"
+  ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7,935 passed, 84 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-combined-batch-4.log"
+  },
+  "bot_findings": {
+    "coderabbit": "approve (trivial, ~2 min, correct diff, no issues)",
+    "gemini": "approve (one minor phrasing suggestion)",
+    "greptile": "no_response",
+    "codeql": "no_findings",
+    "qodo": "failed (no OpenAI key)"
+  },
+  "verdict": "APPROVE"
+}

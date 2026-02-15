@@ -1,0 +1,37 @@
+{
+  "pr": 4963,
+  "title": "Initial draft of kilo pass support on profile page",
+  "author": "lambertjosh",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 2259,
+  "files": 34,
+  "phase": "reviewed",
+  "verdict": "COMMENT",
+  "confidence": 72,
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:00:00Z",
+  "submitted_at": null,
+  "fork_pr": null,
+  "test_results": {
+    "note": "No local verification -- draft PR with active CHANGES_REQUESTED from @iscekic"
+  },
+  "bot_findings": {
+    "kiloconnect": {
+      "status": "reviewed",
+      "rounds": 4,
+      "finding_count": 8,
+      "key_finding": "Loading state not reset on refetch; hardcoded strings; locale hardcoding"
+    },
+    "iscekic": {
+      "status": "changes_requested",
+      "finding_count": 4,
+      "key_finding": "Loading states, zod validation, constants extraction, no-op ternaries"
+    }
+  },
+  "lessons": [
+    "Line count deception in i18n-heavy PRs: 1380 of 2259 lines are translations across 23 locales",
+    "tRPC response normalization fallback chain is a recurring pattern across handlers",
+    "MutationObserver on document.body class is the correct theme detection pattern for VSCode webviews"
+  ]
+}

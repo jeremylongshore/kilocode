@@ -1,0 +1,27 @@
+{
+  "pr": 5801,
+  "title": "feat(subagent): run background sub-agents for focused task and return results",
+  "author": "kels-ng",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 2089,
+  "files": 71,
+  "phase": "reviewed",
+  "verdict": "REQUEST_CHANGES",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:00:00Z",
+  "submitted_at": null,
+  "confidence": "high",
+  "test_results": {
+    "local_build": "not_run",
+    "local_tests": "not_run",
+    "ci_changeset": "fail"
+  },
+  "lessons": [
+    "i18n locale files inflate line counts -- 42/71 files are translations, actual logic is ~500 lines",
+    "Promise-bridge pattern with settled flag handles three-way race (completion, normal exit, error) cleanly",
+    "Tasks created outside clineStack need explicit resource cleanup since normal disposal assumes stack lifecycle",
+    "Always re-verify severity findings against actual diff before committing -- self-corrected new_task exclusion",
+    "Generic ClineSay type names create future namespace pollution -- prefer specific names"
+  ]
+}

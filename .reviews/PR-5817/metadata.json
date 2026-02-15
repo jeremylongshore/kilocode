@@ -1,0 +1,38 @@
+{
+  "number": 5817,
+  "title": "fix: prevent MCP servers from restarting repeatedly on settings save",
+  "author": "markijbema",
+  "authorName": "Mark IJbema",
+  "additions": 75,
+  "deletions": 13,
+  "changedFiles": 3,
+  "createdAt": "2026-02-12T08:29:30Z",
+  "mergeable": "MERGEABLE",
+  "reviewDecision": "REVIEW_REQUIRED",
+  "state": "OPEN",
+  "files": [
+    {"path": ".changeset/fix-mcp-restart-loop.md", "additions": 5, "deletions": 0},
+    {"path": "src/services/mcp/McpHub.ts", "additions": 47, "deletions": 13},
+    {"path": "src/services/mcp/__tests__/McpHub.spec.ts", "additions": 23, "deletions": 0}
+  ],
+  "comments": [
+    {"author": "changeset-bot", "type": "bot", "message": "Changeset detected"}
+  ],
+  "reviews": [],
+  "ci": {
+    "Build Markdoc Site": "pass",
+    "compile": "pass",
+    "test-cli": "pass",
+    "test-extension (ubuntu)": "pass",
+    "test-extension (windows)": "pass",
+    "test-jetbrains": "pass",
+    "test-webview (ubuntu)": "pass",
+    "test-webview (windows)": "pass",
+    "unit-test": "pass"
+  },
+  "rootCauses": [
+    "Config deep-equal mismatch: stored injected config vs raw validated config",
+    "isProgrammaticUpdate flag timing race",
+    "Fire-and-forget transport.close() triggering auto-reconnect"
+  ]
+}

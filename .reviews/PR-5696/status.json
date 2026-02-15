@@ -1,0 +1,34 @@
+{
+  "pr": 5696,
+  "title": "feat(slash-commands): type/source indicators, skill invocation & argument hints",
+  "author": "Drilmo",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 354,
+  "files": 25,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:50:00Z",
+  "completed_at": "2026-02-14T23:59:00Z",
+  "submitted_at": null,
+  "verdict": "COMMENT",
+  "confidence": 4,
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "Feature PRs should not bundle formatter output -- unrelated formatting changes increase merge conflict surface",
+    "Duplicate message handlers (ExtensionStateContext + InstalledSkillsView) create independent state copies",
+    "Priority chains (built-in > workflow > skill) need explicit documentation comments",
+    "Incremental spec adoption (argument-hint from Agent Skills spec) is a good pattern for feature PRs",
+    "Long-lived branches in fast-moving codebases predictably accumulate merge conflicts"
+  ],
+  "test_results": {
+    "check_types": "NOT_RUN (merge conflicts)",
+    "lint": "NOT_RUN (merge conflicts)",
+    "test": "NOT_RUN (merge conflicts)",
+    "evidence_log": null
+  },
+  "bot_findings": {
+    "changeset_bot": "minor changeset detected",
+    "upstream_reviews": "none"
+  }
+}

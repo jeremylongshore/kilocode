@@ -1,0 +1,27 @@
+{
+  "pr": 5799,
+  "title": "Add Ask Sage as a new AI provider",
+  "author": "jdbohrman",
+  "category": "feature",
+  "tier": 3,
+  "total_lines": 736,
+  "files": 20,
+  "phase": "reviewed",
+  "verdict": "REQUEST_CHANGES",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:00:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "test_results": {
+    "check_types": "NOT_RUN (merge conflicts)",
+    "lint": "NOT_RUN (merge conflicts)",
+    "test": "NOT_RUN (merge conflicts)",
+    "evidence_log": null
+  },
+  "lessons": [
+    "New providers must ADD entries to exhaustive Records/switches, not REPLACE existing provider entries",
+    "Provider integration requires a settings UI component (AskSage.tsx) in addition to handler/types/schemas",
+    "Default model IDs must be consistent across packages/types and cli/constants",
+    "Government/FedRAMP-authorized providers fill a real niche for defense sector users"
+  ]
+}

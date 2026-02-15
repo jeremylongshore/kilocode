@@ -1,0 +1,35 @@
+{
+  "pr": 5513,
+  "title": "Add Agentica as a provider to Kilo Code.",
+  "author": "ccocks",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 6274,
+  "files": 46,
+  "phase": "reviewed",
+  "verdict": "REQUEST_CHANGES",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:00:00Z",
+  "submitted_at": null,
+  "confidence": 0.95,
+  "test_results": {
+    "status": "skipped",
+    "reason": "PR is in CONFLICTING state per GitHub API; cannot merge or build. Merge conflicts must be resolved before testing."
+  },
+  "lessons": [
+    "Type shim replacement (re-export -> inline copy) is an architectural red flag in monorepo PRs",
+    "Model data should have a single source of truth, not three copies with inconsistent values",
+    "Large provider PRs (6000+ lines) benefit from decomposition into core/auth/UI/plans",
+    "Always check for committed development artifacts (diff files, build outputs)",
+    "Handler model ID field must match the modelIdKeysByProvider registration"
+  ],
+  "blocking_issues": [
+    "ExtensionMessage.ts and WebviewMessage.ts replaced with 1600+ line inline copies (breaks monorepo type architecture)",
+    "Committed development artifacts: cline_full_diff.txt, diff.txt, github_diff.txt",
+    ".gitignore weakened: bin/ and *.vsix commented out",
+    "Model data triplicated with inconsistent maxTokens and pricing values",
+    "Handler reads apiModelId instead of agenticaModelId (model selection broken)",
+    "Password dual-storage: plaintext in global state AND in secure storage",
+    "Unrelated behavior changes: auto-approve defaults, maxReadFileLine, HTML formatting"
+  ]
+}

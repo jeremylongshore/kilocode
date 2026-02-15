@@ -1,0 +1,19 @@
+{
+  "pr": 5569,
+  "title": "fix: retry Amazon Bedrock network connection lost errors",
+  "author": "romeoscript",
+  "category": "fix",
+  "tier": 2,
+  "total_lines": 22,
+  "files": 1,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:30:00Z",
+  "completed_at": "2026-02-14T23:35:00Z",
+  "submitted_at": null,
+  "confidence": 4.0,
+  "fork_pr": null,
+  "lessons": [
+    "Maintainer feedback in comments can invalidate the entire approach"
+  ],
+  "verdict": "REQUEST_CHANGES"
+}

@@ -1,0 +1,36 @@
+{
+  "pr": 4631,
+  "title": "fix: Adjust handling of thinking blocks in message filtering",
+  "author": "pandemicsyn",
+  "category": "fix",
+  "tier": 3,
+  "total_lines": 87,
+  "files": 4,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:20:00Z",
+  "completed_at": "2026-02-14T23:30:00Z",
+  "submitted_at": null,
+  "confidence": 5.0,
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/18",
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "Allowlist cloning (new Set) is correct pattern for conditional filtering from shared constants",
+    "Optional parameters maintain backward compatibility \u2014 callers that don't pass thinking get safe defaults",
+    "Conversation state != request state \u2014 filter layer reconciles config changes between turns",
+    "Pre-existing build errors in webview/CLI don't affect core package test results"
+  ],
+  "test_results": {
+    "check_types": "PASS (19/20, pre-existing CLI error)",
+    "lint": "PASS (14/14)",
+    "test": "PASS (1,544 passed, 43 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-PR-4631.log"
+  },
+  "bot_findings": {
+    "coderabbit": "processing",
+    "gemini": "comment (clean implementation, solid improvement, increases robustness)",
+    "greptile": "not_installed_on_fork_pr",
+    "codeql": "no_findings",
+    "qodo": "comment (0 bugs, 0 rule violations, 0 requirement gaps)"
+  },
+  "verdict": "APPROVE"
+}

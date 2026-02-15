@@ -1,0 +1,26 @@
+{
+  "pr": 5704,
+  "title": "fix: Improve Kimi model search and add fallback models",
+  "author": "Patel230",
+  "category": "fix",
+  "tier": 3,
+  "total_lines": 74,
+  "files": 4,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T21:00:00Z",
+  "completed_at": "2026-02-15T23:00:00Z",
+  "submitted_at": null,
+  "confidence": 5,
+  "verdict": "REQUEST_CHANGES",
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/15",
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7,859 passed, 77 flaky \u2014 filter.test.ts race condition, pre-existing)",
+    "evidence_log": "test-evidence-combined-batch-1.log"
+  },
+  "lessons": [
+    "i18n keys must exist in locale files before referencing them in components",
+    "Qodo bug detection caught a user-visible issue that manual review might miss"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "pr": 4100,
+  "title": "[VIBE CODED] Feat: Intelligent provider",
+  "author": "ivanarifin",
+  "category": "provider",
+  "tier": 3,
+  "total_lines": 1904,
+  "files": 50,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:00:00Z",
+  "submitted_at": null,
+  "verdict": "REQUEST_CHANGES",
+  "confidence": "high",
+  "merge_state": "CONFLICTING",
+  "existing_reviews": "1 APPROVED (Ari4ka, no body)",
+  "test_results": null,
+  "lessons": [
+    "VIBE_CODED label accurately predicted sham tests, schema collision, and fragile type detection",
+    "Field name collisions in flattened union schemas are a systemic codebase risk",
+    "Mock tautology detection: mockResolvedValue(X) then expect(X) tests nothing",
+    "Existing approval with no body text is a rubber stamp -- not a substitute for review"
+  ]
+}

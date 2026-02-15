@@ -1,0 +1,37 @@
+{
+  "pr": 5771,
+  "title": "Add OTLP Telemetry Export",
+  "author": "jdbohrman",
+  "category": "feature",
+  "tier": 3,
+  "total_lines": 808,
+  "files": 14,
+  "phase": "reviewed",
+  "verdict": "REQUEST_CHANGES",
+  "started_at": "2026-02-14T22:00:00Z",
+  "completed_at": "2026-02-14T22:45:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "OpenTelemetry's global tracer registration is a footgun in VS Code extensions -- all extensions share a process, so register() creates cross-extension conflicts",
+    "Telemetry clients inheriting from a base class still need per-client privacy filtering -- defaults allow everything",
+    "VS Code's globalState is not encrypted -- use SecretStorage for API keys and auth tokens",
+    "Lock file @types/node churn reveals environment inconsistency between contributor and project",
+    "Even opt-in features need test coverage -- span lifecycle bugs and reconfiguration races are real risks"
+  ],
+  "test_results": {
+    "check_types": "NOT_RUN (merge conflicts)",
+    "lint": "NOT_RUN (merge conflicts)",
+    "test": "NOT_RUN (merge conflicts)",
+    "evidence_log": null
+  },
+  "bot_findings": {
+    "coderabbit": "not_checked",
+    "gemini": "not_checked",
+    "greptile": "not_checked",
+    "codeql": "not_checked",
+    "qodo": "not_checked"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "pr": 5860,
+  "title": "Fix Azure/OpenAI endpoints and reject Azure AI Inference URLs",
+  "author": "Neonsy",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 327,
+  "files": 5,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T20:00:00Z",
+  "completed_at": "2026-02-14T20:30:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "verdict": "COMMENT",
+  "fork_pr": null,
+  "lessons": [
+    "Fail fast for unsupported configurations -- reject Azure AI Inference upfront instead of path hacks",
+    "URL normalization is a minefield -- aggressive /v1 appending can break custom proxy endpoints",
+    "Auth varies by Azure endpoint type -- centralizing auth logic in a single method is the right pattern",
+    "Community confirmation on real Azure deployments provides stronger signal than mock tests",
+    "Provider divergence (openai vs openai-responses) needs cross-reference in error messages"
+  ],
+  "test_results": {
+    "upstream_ci": "PASS (11/11)",
+    "local_test": "N/A (tier 5 desk review)",
+    "community_confirmation": "Anthonix24812 confirmed on gpt-5.2-codex via Microsoft Foundry"
+  },
+  "findings_summary": {
+    "yellow": 3,
+    "green": 4,
+    "gray": 2,
+    "red": 0
+  }
+}

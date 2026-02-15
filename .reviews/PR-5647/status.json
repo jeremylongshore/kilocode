@@ -1,0 +1,31 @@
+{
+  "pr": 5647,
+  "title": "fix: reduce console noise for unconfigured services",
+  "author": "markijbema",
+  "category": "fix",
+  "tier": 4,
+  "total_lines": 209,
+  "files": 6,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:15:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "verdict": "REQUEST_CHANGES",
+  "fork_pr": 21,
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "Same pattern claims need verification — early-return vs comment-out are different strategies",
+    "Commented-out code is a code smell — use guards instead",
+    "Check for existing patterns before inventing new ones — hasInstance() was already in the same file"
+  ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (pre-existing failures only)",
+    "evidence_log": "codespace run, fork PR #21"
+  },
+  "bot_findings": {
+    "changeset-bot": "info (changeset detected)"
+  }
+}

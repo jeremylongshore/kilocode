@@ -1,0 +1,33 @@
+{
+  "pr": 4303,
+  "title": "Add OCA provider",
+  "author": "supreethjavalli",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 1507,
+  "files": 35,
+  "phase": "reviewed",
+  "verdict": "REQUEST_CHANGES",
+  "started_at": "2026-02-14T22:00:00Z",
+  "completed_at": "2026-02-14T22:45:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "fork_pr": null,
+  "codespace": "N/A (review-only)",
+  "lessons": [
+    "Bot security reviews are valuable but insufficient -- kiloconnect correctly found PKCE/SecretStorage/DOMPurify but missed type error, test gap, and i18n absence",
+    "Provider PRs need a checklist gate for tests, changeset, i18n, and shared component isolation",
+    "OAuth providers introduce state (token lifecycle) that requires higher test bar than stateless API-key providers",
+    "TypeScript satisfies in switch defaults catches exhaustiveness bugs -- oca in both case and satisfies is an immediate red flag"
+  ],
+  "test_results": {
+    "check_types": "N/A (merge conflicts, not tested locally)",
+    "lint": "N/A (merge conflicts, not tested locally)",
+    "test": "CI FAIL: test-extension fails on ubuntu and windows; unit-test skipped",
+    "evidence_log": null
+  },
+  "bot_findings": {
+    "changeset-bot": "warn (no changeset)",
+    "kiloconnect": "approve at 95% confidence (good security review, missed structural issues)"
+  }
+}

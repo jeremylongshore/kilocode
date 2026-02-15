@@ -1,0 +1,30 @@
+{
+  "pr": 5658,
+  "title": "Try to use exact provider-model profile for autocompletion if such exists",
+  "author": "wkordalski",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 10,
+  "files": 1,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T22:00:00Z",
+  "completed_at": "2026-02-14T22:15:00Z",
+  "submitted_at": null,
+  "verdict": "APPROVE",
+  "confidence": 5,
+  "fork_pr": null,
+  "lessons": [
+    "Credential routing bugs are subtle -- API key for one endpoint + model default pointing to another endpoint = 401",
+    "Two-phase lookup (exact match then fallback) preserves backward compatibility while fixing specific cases",
+    "cleanModelId prefix stripping can cause comparison mismatches with AUTOCOMPLETE_PROVIDER_MODELS values"
+  ],
+  "test_results": {
+    "check_types": "NOT_RUN (merge conflicts)",
+    "lint": "NOT_RUN (merge conflicts)",
+    "test": "NOT_RUN (merge conflicts)",
+    "evidence_log": null
+  },
+  "bot_findings": {
+    "changeset_bot": "warn (no changeset)"
+  }
+}

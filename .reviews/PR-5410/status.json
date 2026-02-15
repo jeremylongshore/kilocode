@@ -1,0 +1,29 @@
+{
+  "pr": 5410,
+  "title": "Support refreshing MCP tool, resources, etc lists and avoid prompts",
+  "author": "lambertjosh",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 413,
+  "files": 3,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:30:00Z",
+  "submitted_at": null,
+  "confidence": 4.0,
+  "fork_pr": null,
+  "lessons": [
+    "Fallback notification handlers that show raw JSON-RPC to users are a UX anti-pattern \u2014 log silently instead",
+    "MCP list_changed notifications are first-class spec features that clients must handle for dynamic capability servers",
+    "5.6:1 test-to-code ratio with handler map capture pattern is a clean approach for testing notification services",
+    "Vibe-coded PRs can still produce clean, well-tested implementations \u2014 judge the code, not the process description"
+  ],
+  "test_results": {
+    "upstream_ci": "PASS (11/11)",
+    "local_test": "not_run"
+  },
+  "bot_findings": {
+    "changeset_bot": "warn (no changeset)"
+  },
+  "verdict": "APPROVE"
+}

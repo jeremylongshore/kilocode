@@ -1,0 +1,26 @@
+{
+  "pr": 5660,
+  "title": "Use Mistral SDK in MistralHandler.streamFim",
+  "author": "wkordalski",
+  "category": "refactor",
+  "tier": 3,
+  "total_lines": 69,
+  "files": 1,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T21:00:00Z",
+  "completed_at": "2026-02-15T22:00:00Z",
+  "submitted_at": null,
+  "confidence": 5,
+  "verdict": "REQUEST_CHANGES",
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/14",
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "FAIL (4 test cases in mistral-fim.spec.ts \u2014 pre-existing, mocks not updated for SDK refactor)",
+    "evidence_log": "test-evidence-combined-batch-1.log"
+  },
+  "lessons": [
+    "Refactoring from fetch() to SDK requires test updates \u2014 mocks must match the new code path",
+    "Mistral SDK returns camelCase fields (promptTokens, not prompt_tokens)"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "pr": 5383,
+  "title": "fix: Add retry mechanisms for file operations to handle temporary not found issues",
+  "author": "zwbproducts",
+  "category": "fix",
+  "tier": 4,
+  "total_lines": 297,
+  "files": 3,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T00:05:00Z",
+  "completed_at": "2026-02-15T00:20:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "verdict": "REQUEST_CHANGES",
+  "fork_pr": 23,
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "Don't nest retry strategies — tune existing retry parameters instead of adding layers",
+    "Scope atomic operations carefully — lock release between retries opens concurrency windows",
+    "Pre-checks that duplicate work are a code smell"
+  ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (pre-existing failures only)",
+    "evidence_log": "codespace run, fork PR #23"
+  },
+  "bot_findings": {
+    "changeset-bot": "info (changeset detected)"
+  }
+}

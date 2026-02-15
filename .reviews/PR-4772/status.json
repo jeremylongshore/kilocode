@@ -1,0 +1,35 @@
+{
+  "pr": 4772,
+  "title": "fix: enable dynamic model selection for OpenAI Compatible provider",
+  "author": "b3nw",
+  "phase": "reviewed",
+  "verdict": "COMMENT",
+  "confidence": 4,
+  "tier": 3,
+  "date": "2026-02-14",
+  "merge_state": "CONFLICTING",
+  "ci_status": "all_pass",
+  "blockers": [
+    "Merge conflicts: customProviders array diverged (main added openai-responses after branching)",
+    "Merge conflicts: dynamicProviders, modelCache switch, webviewMessageHandler all need rebase for zenmux additions"
+  ],
+  "test_results": {
+    "ci_compile": "pass",
+    "ci_unit_test": "pass",
+    "ci_test_extension_ubuntu": "pass",
+    "ci_test_extension_windows": "pass",
+    "ci_test_webview_ubuntu": "pass",
+    "ci_test_webview_windows": "pass",
+    "ci_test_jetbrains": "pass",
+    "ci_test_cli": "pass",
+    "ci_build_cli": "pass",
+    "local_test": "not_run"
+  },
+  "lessons": [
+    "Moving a provider between category arrays (custom->dynamic) has type-level cascading effects across TypicalProvider, modelIdKeysByProvider, RouterName",
+    "Setting displayName on dynamically fetched models bypasses prettyModelName mangling - good pattern",
+    "Long-lived branches accumulate conflicts in fast-moving provider arrays"
+  ],
+  "related_prs": [4860],
+  "closes_issue": 3271
+}

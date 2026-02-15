@@ -1,0 +1,36 @@
+{
+  "pr": 5642,
+  "title": "feat: allow auto-selecting rules based on prompt and context",
+  "author": "shssoichiro",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 1043,
+  "files": 67,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:00:00Z",
+  "submitted_at": null,
+  "verdict": "REQUEST_CHANGES",
+  "confidence": "high",
+  "critical_issues": [
+    "C1: autoSelectedRulePaths not threaded through file-based system prompt path in system.ts",
+    "C3: Global path detection uses includes() instead of startsWith() - false positive risk"
+  ],
+  "moderate_issues": [
+    "M1: Partial message orphaned if autoSelectRules() throws",
+    "M2: Response parser extracts all numbers from LLM text, not just index list",
+    "M3: Visual toggle override not documented"
+  ],
+  "minor_issues": [
+    "m1: Unrelated translation grammar fixes in ru/uk locale files",
+    "m2: Hardcoded English strings in Task.ts instead of i18n",
+    "m3: Cost display threshold too high ($0.01) - will almost never show",
+    "m4: Extra blank line in Task.ts"
+  ],
+  "test_results": null,
+  "lessons": [
+    "Trace ALL code paths when adding parameters to functions with early-return branches",
+    "String.includes() is not safe for path classification - always use startsWith() on resolved paths",
+    "Partial messages need symmetric completion in both success and error paths"
+  ]
+}

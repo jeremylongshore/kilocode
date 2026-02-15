@@ -1,0 +1,27 @@
+{
+  "pr": 5508,
+  "title": "[do not merge] Spped UP CI -  BlackSmith Runners",
+  "author": "catrielmuller",
+  "category": "infra",
+  "tier": 2,
+  "total_lines": 53,
+  "files": 7,
+  "phase": "reviewed",
+  "verdict": "COMMENT",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:00:00Z",
+  "submitted_at": null,
+  "confidence": 85,
+  "test_results": {
+    "ci_status": "all_pass",
+    "checks_passed": 11,
+    "checks_skipped": 1,
+    "checks_failed": 0,
+    "local_test": "not_required"
+  },
+  "lessons": [
+    "Custom runner migrations need fork-fallback conditionals to avoid breaking external contributor CI",
+    "Commit history archaeology reveals iteration path (Depot -> BlackSmith) that inline bot comments may not reflect",
+    "[do not merge] PRs benefit from early review to catch issues before author proceeds"
+  ]
+}

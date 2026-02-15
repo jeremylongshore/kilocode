@@ -1,0 +1,24 @@
+{
+  "pr": 5820,
+  "title": "Changeset version bump",
+  "author": "app/github-actions",
+  "category": "release",
+  "tier": 3,
+  "total_lines": 141,
+  "files": 21,
+  "phase": "reviewed",
+  "verdict": "APPROVE",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:10:00Z",
+  "submitted_at": null,
+  "confidence": 5,
+  "lessons": [
+    "Bot-generated changeset PRs are mechanical — verify version bump matches changesets and changelog is well-formed"
+  ],
+  "test_results": {
+    "check_types": "N/A (no code changes)",
+    "lint": "N/A (no code changes)",
+    "test": "N/A (no code changes)",
+    "evidence_log": null
+  }
+}

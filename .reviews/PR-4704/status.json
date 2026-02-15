@@ -1,0 +1,36 @@
+{
+  "pr": 4704,
+  "title": "feat(retry): add configurable delay and retry limits",
+  "author": "dannycreations",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 442,
+  "files": 36,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:30:00Z",
+  "submitted_at": null,
+  "verdict": "REQUEST_CHANGES",
+  "confidence": 4,
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "Removing exponential backoff is a regression, not a simplification -- keep proven strategies as defaults",
+    "Tests that re-implement production logic are tautological -- test the actual code paths",
+    "0 = unlimited is a UX anti-pattern for numeric slider controls -- use checkbox + conditional input",
+    "Default value changes (5s to 10s) affect all existing installations and need migration awareness"
+  ],
+  "test_results": {
+    "check_types": "NOT_RUN (static analysis only)",
+    "lint": "NOT_RUN (static analysis only)",
+    "test": "NOT_RUN (static analysis only)",
+    "evidence_log": null
+  },
+  "bot_findings": {
+    "coderabbit": "not_available",
+    "gemini": "not_available",
+    "greptile": "not_available",
+    "codeql": "not_available",
+    "qodo": "not_available"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "pr": 5752,
+  "title": "Fixes broken /slash-commands after continue or interrupted tool-use",
+  "author": "Madrawn",
+  "category": "fix",
+  "tier": 5,
+  "total_lines": 294,
+  "files": 3,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T20:00:00Z",
+  "completed_at": "2026-02-14T20:30:00Z",
+  "submitted_at": null,
+  "verdict": "APPROVE",
+  "confidence": 4,
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "Symmetric processing across block types prevents silent feature gaps",
+    "Helper functions make asymmetric processing impossible by design",
+    "Kilo-specific code drift from upstream base creates hidden blind spots",
+    "Regression tests with historical context comments serve as living documentation"
+  ],
+  "test_results": {
+    "upstream_ci": "NOT REPORTED (no checks on branch)",
+    "local_verification": "not performed (tier 5)",
+    "author_claims": "37 mentions tests + 3000+ core tests pass"
+  },
+  "bot_findings": {
+    "changeset_bot": "changeset detected"
+  }
+}

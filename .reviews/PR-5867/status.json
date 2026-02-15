@@ -1,0 +1,21 @@
+{
+  "pr": 5867,
+  "title": "Add banner and pre-release extension info",
+  "author": "lambertjosh",
+  "category": "docs",
+  "tier": 1,
+  "total_lines": 80,
+  "files": 3,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T12:00:00Z",
+  "completed_at": "2026-02-14T12:15:00Z",
+  "submitted_at": null,
+  "confidence": 4.0,
+  "fork_pr": "N/A (docs-only change)",
+  "codespace": "N/A (docs-only change)",
+  "lessons": [
+    "Hard-coded nav height offsets for announcement banners are fragile but pragmatic for short, known copy",
+    "Temporal docs content (banners, current status sections) carries inherent stale-docs risk worth noting"
+  ],
+  "verdict": "APPROVE"
+}

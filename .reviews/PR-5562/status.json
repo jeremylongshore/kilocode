@@ -1,0 +1,26 @@
+{
+  "pr": 5562,
+  "title": "Dynamic OpenAI compatible model fetching on front page",
+  "author": "crazyrabbit0",
+  "category": "feature",
+  "tier": 3,
+  "total_lines": 59,
+  "files": 4,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T20:10:00Z",
+  "completed_at": "2026-02-15T20:30:00Z",
+  "submitted_at": null,
+  "confidence": 4.0,
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/12",
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7,803 passed, 85 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence.log"
+  },
+  "lessons": [
+    "Backend API may already exist \u2014 check before assuming PR is incomplete",
+    "RouterModels type requires ALL provider keys, can't use partial mock"
+  ],
+  "verdict": "APPROVE"
+}

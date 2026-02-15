@@ -1,0 +1,36 @@
+{
+  "number": 5331,
+  "title": "feat(mcp): re-enable oauth resource parameter and add discovery logging",
+  "author": "jrf0110",
+  "authorName": "John Fawcett",
+  "additions": 3,
+  "deletions": 1,
+  "changedFiles": 2,
+  "createdAt": "2026-01-22T21:45:35Z",
+  "mergeable": "MERGEABLE",
+  "reviewDecision": "APPROVED",
+  "state": "OPEN",
+  "files": [
+    {"path": "src/services/mcp/oauth/McpAuthorizationDiscovery.ts", "additions": 2, "deletions": 0},
+    {"path": "src/services/mcp/oauth/McpOAuthService.ts", "additions": 1, "deletions": 1}
+  ],
+  "comments": [
+    {"author": "changeset-bot", "type": "bot", "message": "No changeset found"},
+    {"author": "kiloconnect", "type": "bot", "message": "No Issues Found - recommends merge; notes stale comment about resource param"}
+  ],
+  "reviews": [
+    {"author": "marius-kilocode", "state": "APPROVED", "date": "2026-01-23T07:46:54Z"}
+  ],
+  "ci": {
+    "Build Docusaurus Site": "pass",
+    "compile": "pass",
+    "test-cli": "pass",
+    "test-extension (ubuntu)": "pass",
+    "test-extension (windows)": "pass",
+    "test-jetbrains": "pass",
+    "test-webview (ubuntu)": "pass",
+    "test-webview (windows)": "pass",
+    "unit-test": "pass"
+  },
+  "linkedIssues": ["#5297"]
+}

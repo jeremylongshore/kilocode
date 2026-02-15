@@ -1,0 +1,35 @@
+{
+  "pr": 5331,
+  "title": "feat(mcp): re-enable oauth resource parameter and add discovery logging",
+  "author": "jrf0110",
+  "category": "feature",
+  "tier": 2,
+  "total_lines": 4,
+  "files": 2,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T22:30:00Z",
+  "completed_at": "2026-02-14T22:45:00Z",
+  "submitted_at": null,
+  "confidence": 5.0,
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/10",
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "Already-approved PRs need minimal review - focus on blockers only",
+    "Comment/code mismatches are valid findings even when bots miss them",
+    "RFC 8707 resource parameter was disabled for Cloudflare compat - now re-enabled"
+  ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7,935 passed, 84 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-combined-batch-3.log"
+  },
+  "bot_findings": {
+    "coderabbit": "rate_limited",
+    "gemini": "no_issues",
+    "greptile": "no_response",
+    "codeql": "pending",
+    "qodo": "failed"
+  },
+  "verdict": "APPROVE"
+}

@@ -1,0 +1,36 @@
+{
+  "pr": 5726,
+  "title": "Better search UX",
+  "author": "bernaferrari",
+  "category": "feature",
+  "tier": 3,
+  "total_lines": 177,
+  "files": 4,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:40:00Z",
+  "completed_at": "2026-02-14T23:50:00Z",
+  "submitted_at": null,
+  "confidence": 4.0,
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/20",
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "Track positions during matching, not after \u2014 backtracking algorithms need inline position recording",
+    "Group consecutive characters for rendering \u2014 reduces DOM node count",
+    "Clone-on-write for pipeline data \u2014 spread operator avoids mutation",
+    "Subjective PRs can still be objectively good \u2014 standard UX patterns are standard for a reason"
+  ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (3,540 passed, 46 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-PR-5726.log"
+  },
+  "bot_findings": {
+    "gemini": "comment (well-structured, suggested HighlightedText refactoring)",
+    "coderabbit": "rate_limited",
+    "qodo": "comment (code review generated)",
+    "greptile": "no_response",
+    "codeql": "no_findings"
+  },
+  "verdict": "APPROVE"
+}

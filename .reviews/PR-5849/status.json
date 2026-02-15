@@ -1,0 +1,28 @@
+{
+  "pr": 5849,
+  "title": "Make OpenAI-compatible API key optional for local codebase indexing",
+  "author": "Neonsy",
+  "category": "feature",
+  "tier": 5,
+  "total_lines": 313,
+  "files": 10,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T18:00:00Z",
+  "completed_at": "2026-02-14T18:30:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "verdict": "APPROVE",
+  "fork_pr": null,
+  "lessons": [
+    "Optional fields need consistency across all layers -- UI, config, factory, and service must all be updated together",
+    "SDK constructor constraints drive sentinel values -- a named constant like OPENAI_COMPATIBLE_DUMMY_API_KEY = 'EMPTY' documents the workaround cleanly",
+    "Config restart detection needs testing when field optionality changes -- key-to-empty and empty-to-key transitions are new state machine edges",
+    "Author transparency about untested scenarios helps reviewers focus verification effort"
+  ],
+  "test_results": {
+    "ci": "PASS (11/11 checks green)",
+    "new_tests": "10 new/updated tests across 4 files",
+    "evidence_log": null
+  },
+  "bot_findings": {}
+}

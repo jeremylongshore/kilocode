@@ -1,0 +1,26 @@
+{
+  "pr": 5634,
+  "title": "fix: context condensing prompt not saving properly",
+  "author": "Patel230",
+  "category": "fix",
+  "tier": 2,
+  "total_lines": 33,
+  "files": 2,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:40:00Z",
+  "completed_at": "2026-02-14T23:45:00Z",
+  "submitted_at": null,
+  "verdict": "APPROVE",
+  "confidence": 4,
+  "fork_pr": null,
+  "test_results": {
+    "check_types": "NOT_RUN",
+    "lint": "NOT_RUN",
+    "test": "NOT_RUN",
+    "evidence_log": null
+  },
+  "lessons": [
+    "Local state pattern prevents controlled input flickering",
+    "The undefined reset on blur is critical to prevent stale local state"
+  ]
+}

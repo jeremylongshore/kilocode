@@ -1,0 +1,25 @@
+{
+  "pr": 5267,
+  "title": "fix: preserve extra_content for Gemini 3 thought_signature support",
+  "author": "maywzh",
+  "category": "fix",
+  "tier": 3,
+  "total_lines": 154,
+  "files": 7,
+  "phase": "reviewed",
+  "verdict": "COMMENT",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:15:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "lessons": [
+    "as-any casts to extend third-party types should be centralized — scattered casts are fragile",
+    "CONFLICTING PRs touching high-churn files need rebase before testing"
+  ],
+  "test_results": {
+    "check_types": "NOT_RUN (merge conflicts)",
+    "lint": "NOT_RUN (merge conflicts)",
+    "test": "NOT_RUN (merge conflicts)",
+    "evidence_log": null
+  }
+}

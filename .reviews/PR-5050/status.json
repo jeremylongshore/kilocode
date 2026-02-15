@@ -1,0 +1,33 @@
+{
+  "pr": 5050,
+  "title": "feat: Add auto-triage GitHub Action for issues and PRs",
+  "author": "marius-kilocode",
+  "category": "feature",
+  "tier": 3,
+  "total_lines": 126,
+  "files": 1,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:30:00Z",
+  "completed_at": "2026-02-14T23:40:00Z",
+  "submitted_at": null,
+  "confidence": 4.0,
+  "fork_pr": null,
+  "codespace": "N/A (YAML-only change)",
+  "lessons": [
+    "Dogfooding your own product for CI demonstrates confidence and creates test cases",
+    "Defense in depth for AI-on-untrusted-input: allow-list + deny-list + sanitization + truncation + prompt defense",
+    "Conservative labeling is correct \u2014 over-labeling creates more noise than under-labeling",
+    "YAML-only PRs still need security review \u2014 Actions can execute arbitrary commands"
+  ],
+  "test_results": {
+    "check_types": "N/A (YAML-only)",
+    "lint": "N/A (YAML-only)",
+    "test": "N/A (YAML-only, CI passes upstream)",
+    "evidence_log": null
+  },
+  "bot_findings": {
+    "kiloconnect": "approve (No Issues Found, Recommendation: Merge)",
+    "changeset-bot": "warn (no changeset)"
+  },
+  "verdict": "APPROVE"
+}

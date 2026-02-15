@@ -1,0 +1,41 @@
+{
+  "pr": 5845,
+  "title": "Feat: Profile condense override with model-aware token caps",
+  "author": "Neonsy",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 1628,
+  "files": 38,
+  "phase": "reviewed",
+  "verdict": "REQUEST_CHANGES",
+  "started_at": "2026-02-14T15:00:00Z",
+  "completed_at": "2026-02-14T15:45:00Z",
+  "submitted_at": null,
+  "confidence": 82,
+  "ci_status": "all_pass",
+  "findings": {
+    "red": 2,
+    "yellow": 4,
+    "gray": 2
+  },
+  "red_findings": [
+    "Semantic divergence: global-percent uses raw context window, profile-percent uses effective budget as base",
+    "Test regression: 463 lines of existing ContextManagementSettings tests deleted, only partial replacement coverage"
+  ],
+  "yellow_findings": [
+    "Triple definition of ProfileCondenseOverride type across three files",
+    "Token input accepts out-of-range values before normalization clamp",
+    "22 non-English locales have English-only strings for 10 new keys",
+    "Legacy profileThresholds retained as read fallback but UI write path removed with no migration"
+  ],
+  "test_results": {
+    "ci_all_pass": true,
+    "local_tested": false,
+    "test_evidence_log": false
+  },
+  "lessons": [
+    "AI-authored PRs need extra scrutiny for test deletions that discard unrelated coverage",
+    "Percentage thresholds need documented base when two controls use different denominators",
+    "Legacy setting supersession needs migration path or UI visibility notice"
+  ]
+}

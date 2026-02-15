@@ -1,0 +1,30 @@
+{
+  "pr": 5641,
+  "title": "feat: parallel task execution with git worktrees in main panel",
+  "author": "Drilmo",
+  "category": "docs",
+  "tier": 1,
+  "total_lines": 101,
+  "files": 1,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:55:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
+  "submitted_at": null,
+  "confidence": 4.0,
+  "fork_pr": null,
+  "codespace": "N/A (docs-only change)",
+  "lessons": [
+    "Classify by content, not title \u2014 code-sounding PRs can be pure documentation",
+    "RFCs as committed files create stale documentation risk"
+  ],
+  "test_results": {
+    "check_types": "N/A (docs-only)",
+    "lint": "N/A (docs-only)",
+    "test": "N/A (docs-only, CI passes upstream)",
+    "evidence_log": null
+  },
+  "bot_findings": {
+    "changeset-bot": "warn (no changeset, expected for docs)"
+  },
+  "verdict": "COMMENT"
+}

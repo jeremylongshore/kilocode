@@ -1,0 +1,22 @@
+{
+  "pr": 5818,
+  "title": "docs: autocomplete transplant documentation",
+  "author": "markijbema",
+  "category": "docs",
+  "tier": 1,
+  "total_lines": 3389,
+  "files": 50,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T21:00:00Z",
+  "completed_at": "2026-02-14T21:20:00Z",
+  "submitted_at": null,
+  "confidence": 4.0,
+  "fork_pr": "N/A (docs-only change)",
+  "codespace": "N/A (docs-only change)",
+  "lessons": [
+    "Large PRs with repetitive i18n files have a much smaller effective review surface than line count suggests",
+    "Pre-extraction documentation with TypeScript interface definitions provides actionable migration contracts",
+    "i18n pre-extraction files can be valid TypeScript without being wired into the current build"
+  ],
+  "verdict": "APPROVE"
+}

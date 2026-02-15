@@ -1,0 +1,22 @@
+{
+  "pr": 5779,
+  "title": "feat(anthropic): support custom model typing and endpoint discovery for Anthropic-compatible providers",
+  "author": "ramhaidar",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 954,
+  "files": 15,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:00:00Z",
+  "submitted_at": null,
+  "verdict": "COMMENT",
+  "confidence": 0.80,
+  "test_results": "NOT_AVAILABLE (no CI checks reported on branch)",
+  "lessons": [
+    "Switch/case on model IDs is a maintenance anti-pattern -- use feature flags on model info objects instead",
+    "Custom model info inheritance should null out pricing to avoid misleading cost estimates",
+    "Silent error swallowing in model discovery is a recurring pattern across providers -- needs future improvement",
+    "URL normalization chains are essential for provider integrations where users paste varied URL formats"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "pr": 5865,
+  "title": "Add troubleshooting with console capture",
+  "author": "alexkgold",
+  "category": "docs",
+  "tier": 1,
+  "total_lines": 58,
+  "files": 1,
+  "phase": "submitted",
+  "started_at": "2026-02-14T20:00:00Z",
+  "completed_at": "2026-02-14T20:20:00Z",
+  "submitted_at": "2026-02-14T20:20:00Z",
+  "confidence": 4.0,
+  "fork_pr": "https://github.com/jeremylongshore/kilocode/pull/7",
+  "codespace": "premiumLinux (8-core, 32GB RAM)",
+  "lessons": [
+    "New docs pages need nav integration - check getting-started.ts",
+    "Maintainer feedback is part of the review - surface unresolved design decisions",
+    "Greptile 0/4 PRs reviewed - investigate codebase indexing status",
+    "Some external contributors have Vercel deploy access (org members)"
+  ],
+  "test_results": {
+    "check_types": "PASS (22/22)",
+    "lint": "PASS (18/18)",
+    "test": "PASS (7,935 passed, 84 skipped, pre-existing failures only)",
+    "evidence_log": "test-evidence-combined-batch-4.log"
+  },
+  "bot_findings": {
+    "coderabbit": "processing (still generating at submission time)",
+    "gemini": "comment (missing nav entry + JetBrains simplification)",
+    "greptile": "no_response",
+    "codeql": "no_findings",
+    "qodo": "failed (could not generate suggestions)"
+  },
+  "verdict": "COMMENT"
+}

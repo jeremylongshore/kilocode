@@ -1,0 +1,33 @@
+{
+  "pr": 5648,
+  "title": "Feature: add new provider AIHubmix",
+  "author": "DDU1222",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 503,
+  "files": 46,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:45:00Z",
+  "completed_at": "2026-02-14T23:58:00Z",
+  "submitted_at": null,
+  "verdict": "REQUEST_CHANGES",
+  "confidence": 4,
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "Gateway providers should use OpenAI-compatible endpoints, not client-side routing to native SDKs",
+    "Model metadata fetched but unused by handler is a code smell -- fetcher and handler architectures must align",
+    "Wiring completeness across 46 files is learnable by studying existing providers; handler architecture is where novel choices matter",
+    "Empty PR descriptions cost reviewer time -- design rationale should be documented"
+  ],
+  "test_results": {
+    "check_types": "NOT_RUN (merge conflicts)",
+    "lint": "NOT_RUN (merge conflicts)",
+    "test": "NOT_RUN (merge conflicts)",
+    "evidence_log": null
+  },
+  "bot_findings": {
+    "changeset_bot": "warn (no changeset found)",
+    "upstream_ci": "N/A (no checks reported on branch)"
+  }
+}

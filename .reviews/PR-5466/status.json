@@ -1,0 +1,26 @@
+{
+  "pr": 5466,
+  "title": "feat: display generated session names in task history UI",
+  "author": "app/kiloconnect",
+  "category": "feature",
+  "tier": 2,
+  "total_lines": 75,
+  "files": 5,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:00:00Z",
+  "completed_at": "2026-02-14T23:10:00Z",
+  "submitted_at": null,
+  "verdict": "APPROVE",
+  "confidence": 5,
+  "fork_pr": null,
+  "test_results": {
+    "check_types": "NOT_RUN",
+    "lint": "NOT_RUN",
+    "test": "NOT_RUN",
+    "evidence_log": null
+  },
+  "lessons": [
+    "Optional schema fields are the right choice for additive features in persisted data",
+    "Well-tested PRs with maintainer approval need minimal review"
+  ]
+}

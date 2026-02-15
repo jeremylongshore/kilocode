@@ -1,0 +1,30 @@
+{
+  "pr": 5831,
+  "title": "Fix ZenMux model metadata and native tool message handling",
+  "author": "Neonsy",
+  "category": "fix",
+  "tier": 5,
+  "total_lines": 387,
+  "files": 9,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:30:00Z",
+  "submitted_at": null,
+  "verdict": "APPROVE",
+  "confidence": 4,
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "Model metadata must be fully populated at fetch time -- contextWindow:0 cascaded into condensing loops",
+    "Never re-convert messages in nested call sites -- transform once, use everywhere",
+    "Cache self-healing is a pragmatic migration strategy -- detect invalid entries and re-fetch transparently",
+    "Gate tool parameters on resolved protocol, not just model capability flags"
+  ],
+  "test_results": {
+    "upstream_ci": "PASS (11/11)",
+    "evidence_log": null
+  },
+  "bot_findings": {
+    "changeset_bot": "two patch changesets detected"
+  }
+}

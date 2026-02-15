@@ -1,0 +1,27 @@
+{
+  "pr": 5560,
+  "title": "feat: add Poe provider",
+  "author": "marciepeters",
+  "category": "provider",
+  "tier": 5,
+  "total_lines": 1557,
+  "files": 32,
+  "phase": "reviewed",
+  "verdict": "COMMENT",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:00:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "test_results": {
+    "local_build": null,
+    "local_tests": null,
+    "ci_status": "CONFLICTING",
+    "notes": "Merge conflicts prevent CI from running. Cannot build/test locally without cherry-picking."
+  },
+  "lessons": [
+    "Provider PRs touch ~32 files in a predictable pattern across types/schemas/CLI/webview/handler/fetcher/docs layers",
+    "Use capability flags (supportsReasoningBudget/supportsReasoningEffort) instead of model-name prefix matching for reasoning param detection",
+    "RouterProvider base class handles most OpenAI-compatible provider boilerplate; child classes only need getModel customization",
+    "Community PRs from provider employees tend to have above-average test coverage and integration completeness"
+  ]
+}

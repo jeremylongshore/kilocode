@@ -1,0 +1,44 @@
+{
+  "pr": 5091,
+  "title": "feat(mode): implement Ralph mode for infinite task loops",
+  "author": "dannycreations",
+  "category": "feat",
+  "tier": 4,
+  "total_lines": 768,
+  "files": 39,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T22:00:00Z",
+  "completed_at": "2026-02-14T22:45:00Z",
+  "submitted_at": null,
+  "verdict": "REQUEST_CHANGES",
+  "confidence": 5,
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "Infinite loop features need hard cost/token ceilings independent of loop count limits",
+    "setTimeout is not a lifecycle tool -- use event emitters or promise chains for task sequencing",
+    "Refactoring shared control flow for a new feature changes behavior for all users, not just feature users",
+    "Tests must include all methods the implementation adds to mocked objects",
+    "Author self-reporting 'still working on it' is a clear signal the PR is not merge-ready"
+  ],
+  "test_results": {
+    "check_types": "NOT_RUN (no CI, PR not cherry-picked)",
+    "lint": "NOT_RUN",
+    "test": "NOT_RUN",
+    "evidence_log": null,
+    "notes": "No CI checks on feat-ralph-mode branch. Tests likely fail due to mock issues."
+  },
+  "bot_findings": {
+    "coderabbit": "not_available",
+    "gemini": "not_available",
+    "greptile": "not_available",
+    "codeql": "not_available",
+    "qodo": "not_available"
+  },
+  "critical_issues": [
+    "No cost/token ceiling for unlimited loops -- runaway API spend risk",
+    "Race condition: setTimeout(1s) restart after abortTask() can hit disposed provider",
+    "Tests would fail: mock objects missing handleRalphRestart, abortTask; state missing alwaysAllowRalph",
+    "handleMistakeLimitReached changes mistake-limit behavior for ALL users, not just Ralph users"
+  ]
+}

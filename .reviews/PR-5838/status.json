@@ -1,0 +1,26 @@
+{
+  "pr": 5838,
+  "title": "fix: prevent false unsaved changes dialogs in settings",
+  "author": "wombatepiclandingstudio",
+  "category": "fix",
+  "tier": 2,
+  "total_lines": 49,
+  "files": 4,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T23:55:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
+  "submitted_at": null,
+  "verdict": "APPROVE",
+  "confidence": 4,
+  "fork_pr": null,
+  "test_results": {
+    "check_types": "NOT_RUN",
+    "lint": "NOT_RUN",
+    "test": "NOT_RUN",
+    "evidence_log": null
+  },
+  "lessons": [
+    "isInternal flag pattern separates user vs system actions cleanly",
+    "Previously-skipped tests matching a fix are strong validation signals"
+  ]
+}

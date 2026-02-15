@@ -1,0 +1,30 @@
+{
+  "pr": 5847,
+  "title": "Fix Kilo Quota | OpenRouter error handling and retry flow",
+  "author": "Neonsy",
+  "category": "fix",
+  "tier": 5,
+  "total_lines": 335,
+  "files": 5,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T00:00:00Z",
+  "completed_at": "2026-02-14T00:30:00Z",
+  "submitted_at": null,
+  "verdict": "APPROVE",
+  "confidence": 4,
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "AI SDK error stream parts are not optional -- fullStream can emit terminal { type: 'error' } parts that must be handled",
+    "SDK field name conventions vary -- status vs statusCode vs $metadata.httpStatusCode; error handlers need a priority chain",
+    "Generic wrapper messages need unwrapping -- 'No output generated' hides the real message in responseBody.error.message",
+    "Community screenshots provide concrete evidence for error-handling PRs"
+  ],
+  "test_results": {
+    "upstream_ci": "PASS (11/11)",
+    "community_verification": "PASS (before/after screenshots from @smetanokr)"
+  },
+  "bot_findings": {
+    "changeset_bot": "changeset detected"
+  }
+}

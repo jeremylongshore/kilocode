@@ -1,0 +1,38 @@
+{
+  "pr": 5793,
+  "title": "feat: Add AWS Bedrock Inference Profile ARN resolution support",
+  "author": "marcelloceschia",
+  "category": "feature",
+  "tier": 6,
+  "total_lines": 2041,
+  "files": 22,
+  "phase": "reviewed",
+  "started_at": "2026-02-14T19:00:00Z",
+  "completed_at": "2026-02-14T19:45:00Z",
+  "submitted_at": null,
+  "confidence": 4,
+  "verdict": "REQUEST_CHANGES",
+  "fork_pr": null,
+  "codespace": null,
+  "lessons": [
+    "When a reviewer asks to rename a field, grep for all usages before calling it done",
+    "Never put parent-passed objects in React useEffect dependency arrays -- use primitives",
+    "Fire-and-forget async in constructors needs lazy-await at consumption point",
+    "Unrelated formatting changes hide real bugs -- separate them into their own PRs",
+    "try/catch swallowing errors in tests proves invocation but not correctness"
+  ],
+  "test_results": {
+    "ci_status": "No CI checks have run",
+    "local_build": "not performed",
+    "evidence_log": "code review only, no fork branch"
+  },
+  "bot_findings": {
+    "changeset-bot": "pass (changeset detected)",
+    "kevinvandijk": "CHANGES_REQUESTED (4 items: jetbrains revert, changelog, field names, type fix)"
+  },
+  "blocking_issues": [
+    "Field name mismatch: handler sends bedrockInferenceModelId, component reads modelId",
+    "useEffect dependency array includes apiConfiguration object causing infinite render loop",
+    "check-dependencies.js: let majorVersion removed but variable still referenced"
+  ]
+}
