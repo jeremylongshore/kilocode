@@ -67,8 +67,8 @@ Log files are 6,000+ lines of raw terminal output each, committed alongside revi
 | Metric | Value |
 |--------|-------|
 | PRs Reviewed | **75 / 75** |
-| Test Runs Captured | 9 (with full evidence logs) |
-| Total Tests Verified | ~7,900 per run |
+| Test Runs Captured | 10 (with full evidence logs) |
+| Total Tests Verified | ~7,900+ per run |
 | Avg Time per Review | ~12 minutes |
 | Infrastructure Cost | ~$0.47/PR |
 | Real Bugs Found | 3 (i18n keys, test mocks, path doubling) |
@@ -97,10 +97,18 @@ Raw terminal output from fresh test runs (turbo cache cleared before each run). 
 | [PR-5750_FRESH_20260214-173124.log](logs/PR-5750_FRESH_20260214-173124.log) | #5750 | 7,900+ | 951K |
 | [PR-5726_FRESH_20260214-174202.log](logs/PR-5726_FRESH_20260214-174202.log) | #5726 | 7,900+ | 804K |
 | [PR-5739_FRESH_20260214-175226.log](logs/PR-5739_FRESH_20260214-175226.log) | #5739 | 7,900+ | 951K |
+| [batch-5-mirrors_FRESH_20260215.log](logs/batch-5-mirrors_FRESH_20260215.log) | 10 mirror PRs merged | 7,991 | 941K |
 
 All logs are also browsable in the [logs/](logs/) directory.
 
 ## Other Evidence
+
+### Fork PRs
+
+34 fork PRs created for multi-AI review analysis:
+
+- PRs #3–#24: Original review mirrors (24 PRs, all merged)
+- PRs #25–#34: Additional mirror batch (10 PRs, all merged)
 
 ### Fork Branches
 
@@ -128,7 +136,7 @@ Each fork PR collects independent AI reviews. Examples:
 ├── PROGRESS.md                  # Review log with timing data
 ├── priority-queue.json          # Sorted PR queue (75 PRs)
 ├── db/                          # SQLite tracking database
-├── logs/                        # Master test evidence archive (9 runs, ~8.4MB)
+├── logs/                        # Master test evidence archive (10 runs, ~9.3MB)
 ├── templates/                   # Review comment templates
 └── PR-{NUM}/                    # Per-PR review packages (75 directories)
     ├── kilocode-{NUM}-review.md     # Structured review
