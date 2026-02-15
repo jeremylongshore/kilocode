@@ -139,6 +139,66 @@
 			"action": "Comprar Ara",
 			"viewAll": "Veure totes les opcions de preus"
 		},
+		"kiloPass": {
+			"title": "Kilo Pass",
+			"description": "Subscriu-te per a una despesa d'IA previsible amb crèdits bonus creixents",
+			"recommended": "Recomanat",
+			"perMonth": "/mes",
+			"action": "Subscriu-te",
+			"learnMore": "Més informació sobre Kilo Pass",
+			"yourSubscription": "El teu Kilo Pass",
+			"status": {
+				"active": "Actiu",
+				"canceled": "Cancel·lat",
+				"past_due": "Vençut",
+				"trialing": "En prova",
+				"paused": "Pausat",
+				"cancelling": "Cancel·lant"
+			},
+			"tiers": {
+				"tier_19": "Starter",
+				"tier_49": "Pro",
+				"tier_199": "Expert"
+			},
+			"cadence": {
+				"monthly": "Mensual",
+				"yearly": "Anual"
+			},
+			"nextBilling": "Pròxima facturació: {{date}}",
+			"activeUntil": "Actiu fins: {{date}}",
+			"streak": "{{count}} mes consecutiu",
+			"streakPlural": "{{count}} mesos consecutius",
+			"bonusCredits": "+${{amount}} bonus el {{date}}",
+			"manage": "Gestionar subscripció",
+			"boost": {
+				"mode": "Mode Boost",
+				"unlocked": "Boost desbloquejat!",
+				"unlockProgress": "${{amount}} per desbloquejar Boost",
+				"monthlyUsage": "Ús mensual",
+				"nextBoost": "Pròxim Boost",
+				"boostAmount": "+${{amount}}",
+				"useToUnlock": "Utilitza <amount>${{amount}}</amount> per desbloquejar Boost"
+			},
+			"refills": "Es recarrega en {{days}} dies",
+			"passActiveUntil": "Pass actiu fins",
+			"creditsNote": "Els crèdits del Pass no caduquen mai. Els crèdits de boost no utilitzats caduquen en la recàrrega.",
+			"promo": "Desbloqueja <bonus>Mode Boost</bonus> per fins a un 50% de crèdits gratuïts.",
+			"plans": {
+				"monthly": "Mensual",
+				"perMonth": "/mes",
+				"includesCredits": "Inclou <highlight>${{price}}/mes</highlight> de crèdits Pass",
+				"upToBoost": "Fins a <highlight>{{percent}}%</highlight> de crèdits Boost",
+				"firstMonthBoost": "Primer mes: <highlight>+{{percent}}%</highlight> de crèdits Boost"
+			},
+			"subscriptionNote": "Els crèdits Pass no caduquen mai. Els crèdits Boost es desbloquegen després de consumir un mes de crèdits Pass i caduquen al final de cada cicle mensual.",
+			"legend": {
+				"paid": "Pagat",
+				"freeBonus": "Bonus gratuït"
+			},
+			"activeUntilLabel": "Pass actiu fins",
+			"renewsWithCredits": "Es renova en {{days}} dies: afegeix <paid>${{paid}}</paid> pagat + <bonus>${{bonus}}</bonus> crèdits bonus gratuïts",
+			"creditsExplanation": "Els crèdits pagats no utilitzats no caduquen mai i es transfereixen cada mes. Els crèdits bonus gratuïts es guanyen després d'utilitzar els crèdits pagats del mes. Els crèdits bonus gratuïts no utilitzats no es transfereixen i caducaran el {{expiryDate}}."
+		},
 		"detailedUsage": "Ús detallat",
 		"createOrganization": "Crear organització per fer seguiment de l'ús detallat"
 	},
@@ -236,7 +296,7 @@
 			"idea7": "Crea un camp d'estrelles interactiu i tranquil que es mogui amb gestos del ratolí"
 		}
 	},
-	"autocomplete": {
+	"ghost": {
 		"title": "Autocomplete",
 		"settings": {
 			"codeEditorSuggestions": "Suggeriments de l'Editor de Codi",

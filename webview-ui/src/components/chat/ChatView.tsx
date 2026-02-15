@@ -37,6 +37,7 @@ import { OrganizationSelector } from "../kilocode/common/OrganizationSelector"
 
 import TelemetryBanner from "../common/TelemetryBanner"
 import HistoryPreview from "../history/HistoryPreview"
+import { useIsLightTheme } from "../kilocode/hooks/useIsLightTheme"
 import Announcement from "./Announcement"
 import BrowserActionRow from "./BrowserActionRow"
 import BrowserSessionStatusRow from "./BrowserSessionStatusRow"
@@ -76,9 +77,7 @@ const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0
 // kilocode_change start: KiloLogo component
 const KiloLogo = () => {
 	const iconsBaseUri = (window as any).ICONS_BASE_URI || ""
-	const isLightTheme =
-		document.body.classList.contains("vscode-light") ||
-		document.body.classList.contains("vscode-high-contrast-light")
+	const isLightTheme = useIsLightTheme()
 	const iconFile = isLightTheme ? "kilo-light.svg" : "kilo-dark.svg"
 	return (
 		<div className="flex items-center justify-center" style={{ width: "56px", height: "56px", margin: "0 auto" }}>
@@ -111,7 +110,6 @@ const ChatViewComponent: React.ForwardRefRenderFunction<ChatViewRef, ChatViewPro
 		clineMessages: messages,
 		currentTaskItem,
 		currentTaskTodos,
-		currentTaskCumulativeCost, // kilocode_change
 		taskHistoryFullLength, // kilocode_change
 		taskHistoryVersion, // kilocode_change
 		apiConfiguration,
@@ -177,19 +175,7 @@ const ChatViewComponent: React.ForwardRefRenderFunction<ChatViewRef, ChatViewPro
 	const modifiedMessages = useMemo(() => combineApiRequests(combineCommandSequences(messages.slice(1))), [messages])
 
 	// Has to be after api_req_finished are all reduced into api_req_started messages.
-	// kilocode_change start
-	const apiMetrics = useMemo(() => {
-		const metrics = getApiMetrics(modifiedMessages)
-		// use cumulative cost from backend if available, otherwise fall back to calculated cost
-		if (currentTaskCumulativeCost !== undefined) {
-			return {
-				...metrics,
-				totalCost: currentTaskCumulativeCost,
-			}
-		}
-		return metrics
-	}, [modifiedMessages, currentTaskCumulativeCost])
-	// kilocode_change end
+	const apiMetrics = useMemo(() => getApiMetrics(modifiedMessages), [modifiedMessages])
 
 	const [inputValue, setInputValue] = useState("")
 	const inputValueRef = useRef(inputValue)

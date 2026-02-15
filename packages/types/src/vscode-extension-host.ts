@@ -201,6 +201,7 @@ export interface ExtensionMessage {
 		| "vsCodeSetting"
 		| "profileDataResponse" // kilocode_change
 		| "balanceDataResponse" // kilocode_change
+		| "kiloPassStateResponse" // kilocode_change
 		| "updateProfileData" // kilocode_change
 		| "profileConfigurationForEditing" // kilocode_change: Response with profile config for editing
 		| "authenticatedUser"
@@ -269,6 +270,7 @@ export interface ExtensionMessage {
 	payload?:
 		| ProfileDataResponsePayload
 		| BalanceDataResponsePayload
+		| KiloPassStateResponsePayload
 		| TasksByIdResponsePayload
 		| TaskHistoryResponsePayload
 		| [string, string] // For file save events [taskId, filePath]
@@ -574,7 +576,6 @@ export type ExtensionState = Pick<
 	clineMessages: ClineMessage[]
 	currentTaskItem?: HistoryItem
 	currentTaskTodos?: TodoItem[] // Initial todos for the current task
-	currentTaskCumulativeCost?: number // kilocode_change: cumulative cost including deleted messages
 	apiConfiguration: ProviderSettings
 	uriScheme?: string
 	uiKind?: string // kilocode_change
@@ -834,6 +835,8 @@ export interface WebviewMessage {
 		| "fetchProfileDataRequest" // kilocode_change
 		| "profileDataResponse" // kilocode_change
 		| "fetchBalanceDataRequest" // kilocode_change
+		| "fetchKiloPassStateRequest" // kilocode_change
+		| "kiloPassStateResponse" // kilocode_change
 		| "shopBuyCredits" // kilocode_change
 		| "balanceDataResponse" // kilocode_change
 		| "updateProfileData" // kilocode_change
@@ -1059,7 +1062,6 @@ export interface WebviewMessage {
 			| "vercel-ai-gateway"
 			| "bedrock"
 			| "openrouter"
-			| "voyage" // kilocode_change
 		codebaseIndexVectorStoreProvider?: "lancedb" | "qdrant" // kilocode_change
 		codebaseIndexLancedbVectorStoreDirectory?: string // kilocode_change
 		codebaseIndexEmbedderBaseUrl?: string
@@ -1084,7 +1086,6 @@ export interface WebviewMessage {
 		codebaseIndexMistralApiKey?: string
 		codebaseIndexVercelAiGatewayApiKey?: string
 		codebaseIndexOpenRouterApiKey?: string
-		codebaseIndexVoyageApiKey?: string // kilocode_change
 	}
 	updatedSettings?: RooCodeSettings
 	// kilocode_change start: Review mode
@@ -1129,6 +1130,44 @@ export interface BalanceDataResponsePayload {
 	data?: unknown
 	error?: string
 }
+
+// kilocode_change start: Kilo Pass subscription state types
+export type KiloPassTier = "tier_19" | "tier_49" | "tier_199"
+export type KiloPassCadence = "monthly" | "yearly"
+export type KiloPassSubscriptionStatus =
+	| "active"
+	| "canceled"
+	| "incomplete"
+	| "incomplete_expired"
+	| "past_due"
+	| "paused"
+	| "trialing"
+	| "unpaid"
+
+export interface KiloPassSubscriptionState {
+	tier: KiloPassTier
+	cadence: KiloPassCadence
+	status: KiloPassSubscriptionStatus
+	cancelAtPeriodEnd: boolean
+	currentStreakMonths: number
+	nextYearlyIssueAt: string | null
+	nextBonusCreditsUsd: number | null
+	nextBillingAt: string | null
+	currentPeriodBaseCreditsUsd: number
+	currentPeriodUsageUsd: number
+	currentPeriodBonusCreditsUsd: number | null
+	isBonusUnlocked: boolean
+	refillAt: string | null
+}
+
+export interface KiloPassStateResponsePayload {
+	success: boolean
+	data?: {
+		subscription: KiloPassSubscriptionState | null
+	}
+	error?: string
+}
+// kilocode_change end: Kilo Pass subscription state types
 
 export interface SeeNewChangesPayload {
 	commitRange: CommitRange
@@ -1270,8 +1309,6 @@ export interface ClineSayTool {
 		| "runSlashCommand"
 		| "updateTodoList"
 		| "deleteFile" // kilocode_change: Handles both files and directories
-		| "subagentRunning"
-		| "subagentCompleted"
 	path?: string
 	diff?: string
 	content?: string
@@ -1314,12 +1351,6 @@ export interface ClineSayTool {
 		}>
 	}>
 	question?: string
-	currentTask?: string
-	result?: string
-	error?: string
-	/** When set (e.g. CANCELLED), webview shows t(messageKey) instead of result/error. */
-	resultCode?: string
-	messageKey?: string
 	// kilocode_change start
 	fastApplyResult?: {
 		description?: string

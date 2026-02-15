@@ -152,6 +152,66 @@
 			"action": "अभी खरीदें",
 			"viewAll": "सभी प्राइसिंग विकल्प देखें"
 		},
+		"kiloPass": {
+			"title": "Kilo Pass",
+			"description": "बढ़ते बोनस क्रेडिट के साथ अनुमानित AI खर्च के लिए सब्सक्राइब करें",
+			"recommended": "अनुशंसित",
+			"perMonth": "/महीना",
+			"action": "सदस्यता लें",
+			"learnMore": "Kilo Pass के बारे में और जानें",
+			"yourSubscription": "आपका Kilo Pass",
+			"status": {
+				"active": "सक्रिय",
+				"canceled": "रद्द",
+				"past_due": "बकाया",
+				"trialing": "परीक्षण",
+				"paused": "रुका हुआ",
+				"cancelling": "रद्द हो रहा है"
+			},
+			"tiers": {
+				"tier_19": "स्टार्टर",
+				"tier_49": "प्रो",
+				"tier_199": "एक्सपर्ट"
+			},
+			"cadence": {
+				"monthly": "मासिक",
+				"yearly": "वार्षिक"
+			},
+			"nextBilling": "अगला बिलिंग: {{date}}",
+			"activeUntil": "सक्रिय रहेगा: {{date}}",
+			"streak": "{{count}} महीना लगातार",
+			"streakPlural": "{{count}} महीने लगातार",
+			"bonusCredits": "+${{amount}} बोनस {{date}} को",
+			"manage": "सब्सक्रिप्शन प्रबंधित करें",
+			"boost": {
+				"mode": "बूस्ट मोड",
+				"unlocked": "बूस्ट अनलॉक!",
+				"unlockProgress": "बूस्ट अनलॉक करने के लिए ${{amount}}",
+				"monthlyUsage": "मासिक उपयोग",
+				"nextBoost": "अगला बूस्ट",
+				"boostAmount": "+${{amount}}",
+				"useToUnlock": "Boost अनलॉक करने के लिए <amount>${{amount}}</amount> का उपयोग करें"
+			},
+			"refills": "{{days}} दिनों में रिफिल होगा",
+			"passActiveUntil": "पास सक्रिय है तक",
+			"creditsNote": "पास क्रेडिट कभी समाप्त नहीं होते। अप्रयुक्त बूस्ट क्रेडिट रिफिल पर समाप्त हो जाते हैं।",
+			"promo": "50% तक मुफ्त क्रेडिट के लिए <bonus>Boost Mode</bonus> अनलॉक करें।",
+			"plans": {
+				"monthly": "मासिक",
+				"perMonth": "/माह",
+				"includesCredits": "<highlight>${{price}}/माह</highlight> Pass क्रेडिट शामिल है",
+				"upToBoost": "<highlight>{{percent}}%</highlight> तक Boost क्रेडिट",
+				"firstMonthBoost": "पहला महीना: <highlight>+{{percent}}%</highlight> Boost क्रेडिट"
+			},
+			"subscriptionNote": "Pass क्रेडिट कभी समाप्त नहीं होते। Boost क्रेडिट एक महीने के Pass क्रेडिट उपभोग के बाद अनलॉक होते हैं और प्रत्येक मासिक चक्र के अंत में समाप्त हो जाते हैं।",
+			"legend": {
+				"paid": "भुगतान किया",
+				"freeBonus": "मुफ्त बोनस"
+			},
+			"activeUntilLabel": "पास सक्रिय है तक",
+			"renewsWithCredits": "{{days}} दिनों में नवीनीकरण: <paid>${{paid}}</paid> भुगतान + <bonus>${{bonus}}</bonus> मुफ्त बोनस क्रेडिट जोड़ता है",
+			"creditsExplanation": "अप्रयुक्त भुगतान क्रेडिट कभी समाप्त नहीं होते और हर महीने आगे बढ़ते हैं। मुफ्त बोनस क्रेडिट महीने के भुगतान क्रेडिट उपयोग के बाद मिलते हैं। अप्रयुक्त मुफ्त बोनस क्रेडिट आगे नहीं बढ़ते और {{expiryDate}} को समाप्त हो जाएंगे।"
+		},
 		"detailedUsage": "विस्तृत उपयोग",
 		"createOrganization": "विस्तृत उपयोग ट्रैक करने के लिए संगठन बनाएं"
 	},
@@ -236,7 +296,7 @@
 			"idea7": "एक शांत इंटरैक्टिव स्टारफील्ड बनाएं जो माउस की गतिविधियों के साथ चले"
 		}
 	},
-	"autocomplete": {
+	"ghost": {
 		"title": "ऑटोकम्पलीट",
 		"settings": {
 			"codeEditorSuggestions": "कोड एडिटर सुझाव",
