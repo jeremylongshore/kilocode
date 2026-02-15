@@ -6,7 +6,7 @@
   "tier": 3,
   "total_lines": 59,
   "files": 4,
-  "phase": "ready",
+  "phase": "complete",
   "started_at": "2026-02-15T21:00:00Z",
   "completed_at": "2026-02-15T21:30:00Z",
   "submitted_at": null,
@@ -16,11 +16,11 @@
   "test_results": {
     "check_types": "PASS (22/22)",
     "lint": "PASS (18/18)",
-    "test": "PASS (7,859 passed, 77 flaky \u2014 filter.test.ts race condition, pre-existing)",
+    "test": "PASS (7,859 passed, 77 flaky — filter.test.ts race condition, pre-existing)",
     "evidence_log": "test-evidence-combined-batch-1.log"
   },
   "lessons": [
-    "Stale branches can have unrelated type errors \u2014 verify error is in PR-touched files",
+    "Stale branches can have unrelated type errors — verify error is in PR-touched files",
     "rawInput || nativeArgs || params is the correct fallback chain for tool argument history"
   ],
   "lines": 59

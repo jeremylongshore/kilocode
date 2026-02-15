@@ -6,7 +6,7 @@
   "tier": 3,
   "total_lines": 33,
   "files": 2,
-  "phase": "ready",
+  "phase": "complete",
   "started_at": "2026-02-15T19:45:00Z",
   "completed_at": "2026-02-15T20:05:00Z",
   "submitted_at": null,
@@ -19,7 +19,7 @@
     "evidence_log": "test-evidence-combined-batch-2.log"
   },
   "lessons": [
-    "First review with full local test pipeline \u2014 test evidence is qualitatively different from CI screenshots",
+    "First review with full local test pipeline — test evidence is qualitatively different from CI screenshots",
     "pnpm test --continue is essential for repos with pre-existing test failures"
   ],
   "verdict": "APPROVE",
