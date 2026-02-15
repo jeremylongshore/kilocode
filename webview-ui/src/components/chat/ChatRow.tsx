@@ -13,6 +13,9 @@ import type {
 	ClineSayTool,
 } from "@roo-code/types"
 
+/** i18n keys backend sends as currentTask; we pass to t() for display. */
+const SUBAGENT_STATUS_KEYS = ["chat:subagents.starting", "chat:subagents.thinking"] as const
+
 import { Mode } from "@roo/modes"
 
 import { COMMAND_OUTPUT_STRING } from "@roo/combineCommandSequences"
@@ -88,6 +91,47 @@ import ChatTimestamps from "./ChatTimestamps"
 import { removeLeadingNonAlphanumeric } from "@/utils/removeLeadingNonAlphanumeric"
 import { KILOCODE_TOKEN_REQUIRED_ERROR } from "@roo/kilocode/errorUtils"
 // kilocode_change end
+
+interface ParsedSubagentTask {
+	toolLabel: string
+	purpose: string | null
+	isGeneric: boolean
+}
+
+/**
+ * Parses backend progress strings like "[read_file for 15 files]" or "Thinking..." into
+ * tool label and purpose for highlighted display. getToolLabel(key) returns the localized tool name.
+ */
+function parseSubagentCurrentTask(raw: string, getToolLabel: (toolKey: string) => string): ParsedSubagentTask {
+	const s = raw.trim()
+	if (!s) return { toolLabel: "", purpose: "...", isGeneric: true }
+
+	const fallbackFormat = (str: string) => str.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+
+	// Generic status (no brackets) – show as-is
+	if (!s.startsWith("[")) {
+		return { toolLabel: "", purpose: s.endsWith("...") ? s : s + "...", isGeneric: true }
+	}
+
+	// Strip brackets and parse "[tool_name for purpose]"
+	const inner = s.slice(1, s.endsWith("]") ? s.length - 1 : s.length).trim()
+	const forIndex = inner.indexOf(" for ")
+	if (forIndex === -1) {
+		const toolKey = inner.replace(/\s+/g, "_").toLowerCase()
+		const toolLabel = getToolLabel(toolKey) || fallbackFormat(inner)
+		return { toolLabel, purpose: null, isGeneric: false }
+	}
+
+	const toolPart = inner.slice(0, forIndex).trim()
+	const purposePart = inner.slice(forIndex + 5).trim()
+	const toolKey = toolPart.replace(/\s+/g, "_").toLowerCase()
+	const toolLabel = getToolLabel(toolKey) || fallbackFormat(toolPart)
+	let purpose = purposePart
+	if ((purpose.startsWith("'") && purpose.endsWith("'")) || (purpose.startsWith('"') && purpose.endsWith('"'))) {
+		purpose = purpose.slice(1, -1)
+	}
+	return { toolLabel, purpose: purpose || null, isGeneric: false }
+}
 
 // Helper function to get previous todos before a specific message
 function getPreviousTodos(messages: ClineMessage[], currentMessageTs: number): any[] {
@@ -1659,6 +1703,93 @@ export const ChatRowContent = ({
 											</ToolUseBlockHeader>
 										</ToolUseBlock>
 									</div>
+								</>
+							)
+						}
+						case "subagentRunning": {
+							const desc = sayTool.description ?? ""
+							const currentTask = sayTool.currentTask
+							const getToolLabel = (key: string) =>
+								t("chat:subagents.toolDisplayNames." + key, {
+									defaultValue: key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+								})
+							const parsed = currentTask ? parseSubagentCurrentTask(currentTask, getToolLabel) : null
+							const purposeKey = parsed?.purpose?.replace(/\.\.\.$/, "")
+							const displayPurpose =
+								purposeKey &&
+								SUBAGENT_STATUS_KEYS.includes(purposeKey as (typeof SUBAGENT_STATUS_KEYS)[number])
+									? t(purposeKey)
+									: parsed?.purpose
+							return (
+								<div>
+									<div style={headerStyle}>
+										{message.progressStatus?.icon && (
+											<span
+												className={`codicon codicon-${message.progressStatus.icon}`}
+												style={{ marginRight: "6px", color: "var(--vscode-foreground)" }}
+											/>
+										)}
+										<span>{t("chat:subagents.runningLabel", { description: desc })}</span>
+									</div>
+									{parsed && (
+										<div className="pl-6 mt-1.5 text-sm text-vscode-descriptionForeground">
+											{parsed.toolLabel ? (
+												displayPurpose ? (
+													<>
+														{parsed.toolLabel}: {displayPurpose}
+														{!parsed.purpose?.endsWith("...") && "..."}
+													</>
+												) : (
+													<>{parsed.toolLabel}...</>
+												)
+											) : (
+												<>
+													{displayPurpose?.endsWith("...")
+														? displayPurpose
+														: `${displayPurpose ?? ""}...`}
+												</>
+											)}
+										</div>
+									)}
+								</div>
+							)
+						}
+						case "subagentCompleted": {
+							const hasError = !!sayTool.error
+							return (
+								<>
+									<div style={headerStyle}>
+										<span
+											className={`codicon codicon-${hasError ? "error" : "check-all"}`}
+											style={{
+												marginRight: "6px",
+												color: hasError
+													? "var(--vscode-errorForeground)"
+													: "var(--vscode-foreground)",
+											}}
+										/>
+										<span>{t("chat:subagents.completedLabel")}</span>
+										{sayTool.description && (
+											<span
+												style={{
+													color: "var(--vscode-descriptionForeground)",
+													marginLeft: "8px",
+												}}>
+												{sayTool.description}
+											</span>
+										)}
+									</div>
+									{(sayTool.result ||
+										sayTool.error ||
+										(sayTool.resultCode && sayTool.messageKey)) && (
+										<div className="pl-6 mt-2 text-vscode-descriptionForeground whitespace-pre-wrap">
+											{sayTool.resultCode === "CANCELLED" && sayTool.messageKey
+												? t(sayTool.messageKey)
+												: hasError
+													? sayTool.error
+													: sayTool.result}
+										</div>
+									)}
 								</>
 							)
 						}

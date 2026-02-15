@@ -1270,6 +1270,8 @@ export interface ClineSayTool {
 		| "runSlashCommand"
 		| "updateTodoList"
 		| "deleteFile" // kilocode_change: Handles both files and directories
+		| "subagentRunning"
+		| "subagentCompleted"
 	path?: string
 	diff?: string
 	content?: string
@@ -1312,6 +1314,12 @@ export interface ClineSayTool {
 		}>
 	}>
 	question?: string
+	currentTask?: string
+	result?: string
+	error?: string
+	/** When set (e.g. CANCELLED), webview shows t(messageKey) instead of result/error. */
+	resultCode?: string
+	messageKey?: string
 	// kilocode_change start
 	fastApplyResult?: {
 		description?: string
