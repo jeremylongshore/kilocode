@@ -2,15 +2,19 @@
   "pr": 5820,
   "title": "Changeset version bump",
   "author": "app/github-actions",
-  "category": "feature",
+  "category": "release",
   "tier": 3,
-  "total_lines": 141,
-  "files": 21,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "total_lines": 187,
+  "files": 25,
+  "phase": "complete",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 141
+  "confidence": 5,
+  "verdict": "COMMENT",
+  "review_number": 31,
+  "lessons": [
+    "Changeset-release PRs are mechanical -- verify version math and entry counts"
+  ],
+  "lines": 187
 }

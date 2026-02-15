@@ -6,11 +6,27 @@
   "tier": 4,
   "total_lines": 209,
   "files": 6,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "started_at": "2026-02-15T10:30:00Z",
+  "completed_at": "2026-02-15T10:50:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "verdict": "COMMENT",
+  "confidence": "high",
+  "review_number": 33,
+  "ci_status": "all_pass",
+  "test_results": {
+    "compile": "pass",
+    "test-extension-ubuntu": "pass",
+    "test-extension-windows": "pass",
+    "test-webview-ubuntu": "pass",
+    "test-webview-windows": "pass",
+    "test-cli": "pass",
+    "test-jetbrains": "pass"
+  },
+  "lessons": [
+    "Prefer early returns over commenting out code for noise reduction",
+    "CloudService.hasInstance() is the correct guard pattern",
+    "Bundling upstream-compatible and Kilo-specific changes complicates contribution"
+  ],
   "lines": 209
 }

@@ -7,42 +7,47 @@ category: skip
 tier: 9
 lines: 53
 files: 7
-verdict: pending
-confidence: null
-reviewed_at: null
+verdict: SKIP
+confidence: 1.00
+reviewed_at: 2026-02-15
+review_number: 75
 -->
 
 # Review: kilocode #5508
 
-> **[do not merge] Spped UP CI -  BlackSmith Runners** by @catrielmuller
+> **[do not merge] Spped UP CI - BlackSmith Runners** by @catrielmuller
 
 ## Checklist
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| Correctness | | |
-| Conventions | | |
-| Changeset | | |
-| Tests | | |
-| i18n | | |
-| Types | | |
-| Security | | |
-| Scope | | |
+| Correctness | n/a | Skipped -- author marked "[do not merge]" |
+| Conventions | n/a | |
+| Changeset | n/a | |
+| Tests | n/a | |
+| i18n | n/a | |
+| Types | n/a | |
+| Security | n/a | |
+| Scope | n/a | |
 
 ## Findings
 
-<!-- Structured findings: severity (red/yellow/gray), file:line, description -->
+### Skip rationale
+
+The PR title explicitly states "[do not merge]". This is a CI infrastructure experiment to test BlackSmith CI runners for speed improvements. The author is testing alternative runner configurations for GitHub Actions workflows.
+
+At 53 lines across 7 files (33 additions, 20 deletions), the changes are limited to CI workflow YAML files. This is an internal infrastructure test, not a code change that affects the extension.
 
 ## CI Status
 
 | Check | Result |
 |-------|--------|
-| | |
-
-## Code Snippets
-
-<!-- Key changes with context -->
+| All checks | not evaluated |
 
 ## Verdict
 
-<!-- APPROVE / REQUEST_CHANGES / COMMENT - with rationale -->
+**SKIP** -- PR is explicitly marked "[do not merge]" by the author. This is a CI infrastructure experiment, not a code contribution. No review warranted.
+
+---
+
+Review conducted per [Kilo Code PR Review Methodology](https://github.com/jeremylongshore/kilocode/blob/main/.reviews/METHODOLOGY.md).

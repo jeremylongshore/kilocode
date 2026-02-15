@@ -6,11 +6,20 @@
   "tier": 3,
   "total_lines": 101,
   "files": 1,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "verdict": "COMMENT",
+  "confidence": 0.90,
+  "review_number": 28,
+  "ci_status": "all_pass",
+  "mergeable": "UNKNOWN",
+  "test_results": null,
+  "lessons": [
+    "RFCs that reference existing code should be verified against the codebase",
+    "File size (155KB ClineProvider) is a complexity signal for refactor scope",
+    "Quick reviews still need structural checks: directory conventions, reference verification"
+  ],
   "lines": 101
 }

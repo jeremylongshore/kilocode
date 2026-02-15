@@ -1,16 +1,23 @@
 {
   "pr": 5490,
-  "title": "# Pull Request: Fix Silent JSON Parse Errors in combineApiRequests",
+  "title": "Fix Silent JSON Parse Errors in combineApiRequests",
   "author": "zwbproducts",
-  "category": "feature",
+  "category": "bugfix",
   "tier": 5,
   "total_lines": 815,
   "files": 9,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "verdict": "REQUEST_CHANGES",
+  "confidence": 4,
+  "review_number": 46,
+  "ci_status": "not_run",
+  "lessons": [
+    "Re-export stubs require fixing the upstream package",
+    "Scope creep across 4 unrelated concerns is blocking",
+    "safeWriteJson rewrite without tests is high risk"
+  ],
   "lines": 815
 }

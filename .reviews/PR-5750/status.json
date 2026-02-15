@@ -6,11 +6,16 @@
   "tier": 3,
   "total_lines": 166,
   "files": 3,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "confidence": 4,
+  "verdict": "REQUEST_CHANGES",
+  "review_number": 30,
+  "lessons": [
+    "Streaming parsers must be stateful accumulators, not single-pass regex against fragments",
+    "Non-greedy regex for nested JSON is unreliable -- use balanced-brace parsing"
+  ],
   "lines": 166
 }

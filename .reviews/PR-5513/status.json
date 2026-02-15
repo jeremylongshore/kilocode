@@ -6,11 +6,22 @@
   "tier": 5,
   "total_lines": 6274,
   "files": 46,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "verdict": "REQUEST_CHANGES",
+  "confidence": 5,
+  "review_number": 47,
+  "ci_status": "mostly_fail",
+  "pr_state": "OPEN",
+  "mergeable": "CONFLICTING",
+  "upstream_review": "CHANGES_REQUESTED",
+  "lessons": [
+    "Provider PRs against stale branches accumulate massive merge debt",
+    "Type re-export shims can silently break if reverted to inline",
+    "Always check .gitignore for accidental changes",
+    "Core provider handler was well-done despite surrounding issues"
+  ],
   "lines": 6274
 }

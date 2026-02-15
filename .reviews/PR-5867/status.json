@@ -7,10 +7,15 @@
   "total_lines": 80,
   "files": 3,
   "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "started_at": "2026-02-15T12:00:00Z",
+  "completed_at": "2026-02-15T12:30:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 80
+  "verdict": "COMMENT",
+  "confidence": 92,
+  "lessons": [
+    "Verify branch references in cross-repo links -- Kilo-Org/kilo uses dev, not main",
+    "Hardcoded height calculations for dynamic banners are fragile but acceptable for temporary content"
+  ],
+  "lines": 80,
+  "test_results": "N/A - docs only, all CI green"
 }

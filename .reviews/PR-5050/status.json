@@ -6,11 +6,32 @@
   "tier": 3,
   "total_lines": 126,
   "files": 1,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "verdict": "COMMENT",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "confidence": 80,
+  "review_number": 26,
+  "ci_status": "all_pass",
+  "test_results": {
+    "compile": "pass",
+    "test-extension-ubuntu": "pass",
+    "test-extension-windows": "pass",
+    "test-webview-ubuntu": "pass",
+    "test-webview-windows": "pass",
+    "test-cli": "pass",
+    "test-jetbrains": "pass",
+    "build-cli": "pass",
+    "check-translations": "pass",
+    "unit-test": "pass",
+    "docusaurus": "pass"
+  },
+  "lessons": [
+    "Env var intermediary pattern prevents shell injection in GitHub Actions",
+    "LLM + write permissions = inherent prompt injection surface",
+    "npm install without version pin is supply chain risk in CI",
+    "gh issue edit --add-label creates labels that don't exist"
+  ],
   "lines": 126
 }

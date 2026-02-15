@@ -6,11 +6,17 @@
   "tier": 5,
   "total_lines": 271,
   "files": 15,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "verdict": "COMMENT",
+  "confidence": 3,
+  "review_number": 42,
+  "lessons": [
+    "Multiple overlapping aria-label mechanisms create confusion",
+    "Date.now() for IDs breaks across re-renders",
+    "MutationObserver on body subtree has performance cost"
+  ],
   "lines": 271
 }

@@ -1,16 +1,23 @@
 {
   "pr": 5587,
-  "title": "Add \"Make Active Profile on All Modes\" button to provider settings",
+  "title": "Add \"Make Active Profile on All Modes\" button",
   "author": "crazyrabbit0",
-  "category": "provider",
+  "category": "feature",
   "tier": 5,
   "total_lines": 282,
   "files": 71,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "review_number": 50,
+  "verdict": "APPROVE",
+  "confidence": 4,
+  "started_at": "2026-02-15T11:15:00Z",
+  "completed_at": "2026-02-15T11:35:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 282
+  "ci_status": "all_pass",
+  "merge_status": "UNKNOWN",
+  "lessons": [
+    "i18n-heavy PRs inflate file counts dramatically",
+    "Post-bulk-update activation prevents UI staleness",
+    "Idempotent operations are acceptable UX without guards"
+  ]
 }

@@ -7,10 +7,15 @@
   "total_lines": 3389,
   "files": 50,
   "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 3389
+  "verdict": "APPROVE",
+  "confidence": 95,
+  "lessons": [
+    "Large docs PRs with i18n files need key consistency verification across all locales",
+    "Documentation-as-transplant-preparation is a sound engineering pattern worth recognizing in reviews"
+  ],
+  "lines": 3389,
+  "test_results": "N/A - docs only, CI all green (11/11 pass)"
 }

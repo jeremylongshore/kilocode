@@ -6,11 +6,19 @@
   "tier": 5,
   "total_lines": 954,
   "files": 15,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "review_number": 57,
+  "verdict": "COMMENT",
+  "confidence": 4,
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 954
+  "ci_status": "not_run",
+  "upstream_status": "REVIEW_REQUIRED",
+  "lessons": [
+    "Feature-based conditionals are better than model-list switch statements",
+    "Model discovery should report errors to users",
+    "Large PRs combining multiple features increase review risk",
+    "Custom model defaults should be documented for users"
+  ]
 }

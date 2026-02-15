@@ -1,16 +1,24 @@
 {
   "pr": 4772,
-  "title": "fix: enable dynamic model selection for OpenAI Compatible provider (#\u2026",
+  "title": "fix: enable dynamic model selection for OpenAI Compatible provider",
   "author": "b3nw",
   "category": "provider",
   "tier": 5,
   "total_lines": 908,
   "files": 14,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "started_at": "2026-02-15T13:20:00Z",
+  "completed_at": "2026-02-15T13:45:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 908
+  "verdict": "COMMENT",
+  "confidence": 85,
+  "lessons": [
+    "562-line test file for 202-line fetcher is exemplary test coverage",
+    "Moving provider between categories (custom->dynamic) is a behavioral change",
+    "Extended model info parsing from non-standard fields is practical"
+  ],
+  "lines": 908,
+  "review_number": 39,
+  "mergeable": "CONFLICTING",
+  "ci_status": "pass"
 }

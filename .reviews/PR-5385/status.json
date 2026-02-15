@@ -6,11 +6,18 @@
   "tier": 5,
   "total_lines": 612,
   "files": 10,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "verdict": "COMMENT",
+  "confidence": 3,
+  "review_number": 43,
+  "ci_status": "all_pass",
+  "lessons": [
+    "Reflection-based field access is fragile across SDK versions",
+    "Polling for async initialization needs timeout escalation",
+    "OSC 133 FinalTerm protocol complements OSC 633 VS Code protocol"
+  ],
   "lines": 612
 }

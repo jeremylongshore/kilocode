@@ -7,39 +7,33 @@ category: skip
 tier: 9
 lines: 53
 files: 7
-review_number: null
+review_number: 75
 -->
 
 # Review Journal: kilocode #5508
 
 > **PR**: [#5508](https://github.com/Kilo-Org/kilocode/pull/5508) |
-> **Title**: [do not merge] Spped UP CI -  BlackSmith Runners |
+> **Title**: [do not merge] Spped UP CI - BlackSmith Runners |
 > **Author**: @catrielmuller |
 > **Category**: skip | **Tier**: 9 | **Size**: 53 lines, 7 files
 
 ---
 
 ## Summary
-<!-- 1-3 sentence verdict for humans -->
+
+Skipped. Author explicitly marked "[do not merge]" in the title. This is a CI infrastructure experiment testing BlackSmith runners for faster GitHub Actions execution. 53 lines across 7 CI workflow YAML files.
 
 ## First Impressions
-<!-- What the title/description signals, what we expect -->
+
+The "[do not merge]" prefix and the typo in the title ("Spped") indicate this is a quick experiment, not a polished contribution. BlackSmith is a third-party CI runner service that offers faster builds by providing more powerful machines or caching.
 
 ## What I Looked At
-<!-- Files read, codebase context gathered, linked issues -->
 
-## Analysis
-<!-- Findings with context, code snippets, before/after -->
-
-## Verification
-<!-- CI results, local testing, what we couldn't verify -->
-
-## Diagrams
-<!-- Mermaid diagrams where they add teaching value -->
-<!-- Scale: tiny PRs may not need any, large PRs get architecture diagrams -->
+Only the metadata: 33 additions, 20 deletions, 7 files. No code review performed since the PR is explicitly not intended for merge.
 
 ## Lessons Learned
-<!-- Patterns discovered, methodology improvements, teaching moments -->
+
+1. PRs marked "[do not merge]" or "WIP" or "Draft" should be classified as tier 9 (skip) to avoid spending review resources on experiments.
 
 ---
 

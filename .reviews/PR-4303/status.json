@@ -6,11 +6,19 @@
   "tier": 5,
   "total_lines": 1507,
   "files": 35,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "started_at": "2026-02-15T12:30:00Z",
+  "completed_at": "2026-02-15T13:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 1507
+  "verdict": "COMMENT",
+  "confidence": 82,
+  "lessons": [
+    "Corporate OAuth providers are significantly more complex than API key providers",
+    "DOMPurify is correct pattern for server-provided HTML in dangerouslySetInnerHTML",
+    "Model discovery endpoints vary significantly between providers"
+  ],
+  "lines": 1507,
+  "review_number": 37,
+  "mergeable": "UNKNOWN",
+  "ci_status": "partial_fail"
 }

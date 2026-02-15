@@ -1,16 +1,23 @@
 {
   "pr": 5658,
-  "title": "Try to use exact provider-model profile for autocompletion if such exists",
+  "title": "Try to use exact provider-model profile for autocompletion",
   "author": "wkordalski",
-  "category": "provider",
+  "category": "bugfix",
   "tier": 5,
   "total_lines": 10,
   "files": 1,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "review_number": 52,
+  "verdict": "APPROVE",
+  "confidence": 4,
+  "started_at": "2026-02-15T12:00:00Z",
+  "completed_at": "2026-02-15T12:15:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 10
+  "ci_status": "all_pass",
+  "merge_status": "UNKNOWN",
+  "lessons": [
+    "Profile selection bugs surface with multiple profiles for same provider",
+    "Two-phase lookup (exact then fallback) is a reliable backward-compatible pattern",
+    "Excellent PR descriptions with personal bug reports build reviewer confidence"
+  ]
 }

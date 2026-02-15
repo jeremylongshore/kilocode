@@ -6,11 +6,17 @@
   "tier": 5,
   "total_lines": 736,
   "files": 20,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:20:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "verdict": "COMMENT",
+  "confidence": 3,
+  "review_number": 58,
+  "ci_status": "no checks reported",
+  "lessons": [
+    "New provider PRs from external contributors often have rebase conflicts in CLI constant files",
+    "Provider list Record types force merge conflicts when multiple providers are added concurrently"
+  ],
   "lines": 736
 }

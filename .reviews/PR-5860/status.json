@@ -6,11 +6,17 @@
   "tier": 5,
   "total_lines": 327,
   "files": 5,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T01:20:00Z",
+  "completed_at": "2026-02-15T01:40:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "verdict": "APPROVE",
+  "confidence": 4,
+  "review_number": 62,
+  "ci_status": "all_passing",
+  "lessons": [
+    "Azure endpoint URLs come in many flavors requiring different handling per type",
+    "Failing fast for unsupported endpoint types is better than partial compatibility"
+  ],
   "lines": 327
 }

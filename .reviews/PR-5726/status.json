@@ -6,11 +6,15 @@
   "tier": 3,
   "total_lines": 177,
   "files": 4,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "confidence": 4,
+  "verdict": "APPROVE",
+  "review_number": 29,
+  "lessons": [
+    "Search highlight PRs need position-accuracy verification at branch/backtrack points"
+  ],
   "lines": 177
 }

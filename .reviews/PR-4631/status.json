@@ -6,11 +6,31 @@
   "tier": 3,
   "total_lines": 87,
   "files": 4,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "verdict": "APPROVE",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "confidence": 92,
+  "review_number": 25,
+  "ci_status": "all_pass",
+  "test_results": {
+    "compile": "pass",
+    "test-extension-ubuntu": "pass",
+    "test-extension-windows": "pass",
+    "test-webview-ubuntu": "pass",
+    "test-webview-windows": "pass",
+    "test-cli": "pass",
+    "test-jetbrains": "pass",
+    "build-cli": "pass",
+    "check-translations": "pass",
+    "unit-test": "pass",
+    "docusaurus": "pass"
+  },
+  "lessons": [
+    "Allowlist mutation pattern (copy-then-delete) keeps filter logic clean",
+    "Model switching mid-conversation creates history artifact bugs",
+    "Duplicate filterNonAnthropicBlocks in streaming-client is latent risk"
+  ],
   "lines": 87
 }

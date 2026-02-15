@@ -6,11 +6,17 @@
   "tier": 5,
   "total_lines": 335,
   "files": 5,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T00:40:00Z",
+  "completed_at": "2026-02-15T01:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "verdict": "APPROVE",
+  "confidence": 4,
+  "review_number": 60,
+  "ci_status": "all_passing",
+  "lessons": [
+    "AI SDK error stream parts are terminal events that must be handled explicitly",
+    "Error normalization needs multi-level payload extraction for different SDK nesting patterns"
+  ],
   "lines": 335
 }

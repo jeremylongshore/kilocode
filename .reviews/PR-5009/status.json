@@ -6,11 +6,19 @@
   "tier": 5,
   "total_lines": 829,
   "files": 10,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "started_at": "2026-02-15T13:45:00Z",
+  "completed_at": "2026-02-15T14:10:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 829
+  "verdict": "APPROVE",
+  "confidence": 88,
+  "lessons": [
+    "Zod discriminated unions for WebSocket event types is a clean streaming pattern",
+    "Graceful degradation on schema validation is pragmatic for evolving APIs",
+    "Session-ID-as-capability is common in cloud API auth patterns"
+  ],
+  "lines": 829,
+  "review_number": 40,
+  "mergeable": "UNKNOWN",
+  "ci_status": "partial_fail"
 }

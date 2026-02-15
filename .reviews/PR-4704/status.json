@@ -6,11 +6,19 @@
   "tier": 5,
   "total_lines": 442,
   "files": 36,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "started_at": "2026-02-15T13:00:00Z",
+  "completed_at": "2026-02-15T13:20:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 442
+  "verdict": "COMMENT",
+  "confidence": 80,
+  "lessons": [
+    "Replacing exponential backoff with constant delay is a subtle behavioral regression",
+    "0=unlimited semantics need explicit UI documentation",
+    "Rate limit override via Retry-After header provides safety net"
+  ],
+  "lines": 442,
+  "review_number": 38,
+  "mergeable": "MERGEABLE",
+  "ci_status": "no_checks"
 }

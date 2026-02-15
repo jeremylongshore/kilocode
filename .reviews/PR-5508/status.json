@@ -6,11 +6,15 @@
   "tier": 9,
   "total_lines": 53,
   "files": 7,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 53
+  "verdict": "SKIP",
+  "confidence": 1.00,
+  "review_number": 75,
+  "ci_status": "not_evaluated",
+  "lessons": [
+    "PRs marked '[do not merge]' should be classified as tier 9 (skip) to conserve review resources"
+  ]
 }

@@ -1,16 +1,23 @@
 {
   "pr": 5534,
-  "title": " Per-workspace codebase indexing with manual control",
+  "title": "Per-workspace codebase indexing with manual control",
   "author": "abdulrahimpds",
   "category": "feature",
   "tier": 5,
   "total_lines": 889,
   "files": 59,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "review_number": 48,
+  "verdict": "COMMENT",
+  "confidence": 3,
+  "started_at": "2026-02-15T10:00:00Z",
+  "completed_at": "2026-02-15T10:45:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 889
+  "ci_status": "all_pass",
+  "merge_status": "MERGEABLE",
+  "lessons": [
+    "Stacked contributions from multiple authors complicate atomic review",
+    "Migration paths for behavioral changes are often overlooked",
+    "Unrelated changes in feature PRs should be flagged as scope creep"
+  ]
 }

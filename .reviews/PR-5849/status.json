@@ -4,13 +4,19 @@
   "author": "Neonsy",
   "category": "feature",
   "tier": 5,
-  "total_lines": 313,
-  "files": 10,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "total_lines": 474,
+  "files": 13,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T01:00:00Z",
+  "completed_at": "2026-02-15T01:20:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 313
+  "verdict": "APPROVE",
+  "confidence": 4,
+  "review_number": 61,
+  "ci_status": "all_passing",
+  "lessons": [
+    "Manager lifecycle bugs stem from assigning state before all dependent services are ready",
+    "Local embedding providers must not require API keys"
+  ],
+  "lines": 474
 }

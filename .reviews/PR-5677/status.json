@@ -6,11 +6,27 @@
   "tier": 4,
   "total_lines": 593,
   "files": 3,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "started_at": "2026-02-15T10:50:00Z",
+  "completed_at": "2026-02-15T11:15:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "verdict": "COMMENT",
+  "confidence": "high",
+  "review_number": 34,
+  "ci_status": "partial_fail",
+  "test_results": {
+    "compile": "pass",
+    "test-extension-ubuntu": "fail",
+    "test-extension-windows": "fail",
+    "test-webview-ubuntu": "pass",
+    "test-webview-windows": "pass",
+    "test-cli": "pass",
+    "test-jetbrains": "pass"
+  },
+  "lessons": [
+    "dispose() methods should isolate each cleanup step independently",
+    "Fire-and-forget async calls need .catch(), not sync try-catch",
+    "WeakMap entries need explicit deletion in error paths"
+  ],
   "lines": 593
 }

@@ -6,11 +6,19 @@
   "tier": 5,
   "total_lines": 32,
   "files": 2,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "reviewed",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "verdict": "COMMENT",
+  "confidence": 4,
+  "review_number": 45,
+  "ci_status": "not_run",
+  "pr_state": "CLOSED",
+  "duplicate_of": 5739,
+  "lessons": [
+    "OpenAI Compatible provider has divergent model info vs root config",
+    "Duplicate PRs closed in favor of conflict-free versions"
+  ],
   "lines": 32
 }

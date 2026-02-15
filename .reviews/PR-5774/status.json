@@ -2,15 +2,22 @@
   "pr": 5774,
   "title": "Update API configuration profiles",
   "author": "olearycrew",
-  "category": "feature",
+  "category": "docs",
   "tier": 5,
   "total_lines": 314,
   "files": 2,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "review_number": 56,
+  "verdict": "COMMENT",
+  "confidence": 4,
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 314
+  "ci_status": "all_pass",
+  "upstream_status": "REVIEW_REQUIRED",
+  "lessons": [
+    "PR titles can be misleading for docs changes",
+    "Image assets should be included in same PR as docs references",
+    "Docs PRs should still fill in PR template"
+  ]
 }

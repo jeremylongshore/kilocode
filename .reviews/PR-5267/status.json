@@ -6,11 +6,20 @@
   "tier": 3,
   "total_lines": 154,
   "files": 7,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "started_at": "2026-02-15T00:00:00Z",
+  "completed_at": "2026-02-15T00:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "verdict": "REQUEST_CHANGES",
+  "confidence": 0.85,
+  "review_number": 27,
+  "ci_status": "no_checks",
+  "mergeable": "CONFLICTING",
+  "test_results": null,
+  "lessons": [
+    "Always diff-check file list against PR description",
+    "Provider inheritance: OpenRouter does not extend OpenAI handler",
+    "Stale PRs in high-churn files almost always have merge conflicts"
+  ],
   "lines": 154
 }

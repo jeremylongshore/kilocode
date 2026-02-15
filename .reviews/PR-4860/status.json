@@ -6,11 +6,16 @@
   "tier": 6,
   "total_lines": 1220,
   "files": 40,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "verdict": "COMMENT",
+  "started_at": "2026-02-15",
+  "completed_at": "2026-02-15",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "confidence": 4,
+  "lessons": [
+    "Cascading resolution with merge is better than pure fallback for model info",
+    "Heuristic model ID detection needs word boundaries to avoid false positives",
+    "Scope discipline: CI fixes, CLI refactors, and docs belong in separate PRs"
+  ],
   "lines": 1220
 }

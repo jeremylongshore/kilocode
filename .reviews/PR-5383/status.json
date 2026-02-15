@@ -1,16 +1,24 @@
 {
   "pr": 5383,
-  "title": "fix: Add retry mechanisms for file operations to handle temporary not\u2026",
+  "title": "fix: Add retry mechanisms for file operations to handle temporary not found issues",
   "author": "zwbproducts",
   "category": "fix",
   "tier": 4,
   "total_lines": 297,
   "files": 3,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "started_at": "2026-02-15T10:00:00Z",
+  "completed_at": "2026-02-15T10:30:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
+  "verdict": "REQUEST_CHANGES",
+  "confidence": "high",
+  "review_number": 32,
+  "ci_status": "not_run",
+  "test_results": null,
+  "lessons": [
+    "Scope creep: targeted retry became full function rewrite",
+    "Fixed-delay retries in UI-facing code degrade perceived performance",
+    "Lock libraries with built-in retry make outer retry loops redundant"
+  ],
   "lines": 297
 }

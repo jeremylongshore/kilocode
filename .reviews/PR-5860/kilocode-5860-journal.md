@@ -7,7 +7,7 @@ category: feature
 tier: 5
 lines: 327
 files: 5
-review_number: null
+review_number: 62
 -->
 
 # Review Journal: kilocode #5860
@@ -20,26 +20,61 @@ review_number: null
 ---
 
 ## Summary
-<!-- 1-3 sentence verdict for humans -->
+
+Fixes Azure URL normalization in the OpenAI Responses provider and rejects unsupported Azure AI Inference endpoints. Handles the many URL format variations users provide for Azure deployments. Community user confirmed fix works with Microsoft Foundry. Approve.
 
 ## First Impressions
-<!-- What the title/description signals, what we expect -->
+
+Azure endpoint handling is notoriously complex due to the multiple URL formats (deployment paths, cognitive services, v1 paths, etc.). The PR description clearly explains the endpoint classification and normalization approach. The test coverage at 153 lines covers the critical URL transformations.
 
 ## What I Looked At
-<!-- Files read, codebase context gathered, linked issues -->
+
+- `src/api/providers/openai-responses.ts` -- core handler changes (108 additions, 29 deletions)
+- `src/api/providers/__tests__/openai-responses.spec.ts` -- new tests (153 lines)
+- `webview-ui/src/utils/validate.ts` -- validation addition for openai-responses
+- `webview-ui/src/utils/__tests__/validate.spec.ts` -- validation tests
+- Cross-referenced the existing constructor on main (Azure AI Inference branch, Azure OpenAI branch, standard branch)
+- Verified `OPENAI_AZURE_AI_INFERENCE_PATH` usage before/after
 
 ## Analysis
-<!-- Findings with context, code snippets, before/after -->
+
+The PR makes three categories of changes:
+
+**1. Endpoint classification and rejection**
+
+Two boolean flags are set in the constructor:
+- `isAzureAiInferenceEndpoint`: `*.services.ai.azure.com` -- rejected at runtime
+- `isAzureOpenAiEndpoint`: any `*.azure.com` host or explicit `openAiUseAzure` flag
+
+The Azure AI Inference path was previously handled by creating a client with a specific path override. The PR removes this in favor of an immediate rejection since the Responses API is not supported on these endpoints. This is the correct approach -- failing fast with a clear message is better than partially working.
+
+**2. URL normalization**
+
+The `normalizeResponsesBaseUrl` method is the most complex addition. It handles:
+- Stripping endpoint suffixes (`/chat/completions`, `/completions`, `/responses`)
+- Converting deployment paths (`/openai/deployments/<name>`) to `/openai/v1`
+- Ensuring Azure endpoints always have `/openai/v1`
+- Ensuring non-Azure endpoints always have `/v1`
+- Stripping query parameters (especially `api-version` which should only be added when needed)
+
+The `shouldAppendAzureApiVersion` check correctly exempts `/openai/v1` paths.
+
+**3. Auth header separation**
+
+The fallback fetch path now correctly uses `api-key` header for Azure and `Authorization: Bearer` for non-Azure. Previously, all fallback requests used Bearer auth, which would fail for Azure deployments.
 
 ## Verification
-<!-- CI results, local testing, what we couldn't verify -->
 
-## Diagrams
-<!-- Mermaid diagrams where they add teaching value -->
-<!-- Scale: tiny PRs may not need any, large PRs get architecture diagrams -->
+- All CI checks pass
+- Discord user @Anthonix24812 confirmed fix works with Microsoft Foundry deployment of gpt-5.2-codex
+- Tests cover: URL normalization, Azure auth headers, AI Inference rejection, deployment URL rewriting, cognitive services endpoints, webview validation
 
 ## Lessons Learned
-<!-- Patterns discovered, methodology improvements, teaching moments -->
+
+- Azure endpoint URLs come in many flavors -- deployment paths, v1 paths, cognitive services, AI Inference -- and each requires different handling
+- Failing fast for unsupported endpoint types is better than attempting partial compatibility
+- Auth header separation (api-key vs Bearer) is a common source of Azure integration issues
+- The Responses API being unavailable on Azure AI Inference is a platform limitation that should be documented clearly
 
 ---
 

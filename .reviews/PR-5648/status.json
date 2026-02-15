@@ -6,11 +6,19 @@
   "tier": 5,
   "total_lines": 503,
   "files": 46,
-  "phase": "ready",
-  "started_at": null,
-  "completed_at": null,
+  "phase": "complete",
+  "review_number": 51,
+  "verdict": "REQUEST_CHANGES",
+  "confidence": 4,
+  "started_at": "2026-02-15T11:35:00Z",
+  "completed_at": "2026-02-15T12:00:00Z",
   "submitted_at": null,
-  "confidence": null,
-  "lessons": [],
-  "lines": 503
+  "ci_status": "failing",
+  "merge_status": "CONFLICTING",
+  "maintainer_review": "CHANGES_REQUESTED by kevinvandijk",
+  "lessons": [
+    "Delegation pattern for gateway providers is an interesting architectural alternative",
+    "Empty PR descriptions correlate with lower PR quality",
+    "Side-by-side provider PR comparison reveals dramatic quality differences"
+  ]
 }
