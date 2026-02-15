@@ -4,17 +4,31 @@
 // Mock vscode first to avoid import errors
 vitest.mock("vscode", () => ({}))
 
-import { MistralHandler } from "../mistral"
-import { ApiHandlerOptions } from "../../../shared/api"
-import { streamSse } from "../../../services/autocomplete/continuedev/core/fetch/stream"
+// Mock the Mistral SDK
+const mockFimStream = vitest.fn()
+vitest.mock("@mistralai/mistralai", () => ({
+	Mistral: vitest.fn().mockImplementation((config: any) => ({
+		fim: { stream: mockFimStream },
+		chat: { stream: vitest.fn(), complete: vitest.fn() },
+		_config: config,
+	})),
+}))
 
-// Mock the stream module
-vitest.mock("../../../services/autocomplete/continuedev/core/fetch/stream", () => ({
-	streamSse: vitest.fn(),
+// Mock TelemetryService for error handling tests
+vitest.mock("@roo-code/telemetry", () => ({
+	TelemetryService: {
+		instance: {
+			captureException: vitest.fn(),
+		},
+	},
 }))
 
 // Mock delay
 vitest.mock("delay", () => ({ default: vitest.fn(() => Promise.resolve()) }))
+
+import { Mistral } from "@mistralai/mistralai"
+import { MistralHandler } from "../mistral"
+import { ApiHandlerOptions } from "../../../shared/api"
 
 describe("MistralHandler FIM support", () => {
 	const mockOptions: ApiHandlerOptions = {
@@ -73,20 +87,14 @@ describe("MistralHandler FIM support", () => {
 				apiModelId: "codestral-latest",
 			})
 
-			// Mock streamSse to return the expected data
-			;(streamSse as any).mockImplementation(async function* () {
-				yield { choices: [{ delta: { content: "chunk1" } }] }
-				yield { choices: [{ delta: { content: "chunk2" } }] }
-				yield { choices: [{ delta: { content: "chunk3" } }] }
-			})
-
-			const mockResponse = {
-				ok: true,
-				status: 200,
-				statusText: "OK",
-			} as Response
-
-			global.fetch = vitest.fn().mockResolvedValue(mockResponse)
+			// Mock the SDK's fim.stream to return an async iterable of events
+			mockFimStream.mockResolvedValue(
+				(async function* () {
+					yield { data: { choices: [{ delta: { content: "chunk1" } }] } }
+					yield { data: { choices: [{ delta: { content: "chunk2" } }] } }
+					yield { data: { choices: [{ delta: { content: "chunk3" } }] } }
+				})(),
+			)
 
 			const chunks: string[] = []
 			const fimHandler = handler.fimSupport()
@@ -97,7 +105,14 @@ describe("MistralHandler FIM support", () => {
 			}
 
 			expect(chunks).toEqual(["chunk1", "chunk2", "chunk3"])
-			expect(streamSse).toHaveBeenCalledWith(mockResponse)
+			expect(mockFimStream).toHaveBeenCalledWith(
+				expect.objectContaining({
+					model: "codestral-latest",
+					prompt: "prefix",
+					suffix: "suffix",
+					stream: true,
+				}),
+			)
 		})
 
 		it("handles errors correctly", async () => {
@@ -106,53 +121,27 @@ describe("MistralHandler FIM support", () => {
 				apiModelId: "codestral-latest",
 			})
 
-			const mockResponse = {
-				ok: false,
-				status: 400,
-				statusText: "Bad Request",
-				text: vitest.fn().mockResolvedValue("Invalid request"),
-			}
-
-			global.fetch = vitest.fn().mockResolvedValue(mockResponse)
+			// Mock the SDK throwing an error (SDK handles HTTP errors internally)
+			mockFimStream.mockRejectedValue(new Error("FIM request failed"))
 
 			const fimHandler = handler.fimSupport()
 			expect(fimHandler).toBeDefined()
 			const generator = fimHandler!.streamFim("prefix", "suffix")
-			await expect(generator.next()).rejects.toThrow("FIM streaming failed: 400 Bad Request - Invalid request")
+			await expect(generator.next()).rejects.toThrow("Mistral FIM completion error: FIM request failed")
 		})
 
 		it("uses correct endpoint for codestral models", async () => {
+			// Create handler with codestral model — should use codestral.mistral.ai
 			const handler = new MistralHandler({
 				...mockOptions,
 				apiModelId: "codestral-latest",
 			})
 
-			;(streamSse as any).mockImplementation(async function* () {
-				yield { choices: [{ delta: { content: "test" } }] }
-			})
-
-			const mockResponse = {
-				ok: true,
-				status: 200,
-				statusText: "OK",
-			} as Response
-
-			global.fetch = vitest.fn().mockResolvedValue(mockResponse)
-
-			const fimHandler = handler.fimSupport()
-			expect(fimHandler).toBeDefined()
-			const generator = fimHandler!.streamFim("prefix", "suffix")
-			await generator.next()
-
-			expect(global.fetch).toHaveBeenCalledWith(
+			// Verify the Mistral client was constructed with the codestral URL
+			expect(Mistral).toHaveBeenCalledWith(
 				expect.objectContaining({
-					href: "https://codestral.mistral.ai/v1/fim/completions",
-				}),
-				expect.objectContaining({
-					method: "POST",
-					headers: expect.objectContaining({
-						Authorization: "Bearer test-api-key",
-					}),
+					serverURL: "https://codestral.mistral.ai",
+					apiKey: "test-api-key",
 				}),
 			)
 		})
@@ -164,28 +153,12 @@ describe("MistralHandler FIM support", () => {
 				mistralCodestralUrl: "https://custom.codestral.url",
 			})
 
-			;(streamSse as any).mockImplementation(async function* () {
-				yield { choices: [{ delta: { content: "test" } }] }
-			})
-
-			const mockResponse = {
-				ok: true,
-				status: 200,
-				statusText: "OK",
-			} as Response
-
-			global.fetch = vitest.fn().mockResolvedValue(mockResponse)
-
-			const fimHandler = handler.fimSupport()
-			expect(fimHandler).toBeDefined()
-			const generator = fimHandler!.streamFim("prefix", "suffix")
-			await generator.next()
-
-			expect(global.fetch).toHaveBeenCalledWith(
+			// Verify the Mistral client was constructed with the custom URL
+			expect(Mistral).toHaveBeenCalledWith(
 				expect.objectContaining({
-					href: "https://custom.codestral.url/v1/fim/completions",
+					serverURL: "https://custom.codestral.url",
+					apiKey: "test-api-key",
 				}),
-				expect.any(Object),
 			)
 		})
 	})
