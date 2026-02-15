@@ -371,7 +371,7 @@ export const getOptionsForProvider = (provider: ProviderName, apiConfiguration?:
 				isChina:
 					apiConfiguration?.zaiApiLine === "china_coding" || apiConfiguration?.zaiApiLine === "china_api",
 			}
-			// kilocode_change end
+		// kilocode_change end
 		default:
 			return {}
 	}

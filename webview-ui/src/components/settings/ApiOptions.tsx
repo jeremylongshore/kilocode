@@ -342,11 +342,10 @@ const ApiOptions = ({
 		const modelsAllowedByEndpoint =
 			selectedProvider === "moonshot" && filteredModels
 				? Object.fromEntries(
-						Object.entries(filteredModels).filter(
-							([modelId]) =>
-								apiConfiguration.moonshotBaseUrl === "https://api.kimi.com/coding/v1"
-									? modelId === "kimi-for-coding"
-									: modelId !== "kimi-for-coding",
+						Object.entries(filteredModels).filter(([modelId]) =>
+							apiConfiguration.moonshotBaseUrl === "https://api.kimi.com/coding/v1"
+								? modelId === "kimi-for-coding"
+								: modelId !== "kimi-for-coding",
 						),
 					)
 				: filteredModels
