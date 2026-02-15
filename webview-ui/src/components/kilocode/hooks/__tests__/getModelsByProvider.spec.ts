@@ -43,7 +43,12 @@ describe("getModelsByProvider", () => {
 		synthetic: { "test-model": testModel },
 		inception: { "test-model": testModel },
 		roo: { "test-model": testModel },
+<<<<<<< HEAD
 		zenmux: { "test-model": testModel },
+||||||| parent of 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
+=======
+		openai: { "test-model": testModel },
+>>>>>>> 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
 	}
 
 	it("returns models for all providers", () => {
@@ -52,8 +57,13 @@ describe("getModelsByProvider", () => {
 			"huggingface", // don't know what this is
 			"human-relay", // no models
 			"nano-gpt", // dynamic provider - models fetched from API
+<<<<<<< HEAD
 			"openai", // not implemented
 			"openai-responses", // not implemented
+||||||| parent of 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
+			"openai", // not implemented
+=======
+>>>>>>> 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
 			"roo", // don't care
 			"virtual-quota-fallback", // no models
 			"vercel-ai-gateway", // different structure

@@ -41,7 +41,12 @@ import { getHuggingFaceModels } from "./huggingface"
 import { getRooModels } from "./roo"
 import { getChutesModels } from "./chutes"
 import { getNanoGptModels } from "./nano-gpt" //kilocode_change
+<<<<<<< HEAD
 import { getZenmuxModels } from "./zenmux"
+||||||| parent of 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
+=======
+import { getOpenAiModels } from "./openai" // kilocode_change: OpenAI Compatible provider
+>>>>>>> 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
 
 const memoryCache = new NodeCache({ stdTTL: 5 * 60, checkperiod: 5 * 60 })
 
@@ -184,6 +189,14 @@ async function fetchModelsFromProvider(options: GetModelsOptions): Promise<Model
 			models = await getNanoGptModels({
 				nanoGptModelList: options.nanoGptModelList,
 				apiKey: options.apiKey,
+			})
+			break
+		case "openai":
+			// OpenAI Compatible provider - fetches models from custom baseUrl
+			models = await getOpenAiModels({
+				baseUrl: options.baseUrl,
+				apiKey: options.apiKey,
+				headers: options.headers,
 			})
 			break
 		//kilocode_change end

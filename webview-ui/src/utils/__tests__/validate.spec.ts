@@ -88,7 +88,12 @@ describe("Model Validation Functions", () => {
 		// kilocode_change end
 		roo: {},
 		chutes: {},
+<<<<<<< HEAD:webview-ui/src/utils/__tests__/validate.spec.ts
 		zenmux: {},
+||||||| parent of 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271)):webview-ui/src/utils/__tests__/validate.test.ts
+=======
+		openai: {},
+>>>>>>> 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271)):webview-ui/src/utils/__tests__/validate.test.ts
 	}
 
 	const allowAllOrganization: OrganizationAllowList = {

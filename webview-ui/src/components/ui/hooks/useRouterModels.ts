@@ -65,8 +65,16 @@ type RouterModelsQueryKey = {
 	nanoGptApiKey?: string
 	nanoGptModelList?: "all" | "personalized" | "subscription"
 	syntheticApiKey?: string
+<<<<<<< HEAD
 	zenmuxBaseUrl?: string
 	zenmuxApiKey?: string
+||||||| parent of 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
+=======
+	// OpenAI Compatible provider parameters
+	openAiApiKey?: string
+	openAiBaseUrl?: string
+	openAiHeaders?: Record<string, string>
+>>>>>>> 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
 	// Requesty, Unbound, etc should perhaps also be here, but they already have their own hacks for reloading
 }
 // kilocode_change end

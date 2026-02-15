@@ -58,7 +58,12 @@ export const dynamicProviders = [
 	"inception",
 	"synthetic",
 	"sap-ai-core",
+<<<<<<< HEAD
 	"zenmux",
+||||||| parent of 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
+=======
+	"openai", // OpenAI Compatible - fetches models dynamically from custom baseUrl
+>>>>>>> 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
 	// kilocode_change end
 	"deepinfra",
 	"io-intelligence",
@@ -105,12 +110,22 @@ export const isInternalProvider = (key: string): key is InternalProvider =>
  * CustomProvider
  *
  * Custom providers are completely configurable within Roo Code settings.
+ * Note: "openai" was moved to dynamicProviders as it fetches models dynamically.
  */
+<<<<<<< HEAD
 
 export const customProviders = [
 	"openai",
 	"openai-responses", // kilocode_change
 ] as const
+||||||| parent of 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
+
+export const customProviders = ["openai"] as const
+=======
+// kilocode_change start
+export const customProviders = [] as const
+// kilocode_change end
+>>>>>>> 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
 
 export type CustomProvider = (typeof customProviders)[number]
 
@@ -772,7 +787,12 @@ export const modelIdKeysByProvider: Record<TypicalProvider, ModelIdKey> = {
 	kilocode: "kilocodeModel",
 	bedrock: "apiModelId",
 	vertex: "apiModelId",
+<<<<<<< HEAD
 	"openai-codex": "apiModelId",
+||||||| parent of 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
+=======
+	openai: "openAiModelId", // kilocode_change - OpenAI Compatible provider
+>>>>>>> 499b64f3ef (fix: enable dynamic model selection for OpenAI Compatible provider (#3271))
 	"openai-native": "openAiModelId",
 	ollama: "ollamaModelId",
 	lmstudio: "lmStudioModelId",
